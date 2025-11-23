@@ -4,7 +4,7 @@
 
 window.projects = [
   /* ---------------------------------------------------- */
-  /* PROSTHETIC WORLDS (En Önemli Proje - En Üste Eklendi) */
+  /* PROSTHETIC WORLDS */
   /* ---------------------------------------------------- */
   {
     id: "prosthetic-worlds-vr",
@@ -12,7 +12,6 @@ window.projects = [
     role: "Simulation Developer",
     tagline: "VR • Surgical Training • TKA • Medical Sim",
     date: "2022-11",
-    // HTML'deki hem Software hem Design filtresinde görünsün
     types: ["software", "design", "simulation"], 
     shortDesc:
       "A scientifically validated VR training simulation for Total Knee Arthroplasty (TKA), designed to help surgeons practice without patient risk.",
@@ -74,69 +73,34 @@ window.projects = [
   },
 
   /* ---------------------------------------------------- */
-  /* REDLINE ENGINE SOUNDS */
+  /* DOLMUŞÇU DAYI */
   /* ---------------------------------------------------- */
   {
-    id: "redline-engine-sounds",
-    name: "Redline Engine Sounds",
-    role: "Unity Developer",
-    tagline: "Unity • C# • FMOD • Audio Physics",
-    date: "2021-10",
+    id: "dolmuscu-dayi",
+    name: "Dolmuşçu Dayı",
+    role: "Indie Developer",
+    tagline: "Unity • 2D • Hypercasual",
+    date: "2022-07",
     types: ["software"],
     shortDesc:
-      "A popular Android simulation app that accurately recreates supercar engine physics, exhaust notes, and manual shifting logic.",
+      "A humorous hyper-casual game capturing the chaotic experience of driving a Turkish minibus (Dolmuş).",
     longDesc:
-      "Redline Engine Sounds is a mobile simulator developed for car enthusiasts. I engineered the core audio physics using FMOD to allow for realistic RPM revving, throttle response, and gear shifting. The app features a variety of classic and modern supercars, optimized to run smoothly even on low-end Android devices.",
-    coverImage: "images/redlineengine_1.jpeg",
+      "Dolmuşçu Dayı is a culturally unique mobile game where players manage passengers and money while driving a minibus. The project involved 2D animation, money management logic, and creating a fun, recognizable art style.",
+    coverImage: "images/DolmusIcon.png",
     gallery: [
       { 
         type: "youtube", 
-        src: "https://www.youtube.com/watch?v=Tp5mlPiPLVs", 
-        alt: "Gameplay Demo" 
+        src: "https://www.youtube.com/watch?v=oGrix2jcBIw" 
       }
     ],
     links: [
       { 
-        label: "Google Play", 
-        url: "https://play.google.com/store/apps/details?id=com.Okkagames.RedlineEngineSounds&hl=en" 
-      },
-      { 
-        label: "Watch Demo", 
-        url: "https://www.youtube.com/watch?v=Tp5mlPiPLVs" 
+        label: "App Store", 
+        url: "https://apps.apple.com/us/app/dolmu%C5%9F%C3%A7u-day%C4%B1/id1636141841" 
       }
     ]
   },
-
-  /* ---------------------------------------------------- */
-  /* REDLINE MOTORCYCLE SOUNDS */
-  /* ---------------------------------------------------- */
-  {
-    id: "redline-moto-sounds",
-    name: "Redline Motorcycle Sounds",
-    role: "Unity Developer",
-    tagline: "Unity • Audio • Mobile App",
-    date: "2021-10",
-    types: ["software"],
-    shortDesc:
-      "Focused simulation app for motorcycle exhaust acoustics and throttle control.",
-    longDesc:
-      "A specialized version of the Redline series focused on high-performance motorcycles. My work involved refining the granular audio loops and implementing a responsive throttle system that mimics the rapid RPM changes of bike engines.",
-    coverImage: "images/MotorIcon.png",
-    gallery: [
-      { 
-        type: "youtube", 
-        src: "https://www.youtube.com/watch?v=Tp5mlPiPLVs", 
-        alt: "Motorcycle App Demo" 
-      }
-    ],
-    links: [
-      { 
-        label: "Google Play", 
-        url: "https://play.google.com/store/apps/details?id=com.Okka.RedlineMotorcycleSounds&hl=en" 
-      }
-    ]
-  },
-
+  
   /* ---------------------------------------------------- */
   /* REDLINE DRAG RACING */
   /* ---------------------------------------------------- */
@@ -200,32 +164,67 @@ window.projects = [
       }
     ]
   },
-
+  
   /* ---------------------------------------------------- */
-  /* DOLMUŞÇU DAYI */
+  /* REDLINE ENGINE SOUNDS */
   /* ---------------------------------------------------- */
   {
-    id: "dolmuscu-dayi",
-    name: "Dolmuşçu Dayı",
-    role: "Indie Developer",
-    tagline: "Unity • 2D • Hypercasual",
-    date: "2022-07",
+    id: "redline-engine-sounds",
+    name: "Redline Engine Sounds",
+    role: "Unity Developer",
+    tagline: "Unity • C# • FMOD • Audio Physics",
+    date: "2021-10",
     types: ["software"],
     shortDesc:
-      "A humorous hyper-casual game capturing the chaotic experience of driving a Turkish minibus (Dolmuş).",
+      "A popular Android simulation app that accurately recreates supercar engine physics, exhaust notes, and manual shifting logic.",
     longDesc:
-      "Dolmuşçu Dayı is a culturally unique mobile game where players manage passengers and money while driving a minibus. The project involved 2D animation, money management logic, and creating a fun, recognizable art style.",
-    coverImage: "images/DolmusIcon.png",
+      "Redline Engine Sounds is a mobile simulator developed for car enthusiasts. I engineered the core audio physics using FMOD to allow for realistic RPM revving, throttle response, and gear shifting. The app features a variety of classic and modern supercars, optimized to run smoothly even on low-end Android devices.",
+    coverImage: "images/redlineengine_1.jpeg",
     gallery: [
       { 
         type: "youtube", 
-        src: "https://www.youtube.com/watch?v=oGrix2jcBIw" 
+        src: "https://www.youtube.com/watch?v=Tp5mlPiPLVs", 
+        alt: "Gameplay Demo" 
       }
     ],
     links: [
       { 
-        label: "App Store", 
-        url: "https://apps.apple.com/us/app/dolmu%C5%9F%C3%A7u-day%C4%B1/id1636141841" 
+        label: "Google Play", 
+        url: "https://play.google.com/store/apps/apps/details?id=com.Okkagames.RedlineEngineSounds&hl=en" 
+      },
+      { 
+        label: "Watch Demo", 
+        url: "https://www.youtube.com/watch?v=Tp5mlPiPLVs" 
+      }
+    ]
+  },
+
+  /* ---------------------------------------------------- */
+  /* REDLINE MOTORCYCLE SOUNDS */
+  /* ---------------------------------------------------- */
+  {
+    id: "redline-moto-sounds",
+    name: "Redline Motorcycle Sounds",
+    role: "Unity Developer",
+    tagline: "Unity • Audio • Mobile App",
+    date: "2021-10",
+    types: ["software"],
+    shortDesc:
+      "Focused simulation app for motorcycle exhaust acoustics and throttle control.",
+    longDesc:
+      "A specialized version of the Redline series focused on high-performance motorcycles. My work involved refining the granular audio loops and implementing a responsive throttle system that mimics the rapid RPM changes of bike engines.",
+    coverImage: "images/MotorIcon.png",
+    gallery: [
+      { 
+        type: "youtube", 
+        src: "https://www.youtube.com/watch?v=Tp5mlPiPLVs", 
+        alt: "Motorcycle App Demo" 
+      }
+    ],
+    links: [
+      { 
+        label: "Google Play", 
+        url: "https://play.google.com/store/apps/details?id=com.Okka.RedlineMotorcycleSounds&hl=en" 
       }
     ]
   }
