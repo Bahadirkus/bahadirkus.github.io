@@ -133,7 +133,7 @@
       height: 32px;
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15,23,42,0.9); /* koyu arka plan */
+      background: rgba(15,23,42,0.9);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -148,8 +148,8 @@
     }
 
     .social-btn:hover {
-      background: #111827;                 /* hâlâ koyu */
-      border-color: var(--accent);         /* mavi çerçeve */
+      background: #111827;
+      border-color: var(--accent);
       transform: translateY(-1px) scale(1.04);
       box-shadow: 0 10px 20px rgba(15,23,42,0.6);
     }
@@ -331,11 +331,11 @@
       box-shadow: 0 8px 20px rgba(129, 140, 248, 0.4);
     }
 
-    /* PROJECT LIST – ONE COLUMN, NET AYRIMLI */
+    /* PROJECT LIST */
     .projects-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 24px;             /* kartlar arası boşluk */
+      gap: 24px;
       margin-top: 6px;
     }
 
@@ -345,7 +345,7 @@
       align-items: stretch;
       background: #f9fafb;
       border-radius: 18px;
-      border: 1px solid #e5e7eb;      /* ince çerçeve */
+      border: 1px solid #e5e7eb;
       box-shadow: 0 10px 26px rgba(15,23,42,0.12);
       overflow: hidden;
       cursor: pointer;
@@ -411,7 +411,7 @@
     .project-image {
       flex: 0 0 36%;
       max-width: 36%;
-      height: 220px;          /* sabit yükseklik */
+      height: 220px;
       background: #e5e7eb;
       overflow: hidden;
       display: flex;
@@ -422,7 +422,7 @@
     .project-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;      /* kartta kırp, bozulma yok */
+      object-fit: cover;
       display: block;
     }
 
@@ -599,7 +599,7 @@
     .modal-main-media iframe {
       width: 100%;
       height: 100%;
-      object-fit: contain;   /* panelde TAM görünsün */
+      object-fit: contain;
       display: block;
       border: none;
     }
@@ -662,7 +662,7 @@
       }
 
       .projects-grid {
-        gap: 20px;          /* mobilde kartlar biraz daha ayrı */
+        gap: 20px;
       }
 
       .project-card {
@@ -681,9 +681,21 @@
         bottom: 12px;
       }
 
-      /* Modal: yazı üstte, galeri altta – sadece dikey scroll */
+      /* PANEL: mobilde görsel ÜSTTE, yazı ALTA – sadece dikey scroll */
+      .project-modal-content {
+        max-width: 100%;
+      }
+
       .project-modal-body {
         flex-direction: column;
+      }
+
+      .modal-gallery {
+        order: 1;  /* görseller önce */
+      }
+
+      .modal-text {
+        order: 2;  /* açıklama sonra */
       }
     }
   </style>
@@ -720,7 +732,6 @@
 
       <!-- Contact cards -->
       <div class="contact-list">
-        <!-- Email -->
         <a class="contact-card-link" href="mailto:mrbahadirkus@gmail.com">
           <div class="contact-icon">
             <img src="images/mail-icon.png" alt="Email icon">
@@ -731,7 +742,6 @@
           </div>
         </a>
 
-        <!-- GitHub -->
         <a class="contact-card-link"
            href="https://github.com/bahadirkus"
            target="_blank" rel="noopener noreferrer">
@@ -744,7 +754,6 @@
           </div>
         </a>
 
-        <!-- Location -->
         <div class="contact-card">
           <div class="contact-icon">
             <img src="images/location-icon.png" alt="Location icon">
@@ -783,7 +792,7 @@
         </div>
 
         <div class="projects-grid">
-          <!-- Cards are injected by JS -->
+          <!-- JS dolduruyor -->
         </div>
       </section>
 
@@ -856,7 +865,6 @@
   </div>
 </div>
 
-<!-- PROJECT DATA -->
 <script src="projects.js"></script>
 
 <script>
@@ -881,10 +889,9 @@
     });
   });
 
-  // PROJECT DATA FROM projects.js
+  // PROJECT DATA
   const projects = Array.isArray(window.projects) ? [...window.projects] : [];
 
-  // Helpers: parse and format date
   function parseProjectDate(value) {
     if (!value) return null;
     const parts = value.split('-').map(p => parseInt(p, 10));
@@ -901,7 +908,7 @@
     return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   }
 
-  // Sort projects by date (newest first)
+  // sort by date (newest)
   projects.sort((a, b) => {
     const da = parseProjectDate(a.date);
     const db = parseProjectDate(b.date);
@@ -954,7 +961,7 @@
     attachCardEvents();
   }
 
-  // MODAL ELEMENTS
+  // MODAL
   const modal = document.getElementById('project-modal');
   const modalTitle = document.getElementById('modal-title');
   const modalSub = document.getElementById('modal-sub');
@@ -1010,7 +1017,7 @@
     const project = projects.find(p => p.id === projectId);
     if (!project) return;
 
-    // her açılışta scroll'u en üste al
+    // her açılışta başa dön
     if (modalBody) modalBody.scrollTop = 0;
     if (modalContent) modalContent.scrollTop = 0;
 
@@ -1044,7 +1051,7 @@
 
     let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
 
-    // coverImage'i her zaman en başa ekle (yoksa)
+    // coverImage'i en öne ekle
     if (project.coverImage) {
       const alreadyHasCover = gallery.some(
         item => item.type === 'image' && item.src === project.coverImage
