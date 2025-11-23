@@ -43,16 +43,6 @@ window.projects = [
       }
     ]
   },
-  
-  {
-    "id": "new-project-1763923080691",
-    "name": "New Project",
-    "types": [
-      "software"
-    ],
-    "gallery": [],
-    "links": []
-  },
   {
     "id": "EM-Guided-Surgical-Trainer",
     "name": "EM-Guided Surgical Trainer: Knee Module",
