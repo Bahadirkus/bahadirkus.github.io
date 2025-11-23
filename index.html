@@ -112,13 +112,6 @@
       background: #22c55e;
     }
 
-    .profile-bio {
-      font-size: 13px;
-      color: #e5e7eb;
-      text-align: left;
-      align-self: stretch;
-    }
-
     /* SOCIAL BUTTONS */
     .profile-social {
       display: flex;
@@ -331,49 +324,44 @@
       box-shadow: 0 8px 20px rgba(129, 140, 248, 0.4);
     }
 
-    /* PROJECT LIST */
+    /* PROJECT LIST – ONE COLUMN, STACKED LAYOUT
+       Title → meta → image → short text */
     .projects-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 24px;
-      margin-top: 6px;
+      gap: 22px;
+      margin-top: 4px;
     }
 
     .project-card {
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
       background: #f9fafb;
       border-radius: 18px;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 10px 26px rgba(15,23,42,0.12);
+      box-shadow: 0 16px 38px rgba(15,23,42,0.16);
       overflow: hidden;
       cursor: pointer;
       transition: .15s;
-      min-height: 220px;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(15,23,42,0.2);
+      box-shadow: 0 22px 48px rgba(15,23,42,0.22);
       background: #ffffff;
     }
 
-    .project-text {
-      padding: 18px 20px 18px 22px;
-      flex: 1;
+    .project-header {
+      padding: 16px 18px 10px 22px;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
     }
 
-    .project-text::before {
+    .project-header::before {
       content: "";
       position: absolute;
       left: 0;
-      top: 16px;
-      bottom: 16px;
+      top: 14px;
+      bottom: 14px;
       width: 4px;
       border-radius: 999px;
       background: var(--accent);
@@ -382,53 +370,43 @@
     .project-title {
       font-size: 16px;
       font-weight: 600;
-      margin-bottom: 2px;
+      margin-left: 10px;
     }
 
-    .project-role {
+    .project-meta {
+      margin-left: 10px;
+      margin-top: 4px;
       font-size: 12px;
-      font-weight: 500;
       color: var(--muted);
     }
 
-    .project-date {
-      font-size: 11px;
-      color: var(--muted);
+    .project-image-wrapper {
+      width: 100%;
+      height: 220px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .project-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* kartta kırp, bozulma yok */
+      display: block;
+    }
+
+    .project-body {
+      padding: 12px 18px 18px 22px;
     }
 
     .project-desc {
       font-size: 13px;
       color: var(--muted);
-      margin-top: 4px;
+      margin-bottom: 6px;
     }
 
     .project-tech {
       font-size: 11px;
       color: #6b7280;
-      margin-top: 8px;
-    }
-
-    .project-image {
-      flex: 0 0 36%;
-      max-width: 36%;
-      height: 220px;
-      background: #e5e7eb;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .project-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .project-image span {
-      font-size: 12px;
-      color: var(--muted);
     }
 
     /* RESUME BLOCKS */
@@ -530,14 +508,13 @@
 
     .project-modal-body {
       display: flex;
-      gap: 20px;
+      flex-direction: column; /* HER YERDE DİKEY */
+      gap: 16px;
       padding: 16px 20px 18px;
-      flex-wrap: wrap;
       overflow-y: auto;
     }
 
     .modal-text {
-      flex: 1 1 260px;
       font-size: 14px;
       color: var(--muted);
     }
@@ -576,7 +553,6 @@
     }
 
     .modal-gallery {
-      flex: 1 1 320px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -599,7 +575,7 @@
     .modal-main-media iframe {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: contain;   /* panelde TAM görünsün */
       display: block;
       border: none;
     }
@@ -662,40 +638,11 @@
       }
 
       .projects-grid {
-        gap: 20px;
+        gap: 18px;
       }
 
-      .project-card {
-        flex-direction: column;
-      }
-
-      .project-image {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 100%;
-        height: 220px;
-      }
-
-      .project-text::before {
-        top: 12px;
-        bottom: 12px;
-      }
-
-      /* PANEL: mobilde görsel ÜSTTE, yazı ALTA – sadece dikey scroll */
       .project-modal-content {
-        max-width: 100%;
-      }
-
-      .project-modal-body {
-        flex-direction: column;
-      }
-
-      .modal-gallery {
-        order: 1;  /* görseller önce */
-      }
-
-      .modal-text {
-        order: 2;  /* açıklama sonra */
+        border-radius: 16px;
       }
     }
   </style>
@@ -732,6 +679,7 @@
 
       <!-- Contact cards -->
       <div class="contact-list">
+        <!-- Email -->
         <a class="contact-card-link" href="mailto:mrbahadirkus@gmail.com">
           <div class="contact-icon">
             <img src="images/mail-icon.png" alt="Email icon">
@@ -742,9 +690,10 @@
           </div>
         </a>
 
+        <!-- GitHub -->
         <a class="contact-card-link"
            href="https://github.com/bahadirkus"
-           target="_blank" rel="noopener noreferrer">
+           target="_blank">
           <div class="contact-icon">
             <img src="images/github-icon.png" alt="GitHub icon">
           </div>
@@ -754,6 +703,7 @@
           </div>
         </a>
 
+        <!-- Location -->
         <div class="contact-card">
           <div class="contact-icon">
             <img src="images/location-icon.png" alt="Location icon">
@@ -792,7 +742,7 @@
         </div>
 
         <div class="projects-grid">
-          <!-- JS dolduruyor -->
+          <!-- Cards are injected by JS -->
         </div>
       </section>
 
@@ -849,9 +799,9 @@
       </div>
       <button class="project-modal-close" id="modal-close" aria-label="Close">×</button>
     </div>
-    <div class="project-modal-body">
+    <div class="project-modal-body" id="modal-body">
       <div class="modal-text">
-        <h4>Project Description</h4>
+        <h4>PROJECT DESCRIPTION</h4>
         <p id="modal-desc"></p>
         <div id="modal-links" class="modal-links"></div>
       </div>
@@ -865,6 +815,7 @@
   </div>
 </div>
 
+<!-- PROJECT DATA -->
 <script src="projects.js"></script>
 
 <script>
@@ -889,9 +840,10 @@
     });
   });
 
-  // PROJECT DATA
+  // PROJECT DATA FROM projects.js
   const projects = Array.isArray(window.projects) ? [...window.projects] : [];
 
+  // Helpers: parse and format date
   function parseProjectDate(value) {
     if (!value) return null;
     const parts = value.split('-').map(p => parseInt(p, 10));
@@ -908,7 +860,7 @@
     return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   }
 
-  // sort by date (newest)
+  // Sort projects by date (newest first)
   projects.sort((a, b) => {
     const da = parseProjectDate(a.date);
     const db = parseProjectDate(b.date);
@@ -929,22 +881,25 @@
     card.dataset.types = (project.types || []).join(',');
 
     const hasCover = project.coverImage && project.coverImage.trim() !== '';
-    const dateText = project.date ? `Date: ${formatMonthYear(project.date)}` : '';
+    const dateText = project.date ? formatMonthYear(project.date) : '';
 
     card.innerHTML = `
-      <div class="project-text">
+      <div class="project-header">
         <div class="project-title">${project.name}</div>
-        <div class="project-role">${project.role || ''}</div>
-        <div class="project-date">${dateText}</div>
-        <p class="project-desc">${project.shortDesc || ''}</p>
-        ${project.tagline ? `<div class="project-tech">${project.tagline}</div>` : ''}
+        <div class="project-meta">
+          ${(project.role || '')}${project.role && dateText ? ' • ' : ''}${dateText}
+        </div>
       </div>
-      <div class="project-image">
+      <div class="project-image-wrapper">
         ${
           hasCover
             ? `<img src="${project.coverImage}" alt="${project.name} cover">`
-            : `<span>No image</span>`
+            : ''
         }
+      </div>
+      <div class="project-body">
+        <p class="project-desc">${project.shortDesc || ''}</p>
+        ${project.tagline ? `<div class="project-tech">${project.tagline}</div>` : ''}
       </div>
     `;
     return card;
@@ -961,8 +916,9 @@
     attachCardEvents();
   }
 
-  // MODAL
+  // MODAL ELEMENTS
   const modal = document.getElementById('project-modal');
+  const modalBody = document.getElementById('modal-body');
   const modalTitle = document.getElementById('modal-title');
   const modalSub = document.getElementById('modal-sub');
   const modalDesc = document.getElementById('modal-desc');
@@ -970,8 +926,6 @@
   const modalThumbs = document.getElementById('modal-thumbs');
   const modalCloseBtn = document.getElementById('modal-close');
   const modalLinks = document.getElementById('modal-links');
-  const modalBody = document.querySelector('.project-modal-body');
-  const modalContent = document.querySelector('.project-modal-content');
 
   function youtubeIdFromUrl(url) {
     if (!url) return null;
@@ -1017,10 +971,6 @@
     const project = projects.find(p => p.id === projectId);
     if (!project) return;
 
-    // her açılışta başa dön
-    if (modalBody) modalBody.scrollTop = 0;
-    if (modalContent) modalContent.scrollTop = 0;
-
     modalTitle.textContent = project.name;
 
     const subParts = [];
@@ -1029,6 +979,9 @@
     modalSub.textContent = subParts.join(' • ');
 
     modalDesc.textContent = project.longDesc || project.shortDesc || '';
+
+    // Reset scroll to top every time
+    modalBody.scrollTop = 0;
 
     // Links
     modalLinks.innerHTML = '';
@@ -1051,7 +1004,7 @@
 
     let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
 
-    // coverImage'i en öne ekle
+    // Her zaman coverImage'i en başa ekle (varsa ve zaten ekli değilse)
     if (project.coverImage) {
       const alreadyHasCover = gallery.some(
         item => item.type === 'image' && item.src === project.coverImage
@@ -1093,9 +1046,7 @@
         }
 
         thumb.addEventListener('click', () => {
-          document.querySelectorAll('.modal-thumb').forEach(t =>
-            t.classList.remove('active')
-          );
+          document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
           thumb.classList.add('active');
           setMainMedia(item);
         });
