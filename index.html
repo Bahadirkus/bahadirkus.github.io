@@ -1,6 +1,3 @@
-Aşağıda istediğin gibi **mobilde panel tamamen dikey** olan, albümün yazının altında göründüğü, yatayda hiçbir kaydırma gerektirmeyen tam `index.html` var. Eski dosyanın tamamını bununla değiştir.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -975,6 +972,9 @@ Aşağıda istediğin gibi **mobilde panel tamamen dikey** olan, albümün yazı
   const modalThumbs = document.getElementById('modal-thumbs');
   const modalCloseBtn = document.getElementById('modal-close');
   const modalLinks = document.getElementById('modal-links');
+  const modalBody = document.querySelector('.project-modal-body');
+  const modalContent = document.querySelector('.project-modal-content');
+
 
   function youtubeIdFromUrl(url) {
     if (!url) return null;
@@ -1017,10 +1017,15 @@ Aşağıda istediğin gibi **mobilde panel tamamen dikey** olan, albümün yazı
   }
 
   function openModal(projectId) {
-    const project = projects.find(p => p.id === projectId);
-    if (!project) return;
+  const project = projects.find(p => p.id === projectId);
+  if (!project) return;
 
-    modalTitle.textContent = project.name;
+  // HER AÇILIŞTA SCROLL’U EN ÜSTE AL
+  if (modalBody) modalBody.scrollTop = 0;
+  if (modalContent) modalContent.scrollTop = 0;
+
+  modalTitle.textContent = project.name;
+  ...
 
     const subParts = [];
     if (project.role) subParts.push(project.role);
