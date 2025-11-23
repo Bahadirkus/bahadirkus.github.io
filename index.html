@@ -403,7 +403,6 @@
       font-weight: 500;
     }
     
-    /* Resume İçindeki Eğitim/Deneyim Satırları */
     .resume-item {
         margin-bottom: 16px;
         padding-bottom: 16px;
@@ -464,6 +463,12 @@
     .project-modal-body { display: flex; gap: 32px; padding: 24px; overflow-y: auto; }
     
     .modal-text { flex: 1; min-width: 300px; }
+    
+    /* SATIR BOŞLUKLARI DÜZELTMESİ */
+    #modal-desc {
+        white-space: pre-line;
+    }
+
     .modal-gallery { flex: 1.5; display: flex; flex-direction: column; gap: 16px; }
 
     .modal-main-media {
@@ -860,9 +865,12 @@
       }
   }
 
+  // --- KAPATMA FONKSİYONU GÜNCELLENDİ (VİDEO DURDURMA EKLENDİ) ---
   function closeModal() {
     modal.classList.remove('open');
-    // URL'yi temizlemeden modalı kapat
+    // Medya oynatıcısını temizle ki video kapansın
+    mMedia.innerHTML = ''; 
+    // URL'yi temizle (ana sayfaya dön)
     window.history.pushState(null, '', window.location.pathname + window.location.search);
   }
 
