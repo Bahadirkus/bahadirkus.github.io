@@ -40,7 +40,6 @@
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      /* Modal açıkken JS ile overflow: hidden eklenir */
     }
 
     a { color: inherit; text-decoration: none; }
@@ -123,6 +122,7 @@
     .tab-section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* FILTERS */
     .project-filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 24px; }
     .filter-btn {
       border-radius: 999px; padding: 8px 16px; font-size: 13px;
@@ -326,7 +326,7 @@
         <div class="project-filters">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="software">Software</button>
-          <button class="filter-btn" data-filter="technical-design">Technical Design & Gömülü Yazılım</button>
+          <button class="filter-btn" data-filter="technical-design">Technical Design & Embedded Systems</button>
         </div>
         <div class="projects-grid" id="projects-grid"></div>
       </section>
@@ -363,7 +363,7 @@
                <div class="resume-item">
                   <h4>Freelance Developer & Technical Designer</h4><span class="meta">2020 - 2021 • Mobile & Interactive Apps</span>
                   <p style="font-size:14px; color:#4b5563;">
-                      Engineered physics and procedural audio simulations. Focused on developing custom systems for **CSG physics** and real-time **mesh cutting** algorithms. Also involved in **Easy EDA PCB design** and hardware application.
+                      Engineered physics and audio simulations. Focused on developing custom systems for **CSG physics** and real-time **mesh cutting** algorithms. Also involved in **Easy EDA PCB design** and hardware application.
                   </p>
                </div>
             </div>
@@ -432,9 +432,19 @@
   function renderProjects() {
     if (!window.projects) return;
     grid.innerHTML = '';
-    const projects = window.projects.sort((a, b) => (a.date < b.date ? 1 : -1));
+    const projects = window.projects;
+
+    // SAĞLAM SIRALAMA: Null değerleri hatasız işler.
+    projects.sort((a, b) => {
+        const dateA = a.date || '0';
+        const dateB = b.date || '0';
+        if (dateA < dateB) return 1;
+        if (dateA > dateB) return -1;
+        return 0;
+    });
 
     projects.forEach(p => {
+      // SAĞLAM KONTROL: Types alanı boşsa hata vermez.
       const types = Array.isArray(p.types) ? p.types : [];
       if (activeFilter !== 'all' && !types.includes(activeFilter)) return;
 
@@ -442,13 +452,13 @@
       div.className = 'project-card';
       div.onclick = () => { openModal(p); window.history.pushState(null, '', '#' + p.id); };
       div.innerHTML = `
-        <div class="project-image"><img src="${p.coverImage}" alt="${p.name}"></div>
+        <div class="project-image"><img src="${p.coverImage || 'images/placeholder.jpg'}" alt="${p.name}"></div>
         <div class="project-text">
-          <div class="project-meta">${p.role}</div>
+          <div class="project-meta">${p.role || ''}</div>
           <div class="project-title">${p.name}</div>
           <div class="project-date">${formatMonthYear(p.date)}</div>
-          <p class="project-desc">${p.shortDesc}</p>
-          <div class="project-tech">${p.tagline}</div>
+          <p class="project-desc">${p.shortDesc || ''}</p>
+          <div class="project-tech">${p.tagline || ''}</div>
         </div>`;
       grid.appendChild(div);
     });
@@ -477,7 +487,7 @@
 
   // --- Modal Açma Fonksiyonu ---
   function openModal(project) {
-    // CRITICAL FIX: Modal açıldığında body'yi kilitle
+    // CRITICAL FIX: Modal açıldığında body'yi kilitle (kaydırmayı engelle)
     document.body.style.overflow = 'hidden'; 
     
     mTitle.textContent = project.name;
@@ -521,6 +531,7 @@
     }
 
     modal.classList.add('open');
+    // Sayfayı en üste kaydır
     modalBody.scrollTop = 0;
   }
 
@@ -530,16 +541,17 @@
       else if (item.type === 'youtube') {
           const vidId = item.src.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1];
           if(vidId) mMedia.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+          else mMedia.innerHTML = '<span>Invalid YouTube link.</span>';
       } else if (item.type === 'video') {
           mMedia.innerHTML = `<video src="${item.src}" controls autoplay muted></video>`;
       }
   }
 
-  // --- KAPATMA FONKSİYONU GÜNCELLENDİ (BODY KİLİDİ KALDIRILDI) ---
+  // --- KAPATMA FONKSİYONU ---
   function closeModal() {
     modal.classList.remove('open');
     mMedia.innerHTML = ''; 
-    document.body.style.overflow = ''; // CRITICAL FIX: Body kilidini kaldır
+    document.body.style.overflow = ''; // Body kilidini kaldır
     window.history.pushState(null, '', window.location.pathname + window.location.search);
   }
 
@@ -555,6 +567,7 @@
     }
   }
 
+  // Tüm JS yüklemesi tamamlandıktan sonra başlat
   window.addEventListener('load', () => { renderProjects(); checkDeepLink(); });
   window.addEventListener('hashchange', checkDeepLink);
 </script>
