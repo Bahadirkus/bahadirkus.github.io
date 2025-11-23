@@ -159,11 +159,6 @@
       height: 18px; 
       filter: invert(1); 
       opacity: 0.8; 
-      /* X (Twitter) ikonu için renk düzeltmesi */
-      ${(function() {
-          /* Özel ikonları burada düzenleyebilirsiniz */
-          return '';
-      })()}
     }
 
     .social-btn:hover {
@@ -323,7 +318,7 @@
       border-color: #d1d5db;
     }
 
-    /* Görsel Alanı - ARTIK ŞEFFAF */
+    /* Görsel Alanı - ŞEFFAF */
     .project-image {
       width: 280px;
       min-width: 280px;
@@ -406,6 +401,30 @@
       background: #e5e7eb;
       color: #374151;
       font-weight: 500;
+    }
+    
+    /* Resume İçindeki Eğitim/Deneyim Satırları */
+    .resume-item {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px dashed var(--border);
+    }
+    .resume-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    .resume-item h4 {
+        font-size: 15px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 2px;
+    }
+    .resume-item .meta {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 6px;
+        display: block;
     }
 
     footer {
@@ -551,14 +570,6 @@
             <span class="contact-value">Toronto, Canada</span>
           </div>
         </div>
-        
-        <a class="contact-card-link" href="#">
-          <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/itchdotio.svg" alt="Itch"></div>
-          <div class="contact-text">
-            <span class="contact-label">Game Demo</span>
-            <span class="contact-value">Itch.io / Demo</span>
-          </div>
-        </a>
       </div>
     </aside>
 
@@ -566,7 +577,7 @@
       <div class="main-header">
         <div>
           <h1>Portfolio</h1>
-          <p>Unity, VR/AR, and embedded systems projects.</p>
+          <p>Selected work in simulation, software, and technical design.</p>
         </div>
         <div class="top-tabs">
           <button class="tab-btn active" data-tab="portfolio">Projects</button>
@@ -576,9 +587,11 @@
 
       <section id="portfolio-section" class="tab-section active">
         <div class="project-filters">
-          <button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn" data-filter="software">Software / VR</button>
+          <button class="filter-btn active" data-filter="all">All</button> 
+          <button class="filter-btn" data-filter="software">Software / VR</button>
           <button class="filter-btn" data-filter="design">Technical Design</button>
-          <button class="filter-btn" data-filter="hardware">Hardware / Embedded</button> </div>
+          <button class="filter-btn" data-filter="hardware">Hardware / Embedded</button> 
+        </div>
 
         <div class="projects-grid" id="projects-grid">
           </div>
@@ -587,33 +600,63 @@
       <section id="resume-section" class="tab-section">
         <h2>Professional Summary</h2>
         <p style="color:var(--text); margin-top:8px;">
-            Experienced Simulation Developer specializing in creating realistic surgical training systems using Unity, VR/AR, and custom hardware. 
-            Bridging the gap between mechanical design and real-time software.
+            I specialize in developing **real-time simulation and training systems** using Unity, focusing on the intersection of physical hardware (sensors, haptics) and software logic. My background allows me to deliver high-fidelity applications, particularly in the **Medical Simulation** and XR/VR space.
         </p>
-
+        
         <div class="resume-block">
-          <h3>Technical Stack</h3>
+          <h3>Technical Stack (Skills)</h3>
           <div class="skill-tags">
             <span class="skill-tag">Unity 3D</span>
             <span class="skill-tag">C# / C++</span>
             <span class="skill-tag">VR / AR / MR</span>
+            <span class="skill-tag">Medical Simulation</span>
             <span class="skill-tag">Fusion 360</span>
             <span class="skill-tag">Arduino / ESP32</span>
             <span class="skill-tag">Python</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">3D Printing</span>
+            <span class="skill-tag">FMOD / Audio Physics</span>
+            <span class="skill-tag">Git / Version Control</span>
           </div>
         </div>
 
         <div class="resume-block">
-          <h3>Experience</h3>
-          <div style="display:flex; flex-direction:column; gap:16px;">
-             <div>
-                <h4 style="font-size:15px; font-weight:600;">Lead Simulation Developer</h4>
-                <div style="font-size:12px; color:var(--muted); margin-bottom:4px;">2021 - Present • MedTech Company</div>
-                <p style="font-size:13px; color:#4b5563;">Developing haptic feedback surgical simulators. Integrating sensors with Unity.</p>
-             </div>
-             </div>
+            <h3>Professional Experience</h3>
+            <div style="display:flex; flex-direction:column; gap:16px;">
+               
+               <div class="resume-item">
+                  <h4>Lead Simulation Developer</h4>
+                  <span class="meta">2021 - Present • MedTech Company</span>
+                  <p style="font-size:14px; color:#4b5563;">
+                      Developing high-fidelity, haptic-feedback surgical simulators. Responsible for the full development cycle: 
+                      software architecture, sensor integration (via custom PCB/Arduino), and optimization for virtual reality (VR) environments.
+                  </p>
+               </div>
+               
+               <div class="resume-item">
+                  <h4>Freelance Developer & Technical Designer</h4>
+                  <span class="meta">2020 - 2021 • Mobile & Interactive Apps</span>
+                  <p style="font-size:14px; color:#4b5563;">
+                      Engineered physics and audio simulations for various mobile applications (Redline series). Focused on performance, 
+                      real-time audio processing (FMOD), and custom game logic.
+                  </p>
+               </div>
+            </div>
+        </div>
+
+        <div class="resume-block">
+            <h3>Education</h3>
+            <div style="display:flex; flex-direction:column; gap:16px;">
+                <div class="resume-item">
+                    <h4>Bachelor of Science in Electrical and Electronics Engineering</h4>
+                    <span class="meta">2014 - 2018 • University Name (Example)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-block">
+            <h3>Languages</h3>
+            <p style="font-size:14px; color:#4b5563;">
+                **Turkish:** Native / **English:** Professional Working Proficiency
+            </p>
         </div>
       </section>
 
@@ -702,7 +745,11 @@
 
       const div = document.createElement('article');
       div.className = 'project-card';
-      div.onclick = () => openModal(p);
+      // Derin linkleme için ID'yi ekliyoruz
+      div.onclick = () => {
+          openModal(p);
+          window.history.pushState(null, '', '#' + p.id);
+      };
       
       const dateText = p.date ? formatMonthYear(p.date) : '';
 
@@ -813,16 +860,34 @@
       }
   }
 
+  function closeModal() {
+    modal.classList.remove('open');
+    // URL'yi temizlemeden modalı kapat
+    window.history.pushState(null, '', window.location.pathname + window.location.search);
+  }
+
   document.getElementById('modal-close').onclick = () => closeModal();
   modal.onclick = (e) => { if(e.target === modal) closeModal(); }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   
-  function closeModal() {
-    modal.classList.remove('open');
+  // DERİN LİNKLEME KONTROLÜ
+  function checkDeepLink() {
+    const hash = window.location.hash.substring(1); 
+    if (hash && window.projects) {
+      const project = window.projects.find(p => p.id === hash);
+      if (project) {
+        openModal(project);
+      }
+    }
   }
 
   // Başlat
-  renderProjects();
+  window.addEventListener('load', () => {
+      renderProjects();
+      checkDeepLink();
+  });
+  
+  window.addEventListener('hashchange', checkDeepLink);
 
 </script>
 </body>
