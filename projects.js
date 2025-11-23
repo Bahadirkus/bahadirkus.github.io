@@ -3,6 +3,42 @@
 
 window.projects = [
   {
+    "id": "embedded-control-poc",
+    "name": "Embedded Control System PoC",
+    "date": "2024-08",
+    "role": "Hardware Developer",
+    "types": [
+      "technical-design"
+    ],
+    "shortDesc": "A functional prototype designed to validate sensor logic and mechanical control before final manufacturing.",
+    "longDesc": "This project focuses on the prototyping phase of a custom embedded system. I designed and manufactured the initial PCB using CNC isolation milling to quickly test the circuit concepts in the real world.\n\nThe system integrates various complex components, including absolute encoders, EMF sensors, and potentiometers. These inputs are used to control the vertical movement of the machine and manage haptic feedback through vibration motors. The primary goal was to verify component compatibility and refine the firmware logic, bridging the gap between the digital design and the physical final product.",
+    "coverImage": "images/PoC-Pcb/PoC-01.jpg",
+    "gallery": [
+      {
+        "type": "image",
+        "src": "images/PoC-Pcb/PoC-01.jpg",
+              },
+      {
+        "type": "image",
+        "src": "images/PoC-Pcb/PoC-02.jpg",
+              },
+      {
+        "type": "image",
+        "src": "images/PoC-Pcb/PoC-03.jpg",
+              },
+      {
+        "type": "image",
+        "src": "images/PoC-Pcb/PoC-04.jpg",
+              },
+      {
+        "type": "youtube",
+        "src": "https://www.youtube.com/watch?v=8g_zKZJrbSY",
+              }
+    ],
+    "links": [],
+    "tagline": "PCB Design • C++ • CNC Milling • Sensor Integration • Motor Control"
+  },
+  {
     "id": "EM-Guided-Surgical-Trainer",
     "name": "EM-Guided Surgical Trainer: Knee Module",
     "role": "Industrial Designer & 3D Modeler",
@@ -17,40 +53,40 @@ window.projects = [
     "gallery": [
       {
         "type": "image",
-        "src": "images/em-guided/em-guided-01.jpg",
-              },
+        "src": "images/em-guided/em-guided-01.jpg"
+      },
       {
         "type": "image",
-        "src": "images/em-guided/em-guided-02.jpg",
-              },
+        "src": "images/em-guided/em-guided-02.jpg"
+      },
       {
         "type": "image",
-        "src": "images/em-guided/em-guided-03.jpg",
-              },
+        "src": "images/em-guided/em-guided-03.jpg"
+      },
       {
         "type": "image",
-        "src": "images/em-guided/em-guided-04.jpg",
-              },
+        "src": "images/em-guided/em-guided-04.jpg"
+      },
       {
         "type": "image",
-        "src": "images/em-guided/em-guided-05.jpg",
-              },
+        "src": "images/em-guided/em-guided-05.jpg"
+      },
       {
         "type": "image",
-        "src": "images/em-guided/em-guided-06.jpg",
-              },
+        "src": "images/em-guided/em-guided-06.jpg"
+      },
       {
         "type": "image",
-        "src": "images/em-guided/em-guided-07.jpg",
-              },
+        "src": "images/em-guided/em-guided-07.jpg"
+      },
       {
         "type": "image",
-        "src": "images/em-guided/em-guided-08.jpg",
-              },
+        "src": "images/em-guided/em-guided-08.jpg"
+      },
       {
         "type": "image",
-        "src": "images/em-guided/em-guided-09.jpg",
-              }
+        "src": "images/em-guided/em-guided-09.jpg"
+      }
     ],
     "links": []
   },
@@ -71,16 +107,16 @@ window.projects = [
     "gallery": [
       {
         "type": "image",
-        "src": "images/Pw_1.jpg",
-              },
+        "src": "images/Pw_1.jpg"
+      },
       {
         "type": "image",
-        "src": "images/Pw_3.jpg",
-              },
+        "src": "images/Pw_3.jpg"
+      },
       {
         "type": "youtube",
-        "src": "https://www.youtube.com/watch?v=sWOdGYnegjY",
-              }
+        "src": "https://www.youtube.com/watch?v=sWOdGYnegjY"
+      }
     ],
     "links": [
       {
@@ -109,8 +145,8 @@ window.projects = [
     "gallery": [
       {
         "type": "youtube",
-        "src": "https://youtu.be/pptgV_zM5ts",
-              }
+        "src": "https://youtu.be/pptgV_zM5ts"
+      }
     ],
     "links": []
   },
@@ -154,8 +190,8 @@ window.projects = [
     "gallery": [
       {
         "type": "youtube",
-        "src": "https://www.youtube.com/watch?v=XFWho0Bv_xU",
-              }
+        "src": "https://www.youtube.com/watch?v=XFWho0Bv_xU"
+      }
     ],
     "links": [
       {
@@ -179,8 +215,8 @@ window.projects = [
     "gallery": [
       {
         "type": "image",
-        "src": "images/DragonFaya_2.jpeg",
-              },
+        "src": "images/DragonFaya_2.jpeg"
+      },
       {
         "type": "youtube",
         "src": "https://www.youtube.com/watch?v=syhsci_zf4U"
@@ -202,8 +238,8 @@ window.projects = [
     "gallery": [
       {
         "type": "youtube",
-        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs",
-              }
+        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs"
+      }
     ],
     "links": [
       {
@@ -233,8 +269,8 @@ window.projects = [
     "gallery": [
       {
         "type": "youtube",
-        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs",
-              }
+        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs"
+      }
     ],
     "links": [
       {
@@ -258,8 +294,8 @@ window.projects = [
     "gallery": [
       {
         "type": "youtube",
-        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs",
-              }
+        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs"
+      }
     ],
     "links": [
       {
