@@ -122,7 +122,7 @@
     .tab-section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* FILTERS */
+    /* FILTERS - YENİ FILTRE STİLİ */
     .project-filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 24px; }
     .filter-btn {
       border-radius: 999px; padding: 8px 16px; font-size: 13px;
@@ -165,7 +165,7 @@
       background: #f3f4f6; padding: 4px 8px; border-radius: 6px; align-self: flex-start; margin-top: 12px;
     }
 
-    /* RESUME */
+    /* RESUME - GÜNCEL KISIM */
     .resume-block { background: #f9fafb; border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-top: 20px; }
     .resume-block h3 { margin-bottom: 12px; font-size: 16px; color: #111827; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -212,7 +212,7 @@
 
     /* Ana Görsel Kutusu */
     .modal-main-media {
-      width: 100%; height: 400px; 
+      width: 100%; height: 400px; /* Desktop sabit yükseklik */
       background: #f9fafb; border-radius: 12px; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border);
@@ -235,7 +235,10 @@
 
     /* THUMBNAILS: GRID/TABLO YAPISI */
     .modal-thumbs { 
-        display: flex; flex-wrap: wrap; gap: 10px; padding-bottom: 4px; 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 10px; 
+        padding-bottom: 4px; 
     }
     
     .modal-thumb {
@@ -283,15 +286,9 @@
         </div>
       </div>
       <div class="profile-social">
-        <a class="social-btn" href="https://x.com/mrbahadirkus" target="_blank" title="X / Twitter">
-          <img src="https://unpkg.com/simple-icons@v9/icons/x.svg" alt="X">
-        </a>
-        <a class="social-btn" href="https://www.instagram.com/bahadirkush/" target="_blank" title="Instagram">
-          <img src="https://unpkg.com/simple-icons@v9/icons/instagram.svg" alt="Instagram">
-        </a>
-        <a class="social-btn" href="https://www.linkedin.com/in/bahadir-kus/" target="_blank" title="LinkedIn">
-          <img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn">
-        </a>
+        <a class="social-btn" href="#" target="_blank" title="X"><img src="https://unpkg.com/simple-icons@v9/icons/x.svg" alt="X"></a>
+        <a class="social-btn" href="#" target="_blank" title="Instagram"><img src="https://unpkg.com/simple-icons@v9/icons/instagram.svg" alt="Instagram"></a>
+        <a class="social-btn" href="https://www.linkedin.com/in/bahadirkus/" target="_blank" title="LinkedIn"><img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"></a>
       </div>
       <div class="contact-list">
         <a class="contact-card-link" href="mailto:mrbahadirkus@gmail.com">
@@ -301,10 +298,6 @@
         <a class="contact-card-link" href="https://github.com/Bahadirkus" target="_blank">
           <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/github.svg" alt="GitHub"></div>
           <div class="contact-text"><span class="contact-label">GitHub</span><span class="contact-value">github.com/Bahadirkus</span></div>
-        </a>
-        <a class="contact-card-link" href="https://www.youtube.com/@bahadirkush" target="_blank">
-          <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg" alt="YouTube"></div>
-          <div class="contact-text"><span class="contact-label">YouTube</span><span class="contact-value">@bahadirkush</span></div>
         </a>
         <div class="contact-card-link" style="cursor: default;">
           <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/googlemaps.svg" alt="Loc"></div>
@@ -326,7 +319,7 @@
         <div class="project-filters">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="software">Software</button>
-          <button class="filter-btn" data-filter="technical-design">Technical Design & Embedded Systems</button>
+          <button class="filter-btn" data-filter="technical-design">Technical Design & Gömülü Yazılım</button>
         </div>
         <div class="projects-grid" id="projects-grid"></div>
       </section>
@@ -344,7 +337,7 @@
             <span class="skill-tag">CSG Physics / Mesh Cutting</span><span class="skill-tag">VR / AR / MR</span>
             <span class="skill-tag">Medical Simulation</span><span class="skill-tag">Easy EDA / PCB Design</span>
             <span class="skill-tag">Fusion 360</span><span class="skill-tag">Arduino / ESP32</span>
-            <span class="skill-tag">Python</span><span class="skill-tag">FMOD</span><span class="skill-tag">Git</span>
+            <span class="skill-tag">FMOD</span><span class="skill-tag">Git</span>
           </div>
         </div>
 
@@ -356,14 +349,15 @@
                   <h4>Lead Simulation Developer</h4><span class="meta">2021 - Present • MedTech Company</span>
                   <p style="font-size:14px; color:#4b5563;">
                       Developing high-fidelity, haptic-feedback surgical simulators. Responsible for the full development cycle: 
-                      software architecture, sensor integration, physics modeling (**Soft Body Physics**) and optimization for virtual reality (VR) environments.
+                      software architecture, sensor integration, physics modeling (Soft Body Physics) and optimization for VR environments.
                   </p>
                </div>
                
                <div class="resume-item">
                   <h4>Freelance Developer & Technical Designer</h4><span class="meta">2020 - 2021 • Mobile & Interactive Apps</span>
                   <p style="font-size:14px; color:#4b5563;">
-                      Engineered physics and audio simulations. Focused on developing custom systems for **CSG physics** and real-time **mesh cutting** algorithms. Also involved in **Easy EDA PCB design** and hardware application.
+                      Engineered vehicle physics and procedural audio simulations. Focused on developing custom systems for CSG physics 
+                      and real-time mesh cutting algorithms for interactive experiences.
                   </p>
                </div>
             </div>
@@ -432,19 +426,10 @@
   function renderProjects() {
     if (!window.projects) return;
     grid.innerHTML = '';
-    const projects = window.projects;
-
-    // SAĞLAM SIRALAMA: Null değerleri hatasız işler.
-    projects.sort((a, b) => {
-        const dateA = a.date || '0';
-        const dateB = b.date || '0';
-        if (dateA < dateB) return 1;
-        if (dateA > dateB) return -1;
-        return 0;
-    });
+    const projects = window.projects.sort((a, b) => (a.date < b.date ? 1 : -1));
 
     projects.forEach(p => {
-      // SAĞLAM KONTROL: Types alanı boşsa hata vermez.
+      // YENİ FİLTER LİSTESİNE GÖRE KONTROL
       const types = Array.isArray(p.types) ? p.types : [];
       if (activeFilter !== 'all' && !types.includes(activeFilter)) return;
 
@@ -452,13 +437,13 @@
       div.className = 'project-card';
       div.onclick = () => { openModal(p); window.history.pushState(null, '', '#' + p.id); };
       div.innerHTML = `
-        <div class="project-image"><img src="${p.coverImage || 'images/placeholder.jpg'}" alt="${p.name}"></div>
+        <div class="project-image"><img src="${p.coverImage}" alt="${p.name}"></div>
         <div class="project-text">
-          <div class="project-meta">${p.role || ''}</div>
+          <div class="project-meta">${p.role}</div>
           <div class="project-title">${p.name}</div>
           <div class="project-date">${formatMonthYear(p.date)}</div>
-          <p class="project-desc">${p.shortDesc || ''}</p>
-          <div class="project-tech">${p.tagline || ''}</div>
+          <p class="project-desc">${p.shortDesc}</p>
+          <div class="project-tech">${p.tagline}</div>
         </div>`;
       grid.appendChild(div);
     });
@@ -485,11 +470,7 @@
   const mThumbs = document.getElementById('modal-thumbs');
   const mLinks = document.getElementById('modal-links');
 
-  // --- Modal Açma Fonksiyonu ---
   function openModal(project) {
-    // CRITICAL FIX: Modal açıldığında body'yi kilitle (kaydırmayı engelle)
-    document.body.style.overflow = 'hidden'; 
-    
     mTitle.textContent = project.name;
     mDesc.textContent = project.longDesc || project.shortDesc;
     
@@ -531,7 +512,6 @@
     }
 
     modal.classList.add('open');
-    // Sayfayı en üste kaydır
     modalBody.scrollTop = 0;
   }
 
@@ -541,17 +521,14 @@
       else if (item.type === 'youtube') {
           const vidId = item.src.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1];
           if(vidId) mMedia.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-          else mMedia.innerHTML = '<span>Invalid YouTube link.</span>';
       } else if (item.type === 'video') {
           mMedia.innerHTML = `<video src="${item.src}" controls autoplay muted></video>`;
       }
   }
 
-  // --- KAPATMA FONKSİYONU ---
   function closeModal() {
     modal.classList.remove('open');
-    mMedia.innerHTML = ''; 
-    document.body.style.overflow = ''; // Body kilidini kaldır
+    mMedia.innerHTML = '';
     window.history.pushState(null, '', window.location.pathname + window.location.search);
   }
 
@@ -567,7 +544,6 @@
     }
   }
 
-  // Tüm JS yüklemesi tamamlandıktan sonra başlat
   window.addEventListener('load', () => { renderProjects(); checkDeepLink(); });
   window.addEventListener('hashchange', checkDeepLink);
 </script>
