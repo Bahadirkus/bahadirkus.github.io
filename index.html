@@ -6,6 +6,7 @@
   
   <meta name="description" content="Portfolio of Bahadır Kuş - Simulation Developer, Unity Expert and Technical Designer.">
   <meta name="author" content="Bahadır Kuş">
+  
   <meta property="og:title" content="Bahadır Kuş – Simulation Developer Portfolio">
   <meta property="og:description" content="Unity, VR/AR, and Hardware/Software integration projects.">
   <meta property="og:image" content="images/bahadir.jpeg"> 
@@ -44,11 +45,11 @@
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; }
 
-    /* LAYOUT */
+    /* Layout */
     .page { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
     .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px; align-items: flex-start; }
 
-    /* SIDEBAR */
+    /* Sidebar */
     .sidebar {
       position: sticky; top: 32px;
       background: var(--sidebar-bg); border-radius: 24px; padding: 32px 24px;
@@ -70,7 +71,7 @@
     }
     .profile-role-pill-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; }
 
-    /* SOCIAL & CONTACT */
+    /* Social & Contact */
     .profile-social { display: flex; gap: 12px; justify-content: center; }
     .social-btn {
       width: 36px; height: 36px; border-radius: 50%;
@@ -121,6 +122,7 @@
     .tab-section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* FILTERS - YENİ FILTRE STİLİ */
     .project-filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 24px; }
     .filter-btn {
       border-radius: 999px; padding: 8px 16px; font-size: 13px;
@@ -163,7 +165,7 @@
       background: #f3f4f6; padding: 4px 8px; border-radius: 6px; align-self: flex-start; margin-top: 12px;
     }
 
-    /* RESUME */
+    /* RESUME - GÜNCEL KISIM */
     .resume-block { background: #f9fafb; border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-top: 20px; }
     .resume-block h3 { margin-bottom: 12px; font-size: 16px; color: #111827; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -175,7 +177,7 @@
 
     footer { margin-top: 40px; font-size: 13px; color: var(--muted); text-align: center; border-top: 1px solid var(--border); padding-top: 20px; }
 
-    /* --- MODAL (DÜZELTİLEN KISIMLAR) --- */
+    /* MODAL */
     .project-modal {
       position: fixed; inset: 0; background: rgba(0,0,0,0.7);
       backdrop-filter: blur(5px); z-index: 1000;
@@ -187,7 +189,7 @@
       background: #fff; width: 100%; max-width: 1000px;
       border-radius: 20px; overflow: hidden;
       max-height: 90vh; display: flex; flex-direction: column;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
     }
 
     .project-modal-header {
@@ -203,29 +205,22 @@
     }
     
     .modal-text { flex: 1; min-width: 300px; display: flex; flex-direction: column; }
+    
     #modal-desc { white-space: pre-line; }
 
     .modal-gallery { flex: 1.5; display: flex; flex-direction: column; gap: 16px; }
 
     /* Ana Görsel Kutusu */
     .modal-main-media {
-      width: 100%;
-      height: 400px; /* Desktop sabit yükseklik */
-      background: #f9fafb;
-      border-radius: 12px;
-      overflow: hidden;
+      width: 100%; height: 400px; /* Desktop sabit yükseklik */
+      background: #f9fafb; border-radius: 12px; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-      border: 1px solid var(--border);
-      flex-shrink: 0; /* Büzüşmesin */
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border);
+      flex-shrink: 0; 
     }
 
-    .modal-main-media img {
-      width: 100%; height: 100%; object-fit: contain; display: block;
-    }
-    .modal-main-media iframe, .modal-main-media video {
-      width: 100%; height: 100%; aspect-ratio: 16/9; display: block;
-    }
+    .modal-main-media img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .modal-main-media iframe, .modal-main-media video { width: 100%; height: 100%; aspect-ratio: 16/9; display: block; }
 
     .modal-links {
         margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px;
@@ -241,40 +236,24 @@
     /* THUMBNAILS: GRID/TABLO YAPISI */
     .modal-thumbs { 
         display: flex; 
-        flex-wrap: wrap; /* ANAHTAR KOD: Alt satıra geçsin */
+        flex-wrap: wrap; 
         gap: 10px; 
         padding-bottom: 4px; 
     }
     
     .modal-thumb {
-      width: 80px; 
-      height: 60px; 
-      flex-shrink: 0; 
-      border-radius: 8px; 
-      overflow: hidden;
-      cursor: pointer; 
-      opacity: 0.7; 
-      transition: 0.2s; 
-      border: 2px solid transparent; 
-      background: #f3f4f6;
-      /* Resim kesilmemesi için */
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 80px; height: 60px; flex-shrink: 0; border-radius: 8px; 
+      overflow: hidden; cursor: pointer; opacity: 0.7; transition: 0.2s; 
+      border: 2px solid transparent; background: #f3f4f6;
+      display: flex; align-items: center; justify-content: center;
     }
     
     .modal-thumb.active { 
-        opacity: 1; 
-        border-color: var(--accent); 
-        background: #fff; 
-        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); /* Ekstra vurgu */
+        opacity: 1; border-color: var(--accent); background: #fff; 
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
     }
     
-    .modal-thumb img { 
-        width: 100%; 
-        height: 100%; 
-        object-fit: cover; /* Küçük resimler kareyi doldursun */
-    }
+    .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
     /* MOBILE RESPONSIVE */
     @media (max-width: 900px) {
@@ -284,7 +263,6 @@
       .modal-gallery { order: -1; } 
       .modal-text { order: 1; min-width: auto; }
       .modal-main-media { height: 250px; } 
-      /* Mobilde küçük resimler biraz daha küçük olabilir */
       .modal-thumb { width: 70px; height: 50px; }
     }
 
@@ -340,9 +318,8 @@
       <section id="portfolio-section" class="tab-section active">
         <div class="project-filters">
           <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="software">Software / VR</button>
-          <button class="filter-btn" data-filter="design">Technical Design</button>
-          <button class="filter-btn" data-filter="hardware">Hardware / Embedded</button>
+          <button class="filter-btn" data-filter="software">Software</button>
+          <button class="filter-btn" data-filter="technical-design">Technical Design & Gömülü Yazılım</button>
         </div>
         <div class="projects-grid" id="projects-grid"></div>
       </section>
@@ -352,32 +329,49 @@
         <p style="color:var(--text); margin-top:8px;">
             I specialize in developing **real-time simulation and training systems** using Unity, focusing on the intersection of physical hardware (sensors, haptics) and software logic. My background allows me to deliver high-fidelity applications, particularly in the **Medical Simulation** and XR/VR space.
         </p>
+        
         <div class="resume-block">
-          <h3>Technical Stack</h3>
+          <h3>Technical Stack & Physics Expertise</h3>
           <div class="skill-tags">
-            <span class="skill-tag">Unity 3D</span><span class="skill-tag">C# / C++</span><span class="skill-tag">VR / AR / MR</span>
-            <span class="skill-tag">Medical Simulation</span><span class="skill-tag">Fusion 360</span><span class="skill-tag">Arduino / ESP32</span>
-            <span class="skill-tag">Python</span><span class="skill-tag">FMOD</span><span class="skill-tag">Git</span>
+            <span class="skill-tag">Unity 3D</span><span class="skill-tag">C# / C++</span><span class="skill-tag">Soft Body Physics</span>
+            <span class="skill-tag">CSG Physics / Mesh Cutting</span><span class="skill-tag">VR / AR / MR</span>
+            <span class="skill-tag">Medical Simulation</span><span class="skill-tag">Easy EDA / PCB Design</span>
+            <span class="skill-tag">Fusion 360</span><span class="skill-tag">Arduino / ESP32</span>
+            <span class="skill-tag">FMOD</span><span class="skill-tag">Git</span>
           </div>
         </div>
+
         <div class="resume-block">
             <h3>Professional Experience</h3>
             <div style="display:flex; flex-direction:column; gap:16px;">
+               
                <div class="resume-item">
                   <h4>Lead Simulation Developer</h4><span class="meta">2021 - Present • MedTech Company</span>
-                  <p style="font-size:14px; color:#4b5563;">Developing high-fidelity, haptic-feedback surgical simulators. Responsible for full cycle development.</p>
+                  <p style="font-size:14px; color:#4b5563;">
+                      Developing high-fidelity, haptic-feedback surgical simulators. Responsible for the full development cycle: 
+                      software architecture, sensor integration, physics modeling (Soft Body Physics) and optimization for VR environments.
+                  </p>
                </div>
+               
                <div class="resume-item">
-                  <h4>Freelance Developer</h4><span class="meta">2020 - 2021 • Mobile Apps</span>
-                  <p style="font-size:14px; color:#4b5563;">Engineered physics and audio simulations for various mobile applications (Redline series).</p>
+                  <h4>Freelance Developer & Technical Designer</h4><span class="meta">2020 - 2021 • Mobile & Interactive Apps</span>
+                  <p style="font-size:14px; color:#4b5563;">
+                      Engineered vehicle physics and procedural audio simulations. Focused on developing custom systems for CSG physics 
+                      and real-time mesh cutting algorithms for interactive experiences.
+                  </p>
                </div>
             </div>
         </div>
+
         <div class="resume-block">
             <h3>Education</h3>
-            <div class="resume-item"><h4>B.S. Electrical & Electronics Engineering</h4><span class="meta">2014 - 2018 • University Name</span></div>
+            <div class="resume-item"><h4>B.S. Electrical & Electronics Engineering</h4><span class="meta">2014 - 2018 • University Name (Example)</span></div>
         </div>
-        <div class="resume-block"><h3>Languages</h3><p style="font-size:14px; color:#4b5563;">Turkish: Native / English: Professional</p></div>
+
+        <div class="resume-block">
+            <h3>Languages</h3>
+            <p style="font-size:14px; color:#4b5563;">Turkish: Native / English: Professional Working Proficiency</p>
+        </div>
       </section>
     </main>
   </div>
@@ -435,7 +429,10 @@
     const projects = window.projects.sort((a, b) => (a.date < b.date ? 1 : -1));
 
     projects.forEach(p => {
-      if (activeFilter !== 'all' && !p.types.includes(activeFilter)) return;
+      // YENİ FİLTER LİSTESİNE GÖRE KONTROL
+      const types = Array.isArray(p.types) ? p.types : [];
+      if (activeFilter !== 'all' && !types.includes(activeFilter)) return;
+
       const div = document.createElement('article');
       div.className = 'project-card';
       div.onclick = () => { openModal(p); window.history.pushState(null, '', '#' + p.id); };
@@ -450,6 +447,10 @@
         </div>`;
       grid.appendChild(div);
     });
+
+    if(grid.innerHTML === '') {
+        grid.innerHTML = '<p style="color:#6b7280; text-align:center; padding:20px;">Bu kategoride proje bulunamadı.</p>';
+    }
   }
 
   filters.forEach(btn => {
@@ -511,7 +512,6 @@
     }
 
     modal.classList.add('open');
-    // SCROLL TO TOP FIX
     modalBody.scrollTop = 0;
   }
 
