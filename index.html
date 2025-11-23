@@ -302,9 +302,8 @@
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
-      /* Yüksekliği sabitlemek istiyorsan min-height yerine sabit height verebilirsin ama içerik taşabilir. 
-         Burada esnek ama "görsel alanı sabit" bir yapı kuruyoruz. */
-      height: 240px; /* KART YÜKSEKLİĞİ SABİT */
+      /* KART YÜKSEKLİĞİ SABİT */
+      height: 240px; 
     }
 
     .project-card:hover {
@@ -313,7 +312,7 @@
       border-color: #d1d5db;
     }
 
-    /* Görsel Alanı - İSTEĞE GÖRE DÜZENLENDİ */
+    /* Görsel Alanı */
     .project-image {
       width: 280px;      /* Sabit Genişlik */
       min-width: 280px;
@@ -609,7 +608,6 @@
 </div>
 
 <script>
-  // Eğer dışarıdan projects.js gelmezse bu datayı kullanır.
   if (!window.projects) {
     window.projects = [
       {
@@ -621,25 +619,12 @@
         shortDesc: "A high-fidelity VR simulation with haptic feedback custom controllers.",
         longDesc: "This project involved creating a custom controller using Arduino and Hall Effect sensors to mimic surgical tools. The Unity simulation receives data via Serial port and updates the physics-based soft tissue model in real-time.",
         tagline: "Unity • C# • Arduino • PhysX",
-        coverImage: "https://via.placeholder.com/600x400/000000/ffffff?text=Surgery+Sim", // Siyah arkaplanlı görsel örneği
+        coverImage: "https://via.placeholder.com/600x400/000000/ffffff?text=Surgery+Sim",
         gallery: [
           { type: 'image', src: 'https://via.placeholder.com/800x600/111/fff?text=Screenshot+1' },
           { type: 'youtube', src: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' } 
         ],
         links: [{ label: "View on GitHub", url: "#" }]
-      },
-      {
-        id: "ar-nav",
-        name: "AR Indoor Navigation",
-        role: "Technical Designer",
-        date: "2023-11",
-        types: ["software", "design"],
-        shortDesc: "Mobile AR application for hospital navigation.",
-        longDesc: "Using AR Foundation and Vuforia to help patients find their way in large hospital complexes.",
-        tagline: "AR Foundation • UX Design",
-        coverImage: "https://via.placeholder.com/400x800/222/fff?text=Mobile+AR", // Dikey görsel örneği
-        gallery: [],
-        links: []
       }
     ];
   }
@@ -659,6 +644,22 @@
     });
   });
 
+  // --- TARİH FORMATLAMA YARDIMCISI ---
+  function formatMonthYear(dateString) {
+    if (!dateString) return '';
+    // YYYY-MM veya YYYY-MM-DD formatını işler.
+    const parts = dateString.split('-');
+    if (parts.length < 2) return dateString;
+
+    const year = parseInt(parts[0], 10);
+    const monthIndex = parseInt(parts[1], 10) - 1; // JS'de aylar 0'dan başlar
+
+    const date = new Date(year, monthIndex);
+    
+    // Yabancı dil desteği olmadan sadece ay ve yıl formatını döndürür.
+    return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  }
+
   // --- PROJE LİSTELEME ---
   const grid = document.getElementById('projects-grid');
   const filters = document.querySelectorAll('.filter-btn');
@@ -668,8 +669,17 @@
     grid.innerHTML = '';
     const projects = window.projects || [];
     
-    // Tarihe göre sırala (Yeniden eskiye)
-    projects.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // HATA DÜZELTİLDİ: Tarihe göre sıralama (En yeni en üstte)
+    projects.sort((a, b) => {
+        // YYYY-MM formatındaki stringleri direkt karşılaştırabiliriz
+        if (a.date && b.date) {
+            // b - a: Yeniden eskiye
+            if (a.date < b.date) return 1;
+            if (a.date > b.date) return -1;
+            return 0;
+        }
+        return 0;
+    });
 
     projects.forEach(p => {
       if (activeFilter !== 'all' && !p.types.includes(activeFilter)) return;
@@ -678,7 +688,8 @@
       div.className = 'project-card';
       div.onclick = () => openModal(p);
       
-      // Template Literal Hataları Düzeltildi
+      const dateText = p.date ? formatMonthYear(p.date) : '';
+
       div.innerHTML = `
         <div class="project-image">
            <img src="${p.coverImage || 'images/placeholder.jpg'}" alt="${p.name}">
@@ -686,7 +697,7 @@
         <div class="project-text">
           <div class="project-meta">${p.role || 'Developer'}</div>
           <div class="project-title">${p.name}</div>
-          <div class="project-date">${p.date}</div>
+          <div class="project-date">${dateText}</div> 
           <p class="project-desc">${p.shortDesc}</p>
           <div class="project-tech">${p.tagline || ''}</div>
         </div>
@@ -722,7 +733,7 @@
     
     // Linkler
     mLinks.innerHTML = '';
-    if(project.links) {
+    if(project.links && project.links.length > 0) {
         project.links.forEach(l => {
             const a = document.createElement('a');
             a.href = l.url; a.target = "_blank";
@@ -734,13 +745,21 @@
     // Galeri
     mMedia.innerHTML = '';
     mThumbs.innerHTML = '';
-    const gallery = project.gallery && project.gallery.length > 0 ? project.gallery : [{type:'image', src: project.coverImage}];
+    
+    // Kapak görselini galeriye ekle
+    let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
+    if (project.coverImage) {
+        const alreadyHasCover = gallery.some(item => item.type === 'image' && item.src === project.coverImage);
+        if (!alreadyHasCover) {
+            gallery.unshift({ type: 'image', src: project.coverImage, alt: project.name + ' cover' });
+        }
+    }
 
     // İlk medyayı göster
-    setMedia(gallery[0]);
+    if (gallery.length > 0) {
+        setMedia(gallery[0]);
 
-    // Küçük resimler (thumbnails)
-    if(gallery.length > 1) {
+        // Küçük resimler (thumbnails)
         gallery.forEach((item, idx) => {
             const th = document.createElement('div');
             th.className = 'modal-thumb' + (idx === 0 ? ' active' : '');
@@ -748,9 +767,8 @@
             if(item.type === 'image') {
                 th.innerHTML = `<img src="${item.src}">`;
             } else if (item.type === 'youtube') {
-                 // Youtube thumbnail çekme
-                 const vidId = item.src.split('v=')[1] || item.src.split('/').pop();
-                 th.innerHTML = `<img src="https://img.youtube.com/vi/${vidId}/0.jpg">`;
+                 const vidId = item.src.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1];
+                 th.innerHTML = vidId ? `<img src="https://img.youtube.com/vi/${vidId}/0.jpg">` : 'Video';
             } else {
                 th.innerHTML = '<div style="color:white; font-size:10px; display:flex; align-items:center; justify-content:center; height:100%;">VIDEO</div>';
             }
@@ -762,7 +780,10 @@
             };
             mThumbs.appendChild(th);
         });
+    } else {
+        mMedia.innerHTML = '<span>No media added yet.</span>';
     }
+
 
     modal.classList.add('open');
   }
