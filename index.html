@@ -5,6 +5,14 @@
   <title>Bahadır Kuş – Simulation Developer & Technical Designer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- SEO & SHARE (LinkedIn, X, etc.) -->
+  <meta name="description" content="Portfolio of Bahadır Kuş – Simulation Developer & Technical Designer specializing in VR/AR, medical simulation and interactive systems.">
+  <meta property="og:title" content="Bahadır Kuş – Simulation Developer & Technical Designer">
+  <meta property="og:description" content="Selected work in simulation, software and interactive design.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bahadirkus.github.io">
+  <meta property="og:image" content="images/og-cover.jpg">
+
   <style>
     :root {
       --bg: #f3f4f6;
@@ -348,7 +356,8 @@
       overflow: hidden;
       cursor: pointer;
       transition: .15s;
-      min-height: 220px;
+      height: 240px;           /* SABİT YÜKSEKLİK (desktop) */
+      align-items: stretch;
     }
 
     .project-card:hover {
@@ -364,6 +373,7 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      overflow: hidden;
     }
 
     .project-text::before {
@@ -410,7 +420,7 @@
       width: 38%;
       min-width: 38%;
       max-width: 38%;
-      background: #e5e7eb;
+      background: #000;           /* SİYAH ARKA PLAN */
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -420,7 +430,7 @@
     .project-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* kırpabilir ama bozmuyor */
+      object-fit: contain;        /* GÖRSELİ BOZMA, ALANA SIĞDIR */
       display: block;
     }
 
@@ -597,7 +607,7 @@
     .modal-main-media iframe {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* TÜM görsel/video görünsün */
+      object-fit: contain;
       display: block;
       border: none;
     }
@@ -665,6 +675,8 @@
 
       .project-card {
         flex-direction: column;
+        height: auto;         /* mobilde sabit değil */
+        min-height: 220px;
       }
 
       .project-image {
@@ -693,7 +705,7 @@
     <aside class="sidebar">
       <div class="profile-header">
         <div class="profile-photo">
-          <img src="images/bahadir.jpeg" alt="Bahadır Kuş">
+          <img src="images/bahadir.jpeg" alt="Bahadır Kuş" loading="lazy">
         </div>
         <div class="profile-name">Bahadır Kuş</div>
         <div class="profile-role-pill">
@@ -702,61 +714,54 @@
         </div>
       </div>
 
-      <!-- Kısa bio (istersen tekrar açarsın)
-      <p class="profile-bio">
-        Unity, VR/AR and real-time simulation developer combining mechanical design,
-        sensors and software to build training systems.
-      </p>
-      -->
-
       <!-- Social icons -->
       <div class="profile-social">
         <a class="social-btn" href="#" target="_blank" title="Instagram">
-          <img src="images/icon-instagram.svg" alt="Instagram">
+          <img src="images/icon-instagram.svg" alt="Instagram" loading="lazy">
         </a>
         <a class="social-btn" href="#" target="_blank" title="X / Twitter">
-          <img src="images/icon-x.svg" alt="X">
+          <img src="images/icon-x.svg" alt="X" loading="lazy">
         </a>
         <a class="social-btn" href="#" target="_blank" title="LinkedIn">
-          <img src="images/icon-linkedin.svg" alt="LinkedIn">
+          <img src="images/icon-linkedin.svg" alt="LinkedIn" loading="lazy">
         </a>
       </div>
 
       <!-- Contact cards -->
       <div class="contact-list">
-        <a class="contact-card-link" href="mailto:ornek@mail.com">
+        <a class="contact-card-link" href="mailto:mrbahadirkus@gmail.com">
           <div class="contact-icon">
-            <img src="images/icon-email.svg" alt="Email icon">
+            <img src="images/icon-email.svg" alt="Email icon" loading="lazy">
           </div>
           <div class="contact-text">
             <span class="contact-label">Email</span>
-            <span class="contact-value">ornek@mail.com</span>
+            <span class="contact-value">mrbahadirkus@gmail.com</span>
           </div>
         </a>
 
-        <a class="contact-card-link" href="#" target="_blank">
+        <a class="contact-card-link" href="https://github.com/bahadirkus" target="_blank" rel="noopener noreferrer">
           <div class="contact-icon">
-            <img src="images/icon-game.svg" alt="Game demo icon">
+            <img src="images/icon-game.svg" alt="Game demo icon" loading="lazy">
           </div>
           <div class="contact-text">
             <span class="contact-label">Game Demo</span>
-            <span class="contact-value">GitHub / Itch.io link</span>
+            <span class="contact-value">github.com/bahadirkus</span>
           </div>
         </a>
 
         <div class="contact-card">
           <div class="contact-icon">
-            <img src="images/icon-location.svg" alt="Location icon">
+            <img src="images/icon-location.svg" alt="Location icon" loading="lazy">
           </div>
           <div class="contact-text">
             <span class="contact-label">Location</span>
-            <span class="contact-value">Toronto, Canada</span>
+            <span class="contact-value">Ankara · Toronto (remote)</span>
           </div>
         </div>
 
-        <a class="contact-card-link" href="#" target="_blank">
+        <a class="contact-card-link" href="#" target="_blank" rel="noopener noreferrer">
           <div class="contact-icon">
-            <img src="images/icon-youtube.svg" alt="YouTube icon">
+            <img src="images/icon-youtube.svg" alt="YouTube icon" loading="lazy">
           </div>
           <div class="contact-text">
             <span class="contact-label">YouTube</span>
@@ -896,7 +901,6 @@
   // Helpers: parse and format date
   function parseProjectDate(value) {
     if (!value) return null;
-    // supports "YYYY-MM" or "YYYY-MM-DD"
     const parts = value.split('-').map(p => parseInt(p, 10));
     if (!parts[0] || !parts[1]) return null;
     const year = parts[0];
@@ -945,7 +949,7 @@
       <div class="project-image">
         ${
           hasCover
-            ? `<img src="${project.coverImage}" alt="${project.name} cover">`
+            ? `<img src="${project.coverImage}" alt="${project.name} cover" loading="lazy">`
             : `<span>No image</span>`
         }
       </div>
@@ -1043,63 +1047,63 @@
     }
 
     // Gallery
-  modalMainMedia.innerHTML = '';
-  modalThumbs.innerHTML = '';
+    modalMainMedia.innerHTML = '';
+    modalThumbs.innerHTML = '';
 
-  let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
+    let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
 
-  // HER ZAMAN coverImage'i en başa ekle (varsa ve zaten ekli değilse)
-  if (project.coverImage) {
-    const alreadyHasCover = gallery.some(
-      item => item.type === 'image' && item.src === project.coverImage
-    );
+    // coverImage'i her zaman en başa ekle (varsa)
+    if (project.coverImage) {
+      const alreadyHasCover = gallery.some(
+        item => item.type === 'image' && item.src === project.coverImage
+      );
 
-    if (!alreadyHasCover) {
-      gallery.unshift({
-        type: 'image',
-        src: project.coverImage,
-        alt: project.name + ' cover'
-      });
-    }
-  }
-
-  if (gallery.length > 0) {
-    setMainMedia(gallery[0]);
-
-    gallery.forEach((item, index) => {
-      const thumb = document.createElement('div');
-      thumb.className = 'modal-thumb' + (index === 0 ? ' active' : '');
-      thumb.dataset.index = index;
-
-      if (item.type === 'image') {
-        thumb.innerHTML = `<img src="${item.src}" alt="${item.alt || ''}">`;
-      } else if (item.type === 'video') {
-        thumb.textContent = 'Video';
-      } else if (item.type === 'youtube') {
-        const id = youtubeIdFromUrl(item.src);
-        if (id) {
-          const thumbImg = document.createElement('img');
-          thumbImg.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-          thumbImg.alt = item.alt || 'YouTube video';
-          thumb.appendChild(thumbImg);
-        } else {
-          thumb.textContent = 'YouTube';
-        }
-      } else {
-        thumb.textContent = 'Media';
+      if (!alreadyHasCover) {
+        gallery.unshift({
+          type: 'image',
+          src: project.coverImage,
+          alt: project.name + ' cover'
+        });
       }
+    }
 
-      thumb.addEventListener('click', () => {
-        document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-        setMainMedia(item);
+    if (gallery.length > 0) {
+      setMainMedia(gallery[0]);
+
+      gallery.forEach((item, index) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'modal-thumb' + (index === 0 ? ' active' : '');
+        thumb.dataset.index = index;
+
+        if (item.type === 'image') {
+          thumb.innerHTML = `<img src="${item.src}" alt="${item.alt || ''}">`;
+        } else if (item.type === 'video') {
+          thumb.textContent = 'Video';
+        } else if (item.type === 'youtube') {
+          const id = youtubeIdFromUrl(item.src);
+          if (id) {
+            const thumbImg = document.createElement('img');
+            thumbImg.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+            thumbImg.alt = item.alt || 'YouTube video';
+            thumb.appendChild(thumbImg);
+          } else {
+            thumb.textContent = 'YouTube';
+          }
+        } else {
+          thumb.textContent = 'Media';
+        }
+
+        thumb.addEventListener('click', () => {
+          document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+          setMainMedia(item);
+        });
+
+        modalThumbs.appendChild(thumb);
       });
-
-      modalThumbs.appendChild(thumb);
-    });
-  } else {
-    modalMainMedia.innerHTML = '<span>No media added yet.</span>';
-  }
+    } else {
+      modalMainMedia.innerHTML = '<span>No media added yet.</span>';
+    }
 
     modal.classList.add('open');
   }
