@@ -1,451 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Project Editor – Bahadır</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <title>Portfolio Editor - Bahadır Kuş</title>
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f5f5;
-      color: #111;
-      padding: 24px 16px 64px;
-    }
+    body { font-family: system-ui, sans-serif; background: #111827; color: #f3f4f6; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+    
+    /* LAYOUT */
+    .sidebar { width: 250px; background: #1f2937; border-right: 1px solid #374151; display: flex; flex-direction: column; }
+    .main { flex: 1; padding: 20px; overflow-y: auto; display: flex; gap: 20px; }
+    .editor-area { flex: 2; background: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; }
+    .preview-area { flex: 1; display: flex; flex-direction: column; gap: 10px; }
 
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      background: #fff;
-      border-radius: 16px;
-      padding: 20px 20px 28px;
-      box-shadow: 0 18px 40px rgba(15,23,42,0.08);
-    }
+    /* SIDEBAR LIST */
+    .project-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex: 1; }
+    .project-list li { padding: 12px 16px; cursor: pointer; border-bottom: 1px solid #374151; font-size: 14px; }
+    .project-list li:hover { background: #374151; }
+    .project-list li.active { background: #2563eb; color: white; }
+    .add-btn { padding: 15px; background: #10b981; border: none; color: white; cursor: pointer; font-weight: bold; }
+    .add-btn:hover { background: #059669; }
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 4px;
-    }
+    /* FORM ELEMENTS */
+    .form-group { margin-bottom: 15px; }
+    label { display: block; font-size: 12px; color: #9ca3af; margin-bottom: 4px; text-transform: uppercase; }
+    input, textarea, select { width: 100%; background: #111827; border: 1px solid #4b5563; color: white; padding: 8px; border-radius: 6px; font-size: 14px; }
+    textarea { resize: vertical; height: 80px; }
+    .row { display: flex; gap: 10px; }
+    .col { flex: 1; }
 
-    .sub { font-size: 13px; color: #666; margin-bottom: 16px; }
+    /* CHECKBOXES */
+    .checkbox-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .checkbox-label { display: flex; align-items: center; gap: 6px; font-size: 14px; color: #e5e7eb; text-transform: none; cursor: pointer; background: #374151; padding: 4px 10px; border-radius: 4px; }
+    .checkbox-label input { width: auto; margin: 0; }
 
-    form {
-      border: 1px solid #e5e5e5;
-      border-radius: 12px;
-      padding: 16px 16px 10px;
-      margin-bottom: 16px;
-    }
+    /* DYNAMIC LISTS (Gallery/Links) */
+    .dynamic-list { border: 1px solid #4b5563; padding: 10px; border-radius: 6px; background: #111827; }
+    .dynamic-item { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; background: #1f2937; padding: 8px; border-radius: 4px; }
+    .btn-sm { padding: 4px 8px; font-size: 12px; cursor: pointer; border-radius: 4px; border: none; }
+    .btn-del { background: #ef4444; color: white; }
+    .btn-add { background: #3b82f6; color: white; margin-top: 5px; width: 100%; padding: 6px; }
 
-    .field {
-      margin-bottom: 10px;
-    }
+    /* OUTPUT */
+    .output-box { width: 100%; height: 100%; background: #000; color: #0f0; font-family: monospace; padding: 10px; border: 1px solid #374151; border-radius: 8px; resize: none; }
+    .copy-btn { background: #2563eb; color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; }
+    .copy-btn:hover { background: #1d4ed8; }
 
-    .field label {
-      display: block;
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 3px;
-    }
-
-    .field input[type="text"],
-    .field textarea,
-    .field input[type="date"] {
-      width: 100%;
-      padding: 6px 8px;
-      border-radius: 6px;
-      border: 1px solid #d4d4d4;
-      font-size: 13px;
-    }
-
-    .field textarea {
-      min-height: 60px;
-      resize: vertical;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 13px;
-    }
-
-    .chips label {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid #d4d4d4;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .chips input { margin: 0; }
-
-    .gallery-items {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .gallery-item {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .gallery-item select,
-    .gallery-item input {
-      font-size: 12px;
-      padding: 4px 6px;
-      border-radius: 6px;
-      border: 1px solid #d4d4d4;
-    }
-
-    .gallery-item input {
-      flex: 1;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 7px 14px;
-      font-size: 13px;
-      border: 1px solid #d4d4d4;
-      background: #fff;
-      cursor: pointer;
-      margin-top: 6px;
-    }
-
-    .btn-primary {
-      border-color: #2962ff;
-      background: #2962ff;
-      color: #fff;
-    }
-
-    .btn-small {
-      padding: 4px 10px;
-      font-size: 12px;
-    }
-
-    .btn + .btn { margin-left: 6px; }
-
-    .projects-list {
-      margin-top: 16px;
-      font-size: 13px;
-    }
-
-    .projects-list h2 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .projects-list ul {
-      list-style: none;
-      padding-left: 0;
-      border-radius: 10px;
-      border: 1px solid #e5e5e5;
-      max-height: 220px;
-      overflow-y: auto;
-    }
-
-    .projects-list li {
-      padding: 6px 10px;
-      border-bottom: 1px solid #f0f0f0;
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .projects-list li:last-child {
-      border-bottom: none;
-    }
-
-    .projects-list span.date {
-      color: #777;
-      font-size: 12px;
-    }
-
-    .code-export {
-      margin-top: 16px;
-    }
-
-    .code-export textarea {
-      width: 100%;
-      min-height: 180px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid #d4d4d4;
-      background: #0f172a;
-      color: #e5e7eb;
-      resize: vertical;
-      white-space: pre;
-    }
-
-    .hint {
-      font-size: 12px;
-      color: #666;
-      margin-top: 6px;
-    }
+    h2 { margin-top: 0; border-bottom: 1px solid #374151; padding-bottom: 10px; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Project Editor</h1>
-    <div class="sub">
-      This page is only for you. Fill the form → add project → copy the code below
-      into <strong>projects.js</strong> (same folder as <strong>index.html</strong>).
-    </div>
 
-    <form id="project-form">
-      <div class="field">
-        <label>Title (name)</label>
-        <input type="text" id="name" required />
-      </div>
-
-      <div class="field">
-        <label>Role (role)</label>
-        <input type="text" id="role" placeholder="Simulation Developer & Technical Designer" />
-      </div>
-
-      <div class="field">
-        <label>Tagline</label>
-        <input type="text" id="tagline" placeholder="VR • Medical Simulation" />
-      </div>
-
-      <div class="field">
-        <label>Date</label>
-        <input type="date" id="date" />
-      </div>
-
-      <div class="field">
-        <label>Types (for filters)</label>
-        <div class="chips">
-          <label><input type="checkbox" value="software" /> Software</label>
-          <label><input type="checkbox" value="design" /> Design</label>
-          <label><input type="checkbox" value="hardware" /> Hardware</label>
-          <label><input type="checkbox" value="simulation" /> Simulation</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Short Description (shortDesc)</label>
-        <textarea id="shortDesc" placeholder="Shown on the card"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Long Description (longDesc)</label>
-        <textarea id="longDesc" placeholder="Shown in the detail panel"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Card Cover Image (coverImage URL)</label>
-        <input type="text" id="coverImage" placeholder="e.g. images/knee-cover.jpg" />
-        <div class="hint">
-          Add the file to your repo under <code>images/...</code> and write the path here.
-          If empty, the first gallery item or YouTube thumbnail will be used.
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Gallery (media for the detail panel)</label>
-        <div class="gallery-items" id="gallery-items"></div>
-        <button type="button" class="btn btn-small" id="add-gallery-item">
-          + Add image / video / YouTube
-        </button>
-        <div class="hint">
-          Each row: type + source + alt text.<br>
-          Image: <code>images/...jpg</code> – Video: <code>videos/...mp4</code><br>
-          YouTube: choose <strong>YouTube</strong> and paste the full link
-          (<code>https://www.youtube.com/watch?v=XXXX</code>).
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Links (optional)</label>
-        <div class="hint">
-          These links will be shown under the description in the detail panel.
-        </div>
-        <div style="margin-top:6px;">
-          <div class="field">
-            <label>Link 1 Label</label>
-            <input type="text" id="link1Label" placeholder="e.g. Google Play" />
-          </div>
-          <div class="field">
-            <label>Link 1 URL</label>
-            <input type="text" id="link1Url" placeholder="https://..." />
-          </div>
-          <div class="field">
-            <label>Link 2 Label</label>
-            <input type="text" id="link2Label" placeholder="e.g. Demo Website" />
-          </div>
-          <div class="field">
-            <label>Link 2 URL</label>
-            <input type="text" id="link2Url" placeholder="https://..." />
-          </div>
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Add project</button>
-      <button type="button" class="btn" id="clear-form">Clear form</button>
-    </form>
-
-    <div class="projects-list">
-      <h2>Projects in this session</h2>
-      <ul id="projects-list"></ul>
-      <div class="hint">Order: from top to bottom as you add them.</div>
-    </div>
-
-    <div class="code-export">
-      <h2>Code for <code>projects.js</code></h2>
-      <textarea id="export-code" readonly></textarea>
-      <div class="hint">
-        Copy everything → paste into <strong>projects.js</strong> file.
-      </div>
-    </div>
+  <div class="sidebar">
+    <div style="padding:15px; font-weight:bold; text-align:center; border-bottom:1px solid #374151;">PROJECTS</div>
+    <ul class="project-list" id="projectList"></ul>
+    <button class="add-btn" onclick="createNew()">+ ADD NEW PROJECT</button>
   </div>
 
+  <div class="main">
+    
+    <div class="editor-area">
+      <h2>Edit Project Details</h2>
+      <form id="projectForm">
+        <div class="row">
+          <div class="col form-group">
+            <label>ID (Unique)</label>
+            <input type="text" id="p_id" placeholder="e.g., my-new-game">
+          </div>
+          <div class="col form-group">
+            <label>Date (YYYY-MM)</label>
+            <input type="text" id="p_date" placeholder="2025-01">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Project Name</label>
+          <input type="text" id="p_name">
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            <label>Role</label>
+            <input type="text" id="p_role" placeholder="e.g. Lead Developer">
+          </div>
+          <div class="col form-group">
+            <label>Tagline (Tech Stack)</label>
+            <input type="text" id="p_tagline" placeholder="Unity • VR • C#">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Filters (Types)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" value="software" class="type-check"> Software</label>
+            <label class="checkbox-label"><input type="checkbox" value="design" class="type-check"> Design</label>
+            <label class="checkbox-label"><input type="checkbox" value="hardware" class="type-check"> Hardware</label>
+            <label class="checkbox-label"><input type="checkbox" value="simulation" class="type-check"> Simulation</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Short Description</label>
+          <textarea id="p_short" style="height:50px;"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Long Description</label>
+          <textarea id="p_long"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Cover Image Path</label>
+          <input type="text" id="p_cover" placeholder="images/myImage.jpg">
+        </div>
+
+        <div class="form-group">
+          <label>Gallery (Images / YouTube)</label>
+          <div class="dynamic-list" id="galleryList"></div>
+          <button type="button" class="btn-sm btn-add" onclick="addGalleryItem()">+ Add Media</button>
+        </div>
+
+        <div class="form-group">
+          <label>Links</label>
+          <div class="dynamic-list" id="linksList"></div>
+          <button type="button" class="btn-sm btn-add" onclick="addLinkItem()">+ Add Link</button>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button type="button" class="add-btn" style="flex:1; background:#2563eb;" onclick="saveCurrent()">SAVE CHANGES TO LIST</button>
+          <button type="button" class="add-btn" style="flex:1; background:#ef4444;" onclick="deleteCurrent()">DELETE PROJECT</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="preview-area">
+      <h2>Final Code</h2>
+      <p style="font-size:12px; color:#9ca3af;">
+        1. Make your changes.<br>
+        2. Click "SAVE CHANGES TO LIST".<br>
+        3. Click "COPY CODE" below.<br>
+        4. Paste into your <b>projects.js</b> file.
+      </p>
+      <textarea class="output-box" id="outputCode" readonly></textarea>
+      <button class="copy-btn" onclick="copyCode()">COPY CODE</button>
+    </div>
+
+  </div>
+
+  <script src="projects.js"></script>
+
   <script>
-    const form = document.getElementById('project-form');
-    const galleryContainer = document.getElementById('gallery-items');
-    const addGalleryBtn = document.getElementById('add-gallery-item');
-    const projectsListEl = document.getElementById('projects-list');
-    const exportCodeEl = document.getElementById('export-code');
-    const clearFormBtn = document.getElementById('clear-form');
+    let projectsData = window.projects || [];
+    let currentIndex = -1;
 
-    let projects = [];
+    // --- INIT ---
+    function renderList() {
+      const list = document.getElementById('projectList');
+      list.innerHTML = '';
+      
+      // Sort by date new to old
+      projectsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 
-    function slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .trim()
-        .replace(/ğ/g, 'g')
-        .replace(/ü/g, 'u')
-        .replace(/ş/g, 's')
-        .replace(/ı/g, 'i')
-        .replace(/ö/g, 'o')
-        .replace(/ç/g, 'c')
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '');
-    }
-
-    function addGalleryRow(type = 'image', src = '', alt = '') {
-      const row = document.createElement('div');
-      row.className = 'gallery-item';
-
-      row.innerHTML = `
-        <select class="gallery-type">
-          <option value="image"${type === 'image' ? ' selected' : ''}>Image</option>
-          <option value="video"${type === 'video' ? ' selected' : ''}>Video</option>
-          <option value="youtube"${type === 'youtube' ? ' selected' : ''}>YouTube</option>
-        </select>
-        <input type="text" class="gallery-src" placeholder="images/..., videos/..., YouTube link" value="${src}" />
-        <input type="text" class="gallery-alt" placeholder="Alt text / description" value="${alt}" />
-        <button type="button" class="btn btn-small gallery-remove">Remove</button>
-      `;
-
-      row.querySelector('.gallery-remove').addEventListener('click', () => {
-        row.remove();
-      });
-
-      galleryContainer.appendChild(row);
-    }
-
-    addGalleryBtn.addEventListener('click', () => addGalleryRow());
-
-    clearFormBtn.addEventListener('click', () => {
-      form.reset();
-      galleryContainer.innerHTML = '';
-    });
-
-    function renderProjectsList() {
-      projectsListEl.innerHTML = '';
-      projects.forEach(p => {
+      projectsData.forEach((p, index) => {
         const li = document.createElement('li');
-        li.innerHTML = `
-          <span>${p.name}</span>
-          <span class="date">${p.date || ''}</span>
-        `;
-        projectsListEl.appendChild(li);
+        li.textContent = p.name || '(No Name)';
+        li.onclick = () => loadProject(index);
+        if (index === currentIndex) li.classList.add('active');
+        list.appendChild(li);
       });
+
+      generateCode();
     }
 
-    function updateExportCode() {
-      const json = JSON.stringify(projects, null, 2);
-      exportCodeEl.value = `const projects = ${json};`;
+    // --- LOAD ---
+    function loadProject(index) {
+      currentIndex = index;
+      const p = projectsData[index];
+      
+      document.getElementById('p_id').value = p.id || '';
+      document.getElementById('p_name').value = p.name || '';
+      document.getElementById('p_role').value = p.role || '';
+      document.getElementById('p_tagline').value = p.tagline || '';
+      document.getElementById('p_date').value = p.date || '';
+      document.getElementById('p_short').value = p.shortDesc || '';
+      document.getElementById('p_long').value = p.longDesc || '';
+      document.getElementById('p_cover').value = p.coverImage || '';
+
+      // Types
+      document.querySelectorAll('.type-check').forEach(cb => {
+        cb.checked = p.types && p.types.includes(cb.value);
+      });
+
+      // Gallery
+      const gList = document.getElementById('galleryList');
+      gList.innerHTML = '';
+      if (p.gallery) {
+        p.gallery.forEach(g => addGalleryItem(g));
+      }
+
+      // Links
+      const lList = document.getElementById('linksList');
+      lList.innerHTML = '';
+      if (p.links) {
+        p.links.forEach(l => addLinkItem(l));
+      }
+
+      renderList();
     }
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-
-      const name = document.getElementById('name').value.trim();
-      if (!name) return;
-
-      const role = document.getElementById('role').value.trim();
-      const tagline = document.getElementById('tagline').value.trim();
-      const date = document.getElementById('date').value;
-      const shortDesc = document.getElementById('shortDesc').value.trim();
-      const longDesc = document.getElementById('longDesc').value.trim();
-      const coverImage = document.getElementById('coverImage').value.trim();
-
-      const typeChecks = form.querySelectorAll('.chips input[type="checkbox"]');
-      const types = [];
-      typeChecks.forEach(ch => {
-        if (ch.checked) types.push(ch.value);
-      });
-
-      const galleryItems = [];
-      galleryContainer.querySelectorAll('.gallery-item').forEach(row => {
-        const type = row.querySelector('.gallery-type').value;
-        const src = row.querySelector('.gallery-src').value.trim();
-        const alt = row.querySelector('.gallery-alt').value.trim();
-        if (!src) return;
-        galleryItems.push({ type, src, alt });
-      });
-
-      const link1Label = document.getElementById('link1Label').value.trim();
-      const link1Url = document.getElementById('link1Url').value.trim();
-      const link2Label = document.getElementById('link2Label').value.trim();
-      const link2Url = document.getElementById('link2Url').value.trim();
-
-      const links = [];
-      if (link1Url) {
-        links.push({ label: link1Label || 'Link 1', url: link1Url });
-      }
-      if (link2Url) {
-        links.push({ label: link2Label || 'Link 2', url: link2Url });
-      }
-
-      const idBase = slugify(name);
-      let id = idBase || 'project';
-      let counter = 1;
-      while (projects.some(p => p.id === id)) {
-        id = `${idBase}-${counter++}`;
-      }
-
-      const project = {
-        id,
-        name,
-        role,
-        tagline,
-        date,
-        types,
-        shortDesc,
-        longDesc,
-        coverImage,
-        gallery: galleryItems,
-        links
+    function createNew() {
+      const newP = {
+        id: "new-project-" + Date.now(),
+        name: "New Project",
+        types: ["software"],
+        gallery: [],
+        links: []
       };
+      projectsData.unshift(newP);
+      loadProject(0);
+    }
 
-      projects.push(project);
-      renderProjectsList();
-      updateExportCode();
+    // --- DYNAMIC FIELDS ---
+    function addGalleryItem(data = {type:'image', src:'', alt:''}) {
+      const div = document.createElement('div');
+      div.className = 'dynamic-item';
+      div.innerHTML = `
+        <select onchange="updateState()">
+          <option value="image" ${data.type=='image'?'selected':''}>Image</option>
+          <option value="youtube" ${data.type=='youtube'?'selected':''}>YouTube</option>
+        </select>
+        <input type="text" placeholder="Source (path or url)" value="${data.src||''}" oninput="updateState()">
+        <button type="button" class="btn-sm btn-del" onclick="this.parentElement.remove(); updateState()">X</button>
+      `;
+      document.getElementById('galleryList').appendChild(div);
+    }
 
-      form.reset();
-      galleryContainer.innerHTML = '';
-    });
+    function addLinkItem(data = {label:'', url:''}) {
+      const div = document.createElement('div');
+      div.className = 'dynamic-item';
+      div.innerHTML = `
+        <input type="text" placeholder="Label" value="${data.label||''}" oninput="updateState()">
+        <input type="text" placeholder="URL" value="${data.url||''}" oninput="updateState()">
+        <button type="button" class="btn-sm btn-del" onclick="this.parentElement.remove(); updateState()">X</button>
+      `;
+      document.getElementById('linksList').appendChild(div);
+    }
+
+    // --- SAVE & DELETE ---
+    function saveCurrent() {
+      if (currentIndex === -1) return;
+      
+      const p = projectsData[currentIndex];
+      p.id = document.getElementById('p_id').value;
+      p.name = document.getElementById('p_name').value;
+      p.role = document.getElementById('p_role').value;
+      p.tagline = document.getElementById('p_tagline').value;
+      p.date = document.getElementById('p_date').value;
+      p.shortDesc = document.getElementById('p_short').value;
+      p.longDesc = document.getElementById('p_long').value;
+      p.coverImage = document.getElementById('p_cover').value;
+
+      // Types
+      p.types = [];
+      document.querySelectorAll('.type-check:checked').forEach(cb => p.types.push(cb.value));
+
+      // Gallery
+      p.gallery = [];
+      document.querySelectorAll('#galleryList .dynamic-item').forEach(item => {
+        const selects = item.querySelectorAll('select');
+        const inputs = item.querySelectorAll('input');
+        p.gallery.push({
+          type: selects[0].value,
+          src: inputs[0].value,
+          alt: p.name + " media"
+        });
+      });
+
+      // Links
+      p.links = [];
+      document.querySelectorAll('#linksList .dynamic-item').forEach(item => {
+        const inputs = item.querySelectorAll('input');
+        p.links.push({
+          label: inputs[0].value,
+          url: inputs[1].value
+        });
+      });
+
+      alert("Project Saved to List! Now Copy the Code.");
+      renderList();
+    }
+
+    function deleteCurrent() {
+      if (confirm("Are you sure you want to delete this project?")) {
+        projectsData.splice(currentIndex, 1);
+        currentIndex = -1;
+        renderList();
+        document.getElementById('projectForm').reset();
+        document.getElementById('galleryList').innerHTML = '';
+        document.getElementById('linksList').innerHTML = '';
+      }
+    }
+
+    function updateState() {
+      // Optional: Auto-update local object on typing
+    }
+
+    // --- GENERATE CODE ---
+    function generateCode() {
+      const json = JSON.stringify(projectsData, null, 2);
+      const finalCode = `// projects.js\n// Generated by Portfolio Editor\n\nwindow.projects = ${json};`;
+      document.getElementById('outputCode').value = finalCode;
+    }
+
+    function copyCode() {
+      const copyText = document.getElementById("outputCode");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); 
+      navigator.clipboard.writeText(copyText.value);
+      alert("Code Copied! Now paste it into your 'projects.js' file.");
+    }
+
+    // Start
+    renderList();
+    if(projectsData.length > 0) loadProject(0);
   </script>
 </body>
 </html>
