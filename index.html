@@ -462,9 +462,8 @@
 
     .project-modal-body { display: flex; gap: 32px; padding: 24px; overflow-y: auto; }
     
-    .modal-text { flex: 1; min-width: 300px; }
+    .modal-text { flex: 1; min-width: 300px; display: flex; flex-direction: column; }
     
-    /* SATIR BOŞLUKLARI DÜZELTMESİ */
     #modal-desc {
         white-space: pre-line;
     }
@@ -478,17 +477,25 @@
     }
     .modal-main-media img, .modal-main-media iframe, .modal-main-media video { width: 100%; height: 100%; object-fit: contain; }
 
+    /* MODAL LINKS: YUKARI TAŞINDI */
     .modal-links {
-        margin-top: 10px;
+        margin-bottom: 24px; /* Altına boşluk eklendi */
         display: flex;
         flex-direction: column; 
-        gap: 6px;
+        gap: 8px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border);
     }
     .modal-links a {
-      display: inline-flex; align-items: center; gap: 6px; 
-      color: var(--accent); font-weight: 500; font-size: 14px;
+      display: inline-flex; align-items: center; gap: 8px; 
+      color: var(--accent); font-weight: 600; font-size: 14px;
+      text-decoration: none;
+      background: #f3f4f6;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: 0.2s;
     }
-    .modal-links a:hover { text-decoration: underline; }
+    .modal-links a:hover { background: #e5e7eb; }
 
     .modal-thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
     .modal-thumb {
@@ -681,9 +688,12 @@
     </div>
     <div class="project-modal-body">
       <div class="modal-text">
+        
+        <div id="modal-links" class="modal-links"></div>
+
         <h4 style="font-size:12px; text-transform:uppercase; color:#6b7280; letter-spacing:1px; margin-bottom:8px;">About the Project</h4>
         <p id="modal-desc" style="font-size:14px; color:#374151; line-height:1.7;"></p>
-        <div id="modal-links" class="modal-links"></div>
+        
       </div>
       <div class="modal-gallery">
         <div class="modal-main-media" id="modal-main-media"></div>
@@ -698,7 +708,6 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // --- TAB SİSTEMİ ---
   const tabs = document.querySelectorAll('.tab-btn');
   tabs.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -709,21 +718,16 @@
     });
   });
 
-  // --- TARİH FORMATLAMA YARDIMCISI ---
   function formatMonthYear(dateString) {
     if (!dateString) return '';
     const parts = dateString.split('-');
     if (parts.length < 2) return dateString;
-
     const year = parseInt(parts[0], 10);
     const monthIndex = parseInt(parts[1], 10) - 1; 
-
     const date = new Date(year, monthIndex);
-    
     return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
   }
 
-  // --- PROJE LİSTELEME ---
   const grid = document.getElementById('projects-grid');
   const filters = document.querySelectorAll('.filter-btn');
   let activeFilter = 'all';
@@ -737,7 +741,6 @@
     grid.innerHTML = '';
     const projects = window.projects || [];
     
-    // Projeleri tarihe göre sıralama (En yeni en üstte)
     projects.sort((a, b) => {
         if (a.date < b.date) return 1;
         if (a.date > b.date) return -1;
@@ -750,7 +753,6 @@
 
       const div = document.createElement('article');
       div.className = 'project-card';
-      // Derin linkleme için ID'yi ekliyoruz
       div.onclick = () => {
           openModal(p);
           window.history.pushState(null, '', '#' + p.id);
@@ -787,7 +789,6 @@
     });
   });
 
-  // --- MODAL SİSTEMİ ---
   const modal = document.getElementById('project-modal');
   const mTitle = document.getElementById('modal-title');
   const mDesc = document.getElementById('modal-desc');
@@ -847,7 +848,6 @@
         mMedia.innerHTML = '<span>No media added yet.</span>';
     }
 
-
     modal.classList.add('open');
   }
 
@@ -865,12 +865,10 @@
       }
   }
 
-  // --- KAPATMA FONKSİYONU GÜNCELLENDİ (VİDEO DURDURMA EKLENDİ) ---
   function closeModal() {
     modal.classList.remove('open');
-    // Medya oynatıcısını temizle ki video kapansın
+    // Videoyu durdurmak için içeriği temizle
     mMedia.innerHTML = ''; 
-    // URL'yi temizle (ana sayfaya dön)
     window.history.pushState(null, '', window.location.pathname + window.location.search);
   }
 
@@ -878,7 +876,6 @@
   modal.onclick = (e) => { if(e.target === modal) closeModal(); }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   
-  // DERİN LİNKLEME KONTROLÜ
   function checkDeepLink() {
     const hash = window.location.hash.substring(1); 
     if (hash && window.projects) {
@@ -889,7 +886,6 @@
     }
   }
 
-  // Başlat
   window.addEventListener('load', () => {
       renderProjects();
       checkDeepLink();
