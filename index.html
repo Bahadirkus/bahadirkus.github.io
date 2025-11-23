@@ -154,7 +154,17 @@
       transition: all 0.2s ease;
     }
     
-    .social-btn img { width: 18px; height: 18px; filter: invert(1); opacity: 0.8; }
+    .social-btn img { 
+      width: 18px; 
+      height: 18px; 
+      filter: invert(1); 
+      opacity: 0.8; 
+      /* X (Twitter) ikonu için renk düzeltmesi */
+      ${(function() {
+          /* Özel ikonları burada düzenleyebilirsiniz */
+          return '';
+      })()}
+    }
 
     .social-btn:hover {
       background: #fff;
@@ -201,7 +211,7 @@
 
     .contact-text { display: flex; flex-direction: column; }
     .contact-label { font-size: 10px; text-transform: uppercase; color: #9ca3af; letter-spacing: 0.05em; }
-    .contact-value { font-size: 13px; color: #f3f4f6; font-weight: 500; word-break: break-all; } /* Mail adresi için */
+    .contact-value { font-size: 13px; color: #f3f4f6; font-weight: 500; word-break: break-all; } 
 
     /* --- MAIN CONTENT --- */
     .main-card {
@@ -318,7 +328,6 @@
       width: 280px;
       min-width: 280px;
       height: 100%;
-      /* DEĞİŞİKLİK: Siyah yerine açık gri/şeffaf arka plan */
       background: #f9fafb;  
       display: flex;
       align-items: center;
@@ -379,7 +388,7 @@
       margin-top: 12px;
     }
 
-    /* RESUME SECTION (AYNI) */
+    /* RESUME SECTION */
     .resume-block {
       background: #f9fafb;
       border: 1px solid var(--border);
@@ -439,7 +448,7 @@
     .modal-gallery { flex: 1.5; display: flex; flex-direction: column; gap: 16px; }
 
     .modal-main-media {
-      background: #000; /* Modal galeride siyah tutmak estetik açıdan daha iyidir */
+      background: #000; 
       border-radius: 12px; overflow: hidden;
       aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
     }
@@ -448,7 +457,7 @@
     .modal-links {
         margin-top: 10px;
         display: flex;
-        flex-direction: column; /* DEĞİŞİKLİK: Linkleri alt alta sırala */
+        flex-direction: column; 
         gap: 6px;
     }
     .modal-links a {
@@ -466,7 +475,7 @@
     .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
 
-    /* MOBILE RESPONSIVE (AYNI) */
+    /* MOBILE RESPONSIVE */
     @media (max-width: 900px) {
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: static; flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
@@ -507,10 +516,15 @@
       </div>
 
       <div class="profile-social">
-        <a class="social-btn" href="https://www.linkedin.com/in/bahadirkus/" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"></a>
-        <a class="social-btn" href="https://github.com/Bahadirkus" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/github.svg" alt="GitHub"></a>
-        <a class="social-btn" href="#" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg" alt="YouTube"></a>
-        <a class="social-btn" href="mailto:mrbahadirkus@gmail.com"><img src="https://unpkg.com/simple-icons@v9/icons/gmail.svg" alt="Mail"></a>
+        <a class="social-btn" href="#" target="_blank" title="X / Twitter">
+          <img src="https://unpkg.com/simple-icons@v9/icons/x.svg" alt="X">
+        </a>
+        <a class="social-btn" href="#" target="_blank" title="Instagram">
+          <img src="https://unpkg.com/simple-icons@v9/icons/instagram.svg" alt="Instagram">
+        </a>
+        <a class="social-btn" href="https://www.linkedin.com/in/bahadirkus/" target="_blank" title="LinkedIn">
+          <img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn">
+        </a>
       </div>
 
       <div class="contact-list">
@@ -636,7 +650,7 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // --- TAB SİSTEMİ (AYNI) ---
+  // --- TAB SİSTEMİ ---
   const tabs = document.querySelectorAll('.tab-btn');
   tabs.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -647,7 +661,7 @@
     });
   });
 
-  // --- TARİH FORMATLAMA YARDIMCISI (AYNI) ---
+  // --- TARİH FORMATLAMA YARDIMCISI ---
   function formatMonthYear(dateString) {
     if (!dateString) return '';
     const parts = dateString.split('-');
@@ -799,9 +813,10 @@
       }
   }
 
-  document.getElementById('modal-close').onclick = () => modal.classList.remove('open');
-  modal.onclick = (e) => { if(e.target === modal) modal.classList.remove('open'); }
+  document.getElementById('modal-close').onclick = () => closeModal();
+  modal.onclick = (e) => { if(e.target === modal) closeModal(); }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  
   function closeModal() {
     modal.classList.remove('open');
   }
