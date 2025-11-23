@@ -4,19 +4,19 @@
 
 window.projects = [
   /* ---------------------------------------------------- */
-  /* PROSTHETIC WORLDS (MEDİKAL - KURUMSAL) */
+  /* PROSTHETIC WORLDS (GİRİŞİM - SOLO PROJE) */
   /* ---------------------------------------------------- */
   {
     id: "prosthetic-worlds-vr",
     name: "Prosthetic Worlds – VR Surgical Training",
-    role: "Lead Simulation Developer", // Kurumsal Unvan
+    role: "Founder & Lead Developer", // GÜNCELLENDİ: Girişimci ve Tek Geliştirici vurgusu
     tagline: "VR/XR • Haptics • Medical Simulation • Hardware Integration",
     date: "2022-11",
     types: ["software", "design", "hardware"], 
     shortDesc:
-      "A scientifically validated VR simulation for Total Knee Arthroplasty (TKA), integrating custom haptic feedback hardware to train surgeons.",
+      "A scientifically validated VR simulation for Total Knee Arthroplasty (TKA), founded and developed as a solo venture to revolutionize surgical training.",
     longDesc:
-      "Prosthetic Worlds is a high-fidelity VR surgical training platform focused on Total Knee Arthroplasty (TKA). As the Lead Developer, I engineered the interaction systems that bridge the gap between virtual visuals and physical sensations using custom haptic peripherals. The system offers a structured, measurable training workflow. In a controlled study, doctors trained with this system showed statistically significant improvements in surgical accuracy compared to traditional methods.",
+      "I founded Prosthetic Worlds as a solo venture to bridge the gap between theoretical knowledge and motor skills in surgery. I handled every aspect of the product: from designing the software architecture and modeling the anatomy to engineering custom haptic peripherals. In a controlled study, doctors trained with this system showed statistically significant improvements in surgical accuracy compared to traditional methods.",
     coverImage: "images/Pw_2.jpg", 
     gallery: [
       { type: "image", src: "images/Pw_1.jpg", alt: "Surgical VR Scene" },
@@ -30,19 +30,19 @@ window.projects = [
   },
 
   /* ---------------------------------------------------- */
-  /* FIRE EVACUATION (DİJİTAL İKİZ - KURUMSAL) */
+  /* FIRE EVACUATION (MÜŞTERİ DEMOSU) */
   /* ---------------------------------------------------- */
   {
     id: "fire-evacuation-sim",
-    name: "Fire Evacuation & Safety Sim",
-    role: "Simulation Developer", // Kurumsal Unvan
+    name: "Fire Evacuation Digital Twin", // Başlık biraz daha teknik yapıldı
+    role: "Contract Developer (Bespoke Demo)", // GÜNCELLENDİ: Kişiye özel demo vurgusu
     tagline: "Digital Twin • Lidar Scanning • AR Guidance • Serious Games",
     date: "2022-10",
     types: ["software", "design"],
     shortDesc:
-      "A location-based safety training application where the real-world facility was scanned via Lidar to create an exact Digital Twin.",
+      "A custom-built safety training demo where a specific real-world facility was scanned and recreated as a Digital Twin.",
     longDesc:
-      "Designed for occupational health and safety training, this project utilizes Photogrammetry and Lidar scanning to recreate a real-world facility 1:1 in Unity. The simulation features a dynamic navigation system (similar to AR wayfinding) that guides users to safe zones during procedurally generated emergency scenarios, training them on reaction times and hazard identification.",
+      "Developed as a bespoke proof-of-concept for a client, this project utilizes Lidar scanning to recreate their specific facility 1:1 in Unity. The simulation serves as a specialized training tool where employees must navigate their actual work environment virtually, reacting to procedurally generated fire hazards and following AR-style safety routes.",
     coverImage: "images/fireIcon.jpg",
     gallery: [
       { type: "youtube", src: "https://youtu.be/pptgV_zM5ts", alt: "Fire Evacuation Demo" }
@@ -56,7 +56,7 @@ window.projects = [
   {
     id: "redline-engine-sounds",
     name: "Redline Engine Sounds",
-    role: "Freelance Developer", // GÜNCELLENDİ: Okka Games
+    role: "Freelance Developer", 
     tagline: "Procedural Audio • FMOD • Physics Engine • Mobile Opt.",
     date: "2021-10",
     types: ["software"],
@@ -80,7 +80,7 @@ window.projects = [
   {
     id: "redline-moto-sounds",
     name: "Redline Motorcycle Sounds",
-    role: "Freelance Developer", // GÜNCELLENDİ: Okka Games
+    role: "Freelance Developer",
     tagline: "Audio Simulation • DSP • Interactive Systems",
     date: "2021-10",
     types: ["software"],
@@ -103,7 +103,7 @@ window.projects = [
   {
     id: "redline-drag-racing",
     name: "Redline Drag Racing",
-    role: "Freelance Developer", // GÜNCELLENDİ: Okka Games
+    role: "Freelance Developer",
     tagline: "Vehicle Physics • Kinematics • UI/UX • Android",
     date: "2022-05",
     types: ["software"],
@@ -126,7 +126,7 @@ window.projects = [
   {
     id: "dolmuscu-dayi",
     name: "Dolmuşçu Dayı",
-    role: "Freelance Developer", // GÜNCELLENDİ: Okka Games / Indie
+    role: "Freelance Developer",
     tagline: "Game Economy • 2D Animation • Cultural Adaptation",
     date: "2022-07",
     types: ["software"],
@@ -149,7 +149,7 @@ window.projects = [
   {
     id: "dragon-faya",
     name: "Dragon Faya",
-    role: "Freelance Developer", // GÜNCELLENDİ: Dragon Faya
+    role: "Freelance Developer",
     tagline: "iOS Optimization • Particle VFX • Arcade Physics",
     date: "2021-11",
     types: ["software"],
