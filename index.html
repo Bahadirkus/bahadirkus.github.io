@@ -1,3 +1,6 @@
+Aşağıda istediğin gibi **mobilde panel tamamen dikey** olan, albümün yazının altında göründüğü, yatayda hiçbir kaydırma gerektirmeyen tam `index.html` var. Eski dosyanın tamamını bununla değiştir.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,7 +136,7 @@
       height: 32px;
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15,23,42,0.9); /* koyu arka plan */
+      background: rgba(15,23,42,0.9);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -410,7 +413,7 @@
     .project-image {
       flex: 0 0 36%;
       max-width: 36%;
-      height: 220px;          /* sabit yüksek kart */
+      height: 220px;          /* sabit yükseklik */
       background: #e5e7eb;
       overflow: hidden;
       display: flex;
@@ -421,7 +424,7 @@
     .project-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;      /* kartta kırp, bozulma yok */
+      object-fit: cover;
       display: block;
     }
 
@@ -529,10 +532,12 @@
 
     .project-modal-body {
       display: flex;
+      flex-direction: row;  /* desktop: yan yana */
       gap: 20px;
       padding: 16px 20px 18px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       overflow-y: auto;
+      overflow-x: hidden;   /* YATAY SCROLL YOK */
     }
 
     .modal-text {
@@ -654,12 +659,16 @@
         position: static;
       }
 
-      /* Modal her zaman dikey olsun – mobilde yana kaydırma yok */
+      /* PANEL: sadece DİKEY – yazı üstte, albüm altta */
       .project-modal-body {
-        flex-direction: column;
+        flex-direction: column !important;
+        align-items: stretch;
+        overflow-x: hidden !important;
       }
 
+      .modal-text,
       .modal-gallery {
+        flex: 0 0 auto;
         width: 100%;
       }
     }
@@ -1128,3 +1137,4 @@
 
 </body>
 </html>
+```
