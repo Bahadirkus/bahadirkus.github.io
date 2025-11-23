@@ -9,7 +9,7 @@
   
   <meta property="og:title" content="Bahadır Kuş – Simulation Developer Portfolio">
   <meta property="og:description" content="View my latest work in Unity, VR/AR, and Hardware/Software integration.">
-  <meta property="og:image" content="images/bahadir.jpeg"> <meta property="og:url" content="https://bahadirkus.com"> <meta property="og:type" content="website">
+  <meta property="og:image" content="images/bahadir.jpeg"> <meta property="og:url" content="https://bahadirkus.github.io/"> <meta property="og:type" content="website">
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -286,7 +286,7 @@
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 
-    /* --- PROJECTS GRID (DÜZELTİLEN KISIM) --- */
+    /* --- PROJECTS GRID --- */
     .projects-grid {
       display: grid;
       grid-template-columns: 1fr; /* Tek sütun liste görünümü */
@@ -501,7 +501,7 @@
         <a class="social-btn" href="#" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"></a>
         <a class="social-btn" href="#" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/github.svg" alt="GitHub"></a>
         <a class="social-btn" href="#" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg" alt="YouTube"></a>
-        <a class="social-btn" href="mailto:email@example.com"><img src="https://unpkg.com/simple-icons@v9/icons/gmail.svg" alt="Mail"></a>
+        <a class="social-btn" href="mailto:ornek@mail.com"><img src="https://unpkg.com/simple-icons@v9/icons/gmail.svg" alt="Mail"></a>
       </div>
 
       <div class="contact-list">
@@ -607,28 +607,7 @@
   </div>
 </div>
 
-<script>
-  if (!window.projects) {
-    window.projects = [
-      {
-        id: "sim-1",
-        name: "Laparoscopic Surgery Sim",
-        role: "Lead Developer",
-        date: "2024-02",
-        types: ["software", "hardware"],
-        shortDesc: "A high-fidelity VR simulation with haptic feedback custom controllers.",
-        longDesc: "This project involved creating a custom controller using Arduino and Hall Effect sensors to mimic surgical tools. The Unity simulation receives data via Serial port and updates the physics-based soft tissue model in real-time.",
-        tagline: "Unity • C# • Arduino • PhysX",
-        coverImage: "https://via.placeholder.com/600x400/000000/ffffff?text=Surgery+Sim",
-        gallery: [
-          { type: 'image', src: 'https://via.placeholder.com/800x600/111/fff?text=Screenshot+1' },
-          { type: 'youtube', src: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' } 
-        ],
-        links: [{ label: "View on GitHub", url: "#" }]
-      }
-    ];
-  }
-</script>
+<script src="projects.js"></script>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -652,11 +631,10 @@
     if (parts.length < 2) return dateString;
 
     const year = parseInt(parts[0], 10);
-    const monthIndex = parseInt(parts[1], 10) - 1; // JS'de aylar 0'dan başlar
+    const monthIndex = parseInt(parts[1], 10) - 1; 
 
     const date = new Date(year, monthIndex);
     
-    // Yabancı dil desteği olmadan sadece ay ve yıl formatını döndürür.
     return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
   }
 
@@ -666,23 +644,26 @@
   let activeFilter = 'all';
 
   function renderProjects() {
+    // Projeler yüklenmediyse uyarı ver
+    if (!window.projects || window.projects.length === 0) {
+        grid.innerHTML = '<p style="color:#f00; text-align:center; padding:20px; font-weight:600;">HATA: projects.js dosyası yüklenemedi veya boş. Lütfen dosya adını ve içeriğini kontrol edin.</p>';
+        return;
+    }
+
     grid.innerHTML = '';
     const projects = window.projects || [];
     
-    // HATA DÜZELTİLDİ: Tarihe göre sıralama (En yeni en üstte)
+    // Projeleri tarihe göre sıralama (En yeni en üstte)
     projects.sort((a, b) => {
-        // YYYY-MM formatındaki stringleri direkt karşılaştırabiliriz
-        if (a.date && b.date) {
-            // b - a: Yeniden eskiye
-            if (a.date < b.date) return 1;
-            if (a.date > b.date) return -1;
-            return 0;
-        }
+        if (a.date < b.date) return 1;
+        if (a.date > b.date) return -1;
         return 0;
     });
 
     projects.forEach(p => {
-      if (activeFilter !== 'all' && !p.types.includes(activeFilter)) return;
+      // Filtreleme kontrolü
+      const types = Array.isArray(p.types) ? p.types : [];
+      if (activeFilter !== 'all' && !types.includes(activeFilter)) return;
 
       const div = document.createElement('article');
       div.className = 'project-card';
@@ -706,7 +687,7 @@
     });
 
     if(grid.innerHTML === '') {
-        grid.innerHTML = '<p style="color:#6b7280; text-align:center; padding:20px;">No projects found in this category.</p>';
+        grid.innerHTML = '<p style="color:#6b7280; text-align:center; padding:20px;">Bu kategoride proje bulunamadı.</p>';
     }
   }
 
@@ -719,7 +700,7 @@
     });
   });
 
-  // --- MODAL SİSTEMİ ---
+  // --- MODAL SİSTEMİ (AYNI) ---
   const modal = document.getElementById('project-modal');
   const mTitle = document.getElementById('modal-title');
   const mDesc = document.getElementById('modal-desc');
@@ -731,7 +712,6 @@
     mTitle.textContent = project.name;
     mDesc.textContent = project.longDesc || project.shortDesc;
     
-    // Linkler
     mLinks.innerHTML = '';
     if(project.links && project.links.length > 0) {
         project.links.forEach(l => {
@@ -742,11 +722,9 @@
         });
     }
 
-    // Galeri
     mMedia.innerHTML = '';
     mThumbs.innerHTML = '';
     
-    // Kapak görselini galeriye ekle
     let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
     if (project.coverImage) {
         const alreadyHasCover = gallery.some(item => item.type === 'image' && item.src === project.coverImage);
@@ -755,11 +733,9 @@
         }
     }
 
-    // İlk medyayı göster
     if (gallery.length > 0) {
         setMedia(gallery[0]);
 
-        // Küçük resimler (thumbnails)
         gallery.forEach((item, idx) => {
             const th = document.createElement('div');
             th.className = 'modal-thumb' + (idx === 0 ? ' active' : '');
