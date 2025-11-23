@@ -342,6 +342,7 @@
     .project-card {
       display: flex;
       flex-direction: row;
+      align-items: stretch;
       background: #f9fafb;
       border-radius: 18px;
       box-shadow: 0 14px 34px rgba(15,23,42,0.14);
@@ -407,9 +408,9 @@
     }
 
     .project-image {
-      width: 38%;
-      min-width: 38%;
-      max-width: 38%;
+      flex: 0 0 36%;
+      max-width: 36%;
+      height: 220px;          /* sabit yükseklik */
       background: #e5e7eb;
       overflow: hidden;
       display: flex;
@@ -420,7 +421,7 @@
     .project-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* kırpabilir ama bozmuyor */
+      object-fit: cover;      /* kartta kırp, bozulma yok */
       display: block;
     }
 
@@ -584,8 +585,8 @@
       width: 100%;
       background: #000;
       border-radius: 14px;
-      min-height: 220px;
-      max-height: 70vh;
+      min-height: 260px;
+      max-height: 65vh;  /* daha iyi sığsın */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -597,7 +598,7 @@
     .modal-main-media iframe {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* TÜM görsel/video görünsün */
+      object-fit: contain;   /* panelde TAM görünsün */
       display: block;
       border: none;
     }
@@ -668,10 +669,10 @@
       }
 
       .project-image {
+        flex: 0 0 auto;
         width: 100%;
-        min-width: 100%;
         max-width: 100%;
-        height: 200px;
+        height: 220px; /* mobilde sabit */
       }
 
       .project-text::before {
@@ -701,13 +702,6 @@
           <span>Simulation Developer &amp; Technical Designer</span>
         </div>
       </div>
-
-      <!-- Kısa bio (istersen tekrar açarsın)
-      <p class="profile-bio">
-        Unity, VR/AR and real-time simulation developer combining mechanical design,
-        sensors and software to build training systems.
-      </p>
-      -->
 
       <!-- Social icons -->
       <div class="profile-social">
@@ -865,7 +859,7 @@
   </div>
 </div>
 
-<!-- projects.js must define window.projects -->
+<!-- PROJECT DATA -->
 <script src="projects.js"></script>
 
 <script>
@@ -896,7 +890,6 @@
   // Helpers: parse and format date
   function parseProjectDate(value) {
     if (!value) return null;
-    // supports "YYYY-MM" or "YYYY-MM-DD"
     const parts = value.split('-').map(p => parseInt(p, 10));
     if (!parts[0] || !parts[1]) return null;
     const year = parts[0];
@@ -1043,63 +1036,63 @@
     }
 
     // Gallery
-  modalMainMedia.innerHTML = '';
-  modalThumbs.innerHTML = '';
+    modalMainMedia.innerHTML = '';
+    modalThumbs.innerHTML = '';
 
-  let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
+    let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
 
-  // HER ZAMAN coverImage'i en başa ekle (varsa ve zaten ekli değilse)
-  if (project.coverImage) {
-    const alreadyHasCover = gallery.some(
-      item => item.type === 'image' && item.src === project.coverImage
-    );
+    // HER ZAMAN coverImage'i en başa ekle (varsa ve zaten ekli değilse)
+    if (project.coverImage) {
+      const alreadyHasCover = gallery.some(
+        item => item.type === 'image' && item.src === project.coverImage
+      );
 
-    if (!alreadyHasCover) {
-      gallery.unshift({
-        type: 'image',
-        src: project.coverImage,
-        alt: project.name + ' cover'
-      });
-    }
-  }
-
-  if (gallery.length > 0) {
-    setMainMedia(gallery[0]);
-
-    gallery.forEach((item, index) => {
-      const thumb = document.createElement('div');
-      thumb.className = 'modal-thumb' + (index === 0 ? ' active' : '');
-      thumb.dataset.index = index;
-
-      if (item.type === 'image') {
-        thumb.innerHTML = `<img src="${item.src}" alt="${item.alt || ''}">`;
-      } else if (item.type === 'video') {
-        thumb.textContent = 'Video';
-      } else if (item.type === 'youtube') {
-        const id = youtubeIdFromUrl(item.src);
-        if (id) {
-          const thumbImg = document.createElement('img');
-          thumbImg.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-          thumbImg.alt = item.alt || 'YouTube video';
-          thumb.appendChild(thumbImg);
-        } else {
-          thumb.textContent = 'YouTube';
-        }
-      } else {
-        thumb.textContent = 'Media';
+      if (!alreadyHasCover) {
+        gallery.unshift({
+          type: 'image',
+          src: project.coverImage,
+          alt: project.name + ' cover'
+        });
       }
+    }
 
-      thumb.addEventListener('click', () => {
-        document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-        setMainMedia(item);
+    if (gallery.length > 0) {
+      setMainMedia(gallery[0]);
+
+      gallery.forEach((item, index) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'modal-thumb' + (index === 0 ? ' active' : '');
+        thumb.dataset.index = index;
+
+        if (item.type === 'image') {
+          thumb.innerHTML = `<img src="${item.src}" alt="${item.alt || ''}">`;
+        } else if (item.type === 'video') {
+          thumb.textContent = 'Video';
+        } else if (item.type === 'youtube') {
+          const id = youtubeIdFromUrl(item.src);
+          if (id) {
+            const thumbImg = document.createElement('img');
+            thumbImg.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+            thumbImg.alt = item.alt || 'YouTube video';
+            thumb.appendChild(thumbImg);
+          } else {
+            thumb.textContent = 'YouTube';
+          }
+        } else {
+          thumb.textContent = 'Media';
+        }
+
+        thumb.addEventListener('click', () => {
+          document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+          setMainMedia(item);
+        });
+
+        modalThumbs.appendChild(thumb);
       });
-
-      modalThumbs.appendChild(thumb);
-    });
-  } else {
-    modalMainMedia.innerHTML = '<span>No media added yet.</span>';
-  }
+    } else {
+      modalMainMedia.innerHTML = '<span>No media added yet.</span>';
+    }
 
     modal.classList.add('open');
   }
