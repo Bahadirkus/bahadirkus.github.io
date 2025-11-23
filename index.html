@@ -450,14 +450,14 @@
 
     projects.forEach(p => {
       // SAĞLAM KONTROL: Types alanı boşsa veya undefined ise hata vermez.
-      const types = Array.isArray(p.types) ? types : [];
+      const types = Array.isArray(p.types) ? p.types : [];
       if (activeFilter !== 'all' && !types.includes(activeFilter)) return;
 
       const div = document.createElement('article');
       div.className = 'project-card';
       div.onclick = () => { openModal(p); window.history.pushState(null, '', '#' + p.id); };
       
-      // SAĞLAM KONTROL: Tüm string alanları boşsa bile hata vermez.
+      // SAĞLAM KONTROL: Tüm string alanları boşsa bile varsayılan değer kullanır.
       div.innerHTML = `
         <div class="project-image"><img src="${p.coverImage || 'images/placeholder.jpg'}" alt="${p.name || 'Project'}"></div>
         <div class="project-text">
@@ -494,8 +494,7 @@
 
   // --- Modal Açma Fonksiyonu ---
   function openModal(project) {
-    // CRITICAL FIX: Modal açıldığında body'yi kilitle
-    document.body.style.overflow = 'hidden'; 
+    document.body.style.overflow = 'hidden'; // Kaydırmayı engelle
     
     mTitle.textContent = project.name;
     mDesc.textContent = project.longDesc || project.shortDesc;
