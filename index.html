@@ -210,12 +210,14 @@
 
     .modal-gallery { flex: 1.5; display: flex; flex-direction: column; gap: 16px; }
 
-    /* Ana Görsel Kutusu */
+    /* Ana Görsel Kutusu - ARTIK ŞEFFAF */
     .modal-main-media {
       width: 100%; height: 400px; 
-      background: #f9fafb; border-radius: 12px; overflow: hidden;
+      background: transparent; /* Burası şeffaf */
+      border-radius: 12px; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border);
+      box-shadow: none; /* Shadow'u da kaldırabiliriz */
+      border: 1px solid var(--border); /* İsteğe bağlı olarak border kalabilir */
       flex-shrink: 0; 
     }
 
@@ -241,12 +243,14 @@
     .modal-thumb {
       width: 80px; height: 60px; flex-shrink: 0; border-radius: 8px; 
       overflow: hidden; cursor: pointer; opacity: 0.7; transition: 0.2s; 
-      border: 2px solid transparent; background: #f3f4f6;
+      border: 2px solid transparent; 
+      background: transparent; /* Küçük resimler de şeffaf */
       display: flex; align-items: center; justify-content: center;
     }
     
     .modal-thumb.active { 
-        opacity: 1; border-color: var(--accent); background: #fff; 
+        opacity: 1; border-color: var(--accent); 
+        background: transparent; /* Aktif küçük resim de şeffaf */
         box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
     }
     
@@ -484,97 +488,4 @@
     });
   });
 
-  const modal = document.getElementById('project-modal');
-  const modalBody = document.getElementById('modal-body-scroll');
-  const mTitle = document.getElementById('modal-title');
-  const mDesc = document.getElementById('modal-desc');
-  const mMedia = document.getElementById('modal-main-media');
-  const mThumbs = document.getElementById('modal-thumbs');
-  const mLinks = document.getElementById('modal-links');
-
-  // --- Modal Açma Fonksiyonu ---
-  function openModal(project) {
-    document.body.style.overflow = 'hidden'; // Kaydırmayı engelle
-    
-    mTitle.textContent = project.name;
-    mDesc.textContent = project.longDesc || project.shortDesc;
-    
-    mLinks.innerHTML = '';
-    if(project.links) {
-        project.links.forEach(l => {
-            const a = document.createElement('a');
-            a.href = l.url; a.target = "_blank";
-            a.innerHTML = `<span>🔗</span> ${l.label}`;
-            mLinks.appendChild(a);
-        });
-    }
-
-    mMedia.innerHTML = '';
-    mThumbs.innerHTML = '';
-    let gallery = project.gallery ? [...project.gallery] : [];
-    if (project.coverImage && !gallery.some(i => i.src === project.coverImage)) {
-        gallery.unshift({ type: 'image', src: project.coverImage });
-    }
-
-    if (gallery.length > 0) {
-        setMedia(gallery[0]);
-        gallery.forEach((item, idx) => {
-            const th = document.createElement('div');
-            th.className = 'modal-thumb' + (idx === 0 ? ' active' : '');
-            if(item.type === 'image') th.innerHTML = `<img src="${item.src}">`;
-            else if (item.type === 'youtube') {
-                 const vidId = item.src.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1];
-                 th.innerHTML = vidId ? `<img src="https://img.youtube.com/vi/${vidId}/0.jpg">` : 'Video';
-            } else th.innerHTML = 'Video';
-            
-            th.onclick = () => {
-                document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
-                th.classList.add('active');
-                setMedia(item);
-            };
-            mThumbs.appendChild(th);
-        });
-    }
-
-    modal.classList.add('open');
-    modalBody.scrollTop = 0;
-  }
-
-  function setMedia(item) {
-      mMedia.innerHTML = '';
-      if(item.type === 'image') mMedia.innerHTML = `<img src="${item.src}">`;
-      else if (item.type === 'youtube') {
-          const vidId = item.src.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1];
-          if(vidId) mMedia.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-          else mMedia.innerHTML = '<span>Invalid YouTube link.</span>';
-      } else if (item.type === 'video') {
-          mMedia.innerHTML = `<video src="${item.src}" controls autoplay muted></video>`;
-      }
-  }
-
-  // --- KAPATMA FONKSİYONU ---
-  function closeModal() {
-    modal.classList.remove('open');
-    mMedia.innerHTML = ''; 
-    document.body.style.overflow = ''; // Kaydırma kilidini kaldır
-    window.history.pushState(null, '', window.location.pathname + window.location.search);
-  }
-
-  document.getElementById('modal-close').onclick = closeModal;
-  modal.onclick = (e) => { if(e.target === modal) closeModal(); }
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-  
-  function checkDeepLink() {
-    const hash = window.location.hash.substring(1);
-    if (hash && window.projects) {
-      const project = window.projects.find(p => p.id === hash);
-      if (project) openModal(project);
-    }
-  }
-
-  // Tüm JS yüklemesi tamamlandıktan sonra başlat
-  window.addEventListener('load', () => { renderProjects(); checkDeepLink(); });
-  window.addEventListener('hashchange', checkDeepLink);
-</script>
-</body>
-</html>
+  const modal = document.getElementById('project
