@@ -120,39 +120,39 @@
     }
 
     /* SOCIAL BUTTONS */
-   .profile-social {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 2px;
-  }
-  
-  .social-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
-    border: 1px solid rgba(148,163,184,0.6);
-    background: rgba(15,23,42,0.9); /* koyu arka plan */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: 0.2s;
-  }
-  
-  .social-btn img {
-    width: 16px;
-    height: 16px;
-    display: block;
-  }
-  
-  .social-btn:hover {
-    background: #111827;                 /* hâlâ koyu */
-    border-color: var(--accent);         /* mavi çerçeve */
-    transform: translateY(-1px) scale(1.04);
-    box-shadow: 0 10px 20px rgba(15,23,42,0.6);
-  }
+    .profile-social {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .social-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9); /* koyu arka plan */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .social-btn img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .social-btn:hover {
+      background: #111827;                 /* hâlâ koyu */
+      border-color: var(--accent);         /* mavi çerçeve */
+      transform: translateY(-1px) scale(1.04);
+      box-shadow: 0 10px 20px rgba(15,23,42,0.6);
+    }
 
     /* CONTACT CARDS */
     .contact-list {
@@ -586,7 +586,7 @@
       background: #000;
       border-radius: 14px;
       min-height: 260px;
-      max-height: 65vh;  /* daha iyi sığsın */
+      max-height: 65vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -598,7 +598,7 @@
     .modal-main-media iframe {
       width: 100%;
       height: 100%;
-      object-fit: contain;   /* panelde TAM görünsün */
+      object-fit: contain;
       display: block;
       border: none;
     }
@@ -672,7 +672,7 @@
         flex: 0 0 auto;
         width: 100%;
         max-width: 100%;
-        height: 220px; /* mobilde sabit */
+        height: 220px;
       }
 
       .project-text::before {
@@ -690,6 +690,7 @@
 
 <div class="page">
   <div class="layout">
+
     <!-- LEFT PROFILE -->
     <aside class="sidebar">
       <div class="profile-header">
@@ -716,47 +717,47 @@
         </a>
       </div>
 
-<!-- Contact cards -->
-<div class="contact-list">
+      <!-- Contact cards -->
+      <div class="contact-list">
 
-  <!-- Email -->
-  <a class="contact-card-link" href="mailto:mrbahadirkus@gmail.com">
-    <div class="contact-icon">
-      <img src="images/mail-icon.png" alt="Email icon">
-    </div>
-    <div class="contact-text">
-      <span class="contact-label">Email</span>
-      <span class="contact-value">mrbahadirkus@gmail.com</span>
-    </div>
-  </a>
+        <!-- Email -->
+        <a class="contact-card-link" href="mailto:mrbahadirkus@gmail.com">
+          <div class="contact-icon">
+            <img src="images/mail-icon.png" alt="Email icon">
+          </div>
+          <div class="contact-text">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">mrbahadirkus@gmail.com</span>
+          </div>
+        </a>
 
-  <!-- GitHub -->
-  <a class="contact-card-link" 
-     href="https://github.com/bahadirkus" 
-     target="_blank">
-    <div class="contact-icon">
-      <img src="images/github-icon.png" alt="GitHub icon">
-    </div>
-    <div class="contact-text">
-      <span class="contact-label">GitHub</span>
-      <span class="contact-value">github.com/bahadirkus</span>
-    </div>
-  </a>
+        <!-- GitHub -->
+        <a class="contact-card-link"
+           href="https://github.com/bahadirkus"
+           target="_blank">
+          <div class="contact-icon">
+            <img src="images/github-icon.png" alt="GitHub icon">
+          </div>
+          <div class="contact-text">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">github.com/bahadirkus</span>
+          </div>
+        </a>
 
-  <!-- Location -->
-  <div class="contact-card">
-    <div class="contact-icon">
-      <img src="images/location-icon.png" alt="Location icon">
-    </div>
-    <div class="contact-text">
-      <span class="contact-label">Location</span>
-      <span class="contact-value">Toronto, Canada</span>
-    </div>
-  </div>
+        <!-- Location -->
+        <div class="contact-card">
+          <div class="contact-icon">
+            <img src="images/location-icon.png" alt="Location icon">
+          </div>
+          <div class="contact-text">
+            <span class="contact-label">Location</span>
+            <span class="contact-value">Toronto, Canada</span>
+          </div>
+        </div>
 
-</div>
-
-
+      </div>
+    </aside>
+    <!-- END SIDEBAR -->
 
     <!-- RIGHT MAIN CARD -->
     <main class="main-card">
@@ -823,6 +824,7 @@
         </div>
       </section>
     </main>
+
   </div>
 
   <footer>
@@ -1039,7 +1041,7 @@
 
     let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
 
-    // HER ZAMAN coverImage'i en başa ekle (varsa ve zaten ekli değilse)
+    // coverImage her zaman ilk sırada
     if (project.coverImage) {
       const alreadyHasCover = gallery.some(
         item => item.type === 'image' && item.src === project.coverImage
