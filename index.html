@@ -34,6 +34,12 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* SCROLL LOCK CLASS (Modal açılınca body'e eklenir) */
+    body.no-scroll {
+      overflow: hidden;
+      height: 100vh;
+    }
+
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: radial-gradient(circle at 50% 0%, #dbeafe 0%, #f3f4f6 50%, #f9fafb 100%);
@@ -435,58 +441,80 @@
       padding-top: 20px;
     }
 
-    /* MODAL */
+    /* --- MODAL (GELİŞTİRİLMİŞ KONTROLLER) --- */
     .project-modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(5px);
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px); /* Daha profesyonel bulanıklık */
       z-index: 1000;
       display: none; justify-content: center; align-items: center; padding: 20px;
     }
-    .project-modal.open { display: flex; animation: modalFadeIn 0.2s ease-out; }
     
-    @keyframes modalFadeIn { from{opacity:0; transform:scale(0.95);} to{opacity:1; transform:scale(1);} }
+    .project-modal.open { display: flex; animation: modalFadeIn 0.25s ease-out; }
+    
+    @keyframes modalFadeIn { 
+        from { opacity:0; transform: scale(0.95) translateY(10px); } 
+        to { opacity:1; transform: scale(1) translateY(0); } 
+    }
 
     .project-modal-content {
       background: #fff; width: 100%; max-width: 1000px;
       border-radius: 20px; overflow: hidden;
       max-height: 90vh; display: flex; flex-direction: column;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
     }
 
     .project-modal-header {
       padding: 20px 24px; border-bottom: 1px solid var(--border);
       display: flex; justify-content: space-between; align-items: center;
+      background: #fff;
+      position: sticky; top: 0; z-index: 10; /* Header sabit kalır */
     }
-    .project-modal-close { font-size: 28px; background: none; border: none; cursor: pointer; color: #6b7280; }
-    .project-modal-close:hover { color: #111827; }
 
-    .project-modal-body { display: flex; gap: 32px; padding: 24px; overflow-y: auto; }
+    /* GELİŞMİŞ KAPATMA BUTONU */
+    .project-modal-close {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      color: #6b7280;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .project-modal-close:hover {
+      background: #ef4444; color: #fff; border-color: #ef4444; transform: rotate(90deg);
+    }
+
+    /* MODAL BODY SCROLL (ÖNEMLİ) */
+    .project-modal-body { 
+        display: flex; gap: 32px; padding: 24px; 
+        overflow-y: auto; /* Scroll burada olur */
+        overscroll-behavior: contain; /* Scroll zincirlemesini engeller */
+    }
     
     .modal-text { flex: 1; min-width: 300px; display: flex; flex-direction: column; }
     
-    /* SATIR BOŞLUKLARI DÜZELTMESİ */
-    #modal-desc {
-        white-space: pre-line;
-    }
+    #modal-desc { white-space: pre-line; }
 
-    /* --- PROFESYONEL GALERİ (DÜZELTİLEN KISIM) --- */
+    /* PROFESYONEL GALERİ */
     .modal-gallery { flex: 1.5; display: flex; flex-direction: column; gap: 16px; }
 
     .modal-main-media {
       width: 100%;
-      height: auto; /* Siyah kutu zorlaması kalktı */
+      height: auto;
       min-height: 300px;
-      max-height: 600px; /* Çok uzamasını engelle */
-      background: #f9fafb; /* Siyah yerine çok açık gri */
+      max-height: 600px;
+      background: #f9fafb; 
       border-radius: 12px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
 
-    /* Görseller orijinal oranında kalsın, siyah kutu olmasın */
     .modal-main-media img {
       width: auto;
       height: auto;
@@ -496,7 +524,6 @@
       display: block;
     }
 
-    /* Video/Iframe için 16:9 oranını koru */
     .modal-main-media iframe, .modal-main-media video {
          width: 100%;
          height: 100%;
@@ -528,7 +555,7 @@
     .modal-thumb {
       width: 80px; height: 60px; flex-shrink: 0; border-radius: 8px; overflow: hidden;
       cursor: pointer; opacity: 0.7; transition: 0.2s; border: 2px solid transparent; 
-      background: #f3f4f6; /* Thumb arka planı da beyaz/gri */
+      background: #f3f4f6; 
     }
     .modal-thumb.active { opacity: 1; border-color: var(--accent); background:#fff; }
     .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
@@ -548,7 +575,16 @@
       .project-card { height: auto; flex-direction: column; }
       .project-image { width: 100%; height: 200px; }
       .project-text::before { top: 0; left: 24px; right: 24px; width: auto; height: 4px; }
-      .project-modal-body { flex-direction: column-reverse; }
+      
+      /* Mobil Modal Ayarı: Tam Ekran Hissi */
+      .project-modal { padding: 0; align-items: flex-end; }
+      .project-modal-content { 
+          border-radius: 20px 20px 0 0; 
+          max-height: 92vh; 
+          height: 92vh;
+      }
+      .project-modal-body { flex-direction: column-reverse; padding: 20px; padding-bottom: 80px; }
+      
       .sidebar { flex-direction: column; align-items: center; }
       .profile-header { flex-direction: column; text-align: center; }
       .contact-card-link { width: 100%; }
@@ -714,7 +750,7 @@
       <h2 style="font-size:18px; margin:0;" id="modal-title">Project Name</h2>
       <button class="project-modal-close" id="modal-close">&times;</button>
     </div>
-    <div class="project-modal-body">
+    <div class="project-modal-body" id="modal-body-scroll">
       <div class="modal-text">
         
         <div id="modal-links" class="modal-links"></div>
@@ -823,8 +859,18 @@
   const mMedia = document.getElementById('modal-main-media');
   const mThumbs = document.getElementById('modal-thumbs');
   const mLinks = document.getElementById('modal-links');
+  const mBody = document.getElementById('modal-body-scroll'); // Scroll için
 
   function openModal(project) {
+    // 1. Arka planı kilitle
+    document.body.classList.add('no-scroll');
+    
+    // 2. Modalı aç
+    modal.classList.add('open');
+
+    // 3. İÇERİĞİ EN ÜSTE KAYDIR (DÜZELTME)
+    mBody.scrollTop = 0;
+
     mTitle.textContent = project.name;
     mDesc.textContent = project.longDesc || project.shortDesc;
     
@@ -875,32 +921,27 @@
     } else {
         mMedia.innerHTML = '<span>No media added yet.</span>';
     }
-
-    modal.classList.add('open');
   }
 
   function setMedia(item) {
       mMedia.innerHTML = '';
       
       if(item.type === 'image') {
-          // İmaj ise adaptive container
           mMedia.innerHTML = `<img src="${item.src}">`;
       } else if (item.type === 'youtube') {
-          // Youtube ise iframe
           const vidId = item.src.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1];
           if(vidId) {
               mMedia.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
           }
       } else if (item.type === 'video') {
-          // Video dosyası
           mMedia.innerHTML = `<video src="${item.src}" controls autoplay muted></video>`;
       }
   }
 
   function closeModal() {
     modal.classList.remove('open');
-    // Videoyu durdurmak için içeriği temizle
-    mMedia.innerHTML = ''; 
+    document.body.classList.remove('no-scroll'); // Kilidi kaldır
+    mMedia.innerHTML = ''; // Videoyu durdur
     window.history.pushState(null, '', window.location.pathname + window.location.search);
   }
 
