@@ -3,697 +3,479 @@
 <head>
   <meta charset="UTF-8" />
   <title>Bahadır Kuş – Simulation Developer & Technical Designer</title>
+  
+  <meta name="description" content="Portfolio of Bahadır Kuş - Simulation Developer, Unity Expert and Technical Designer specialized in VR/AR and Medical Simulations.">
+  <meta name="author" content="Bahadır Kuş">
+  
+  <meta property="og:title" content="Bahadır Kuş – Simulation Developer Portfolio">
+  <meta property="og:description" content="View my latest work in Unity, VR/AR, and Hardware/Software integration.">
+  <meta property="og:image" content="images/bahadir.jpeg"> <meta property="og:url" content="https://bahadirkus.com"> <meta property="og:type" content="website">
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO & SHARE (LinkedIn, X, etc.) -->
-  <meta name="description" content="Portfolio of Bahadır Kuş – Simulation Developer & Technical Designer specializing in VR/AR, medical simulation and interactive systems.">
-  <meta property="og:title" content="Bahadır Kuş – Simulation Developer & Technical Designer">
-  <meta property="og:description" content="Selected work in simulation, software and interactive design.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://bahadirkus.github.io">
-  <meta property="og:image" content="images/og-cover.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #f3f4f6;
+      --bg: #f8f9fa;
       --card-bg: #ffffff;
-      --text: #111827;
+      --text: #1f2937;
       --muted: #6b7280;
       --border: #e5e7eb;
       --accent: #2563eb;
+      --accent-hover: #1d4ed8;
       --accent-soft: #eff6ff;
+      --sidebar-bg: #111827;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #e5f0ff 0, #f3f4f6 40%, #f3f4f6 100%);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #dbeafe 0%, #f3f4f6 50%, #f9fafb 100%);
       color: var(--text);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
 
     .page {
-      max-width: 1180px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 32px 16px 64px;
+      padding: 40px 20px 80px;
     }
 
     .layout {
       display: grid;
-      grid-template-columns: 290px minmax(0, 1fr);
-      gap: 24px;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 32px;
       align-items: flex-start;
     }
 
-    /* LEFT SIDEBAR */
+    /* --- LEFT SIDEBAR --- */
     .sidebar {
       position: sticky;
-      top: 24px;
-      align-self: flex-start;
-      background: #111827;
+      top: 32px;
+      background: var(--sidebar-bg);
       border-radius: 24px;
-      padding: 26px 22px 22px;
-      box-shadow: 0 26px 60px rgba(15, 23, 42, 0.45);
+      padding: 32px 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 24px;
       color: #f9fafb;
       align-items: center;
-    }
-
-    .profile-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
     .profile-photo {
-      width: 140px;
-      height: 140px;
-      border-radius: 32px;
+      width: 150px;
+      height: 150px;
+      border-radius: 40px; /* Biraz daha yumuşak köşe */
       background: #020617;
-      border: 1px solid rgba(148, 163, 184, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.1);
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
-      color: #9ca3af;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
     }
 
     .profile-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+    }
+
+    .profile-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
 
     .profile-name {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
     .profile-role-pill {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 6px 18px;
-      background: #27272f;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 999px;
       font-size: 12px;
-      color: #e5e7eb;
-      letter-spacing: 0.06em;
-      text-transform: none;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.7);
+      font-weight: 500;
+      color: #e2e8f0;
+      backdrop-filter: blur(4px);
     }
 
     .profile-role-pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    .profile-bio {
-      font-size: 13px;
-      color: #e5e7eb;
-      text-align: left;
-      align-self: stretch;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80; /* Yeşil online ışığı */
+      box-shadow: 0 0 8px #4ade80;
     }
 
     /* SOCIAL BUTTONS */
     .profile-social {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 12px;
       justify-content: center;
-      margin-top: 2px;
     }
 
     .social-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(255,255,255,0.06);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
-      transition: .2s;
+      transition: all 0.2s ease;
     }
-
-    .social-btn img {
-      width: 16px;
-      height: 16px;
-      display: block;
-    }
+    
+    .social-btn img { width: 18px; height: 18px; filter: invert(1); opacity: 0.8; }
 
     .social-btn:hover {
       background: #fff;
-      border-color: var(--accent);
-      transform: translateY(-1px);
-      box-shadow: 0 10px 20px rgba(15,23,42,0.4);
+      border-color: #fff;
+      transform: translateY(-2px);
     }
+    .social-btn:hover img { filter: invert(0); opacity: 1; }
 
-    /* CONTACT CARDS */
+    /* CONTACT LIST */
     .contact-list {
-      align-self: stretch;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-top: 8px;
-      font-size: 13px;
+      gap: 10px;
     }
 
-    .contact-card,
     .contact-card-link {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 11px;
+      gap: 12px;
+      padding: 12px;
       border-radius: 16px;
-      background: #15151f;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.45);
-    }
-
-    .contact-card-link {
-      text-decoration: none;
-      color: #e5e7eb;
-      transition: .15s;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.2s;
     }
 
     .contact-card-link:hover {
-      background: #1e1e29;
-      transform: translateY(-1px);
-      box-shadow: 0 16px 30px rgba(0,0,0,0.6);
+      background: rgba(255,255,255,0.08);
+      transform: translateX(2px);
     }
 
     .contact-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 14px;
-      background: #0f172a;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: #1f2937;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.7);
       flex-shrink: 0;
     }
+    .contact-icon img { width: 16px; height: 16px; filter: invert(1); opacity: 0.9; }
 
-    .contact-icon img {
-      width: 18px;
-      height: 18px;
-      display: block;
-    }
+    .contact-text { display: flex; flex-direction: column; }
+    .contact-label { font-size: 10px; text-transform: uppercase; color: #9ca3af; letter-spacing: 0.05em; }
+    .contact-value { font-size: 13px; color: #f3f4f6; font-weight: 500; }
 
-    .contact-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .contact-label {
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #9ca3af;
-    }
-
-    .contact-value {
-      font-size: 13px;
-      color: #e5e7eb;
-      word-break: break-all;
-    }
-
-    /* MAIN CARD */
+    /* --- MAIN CONTENT --- */
     .main-card {
-      background: #fff;
+      background: var(--card-bg);
       border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
-      padding: 18px 20px 22px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 32px;
+      min-height: 80vh;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 24px;
     }
 
     .main-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
-      gap: 12px;
+      padding-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .main-header h1 {
-      font-size: 19px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
+    .main-header h1 { font-size: 24px; font-weight: 700; color: #111827; }
+    .main-header p { font-size: 14px; color: var(--muted); margin-top: 4px; }
 
-    .main-header p {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
+    /* TABS */
     .top-tabs {
       display: flex;
       background: #f3f4f6;
-      padding: 3px;
-      border-radius: 999px;
-      gap: 3px;
+      padding: 4px;
+      border-radius: 12px;
     }
 
     .tab-btn {
-      padding: 6px 16px;
-      border-radius: 999px;
+      padding: 8px 20px;
+      border-radius: 8px;
       font-size: 13px;
+      font-weight: 500;
       border: none;
-      background: none;
+      background: transparent;
       cursor: pointer;
       color: var(--muted);
-      white-space: nowrap;
-      transition: 0.15s;
+      transition: all 0.2s;
     }
 
     .tab-btn.active {
       background: #fff;
       color: var(--text);
-      font-weight: 500;
-      box-shadow: 0 6px 18px rgba(148,163,184,0.5);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-weight: 600;
     }
 
-    .tab-section { display: none; }
+    .tab-section { display: none; animation: fadeIn 0.3s ease; }
     .tab-section.active { display: block; }
 
-    section h2 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    section p {
-      font-size: 14px;
-      color: var(--muted);
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
     /* FILTERS */
     .project-filters {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin: 12px 0 16px;
+      gap: 10px;
+      margin: 20px 0 24px;
     }
 
     .filter-btn {
       border-radius: 999px;
-      padding: 6px 13px;
-      font-size: 12px;
+      padding: 8px 16px;
+      font-size: 13px;
       border: 1px solid var(--border);
-      background: #f9fafb;
+      background: #fff;
+      color: var(--muted);
       cursor: pointer;
-      opacity: 0.9;
-      transition: background 0.15s ease, opacity 0.1s ease,
-                  transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
+      transition: all 0.2s;
     }
 
-    .filter-btn:hover {
-      background: #e5e7eb;
-      opacity: 1;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(148, 163, 184, 0.6);
-    }
-
+    .filter-btn:hover { background: #f9fafb; border-color: #d1d5db; color: var(--text); }
+    
     .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
       border-color: var(--accent);
-      background: var(--accent-soft);
-      color: #1d4ed8;
-      opacity: 1;
-      box-shadow: 0 8px 20px rgba(129, 140, 248, 0.4);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 
-    /* PROJECT LIST – ALWAYS ONE COLUMN */
+    /* --- PROJECTS GRID (DÜZELTİLEN KISIM) --- */
     .projects-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 20px;
-      margin-top: 4px;
+      grid-template-columns: 1fr; /* Tek sütun liste görünümü */
+      gap: 24px;
     }
 
     .project-card {
       display: flex;
       flex-direction: row;
-      background: #f9fafb;
-      border-radius: 18px;
-      box-shadow: 0 14px 34px rgba(15,23,42,0.14);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-      transition: .15s;
-      height: 240px;           /* SABIT YUKSEKLIK (desktop) */
-      align-items: stretch;
+      transition: transform 0.2s, box-shadow 0.2s;
+      /* Yüksekliği sabitlemek istiyorsan min-height yerine sabit height verebilirsin ama içerik taşabilir. 
+         Burada esnek ama "görsel alanı sabit" bir yapı kuruyoruz. */
+      height: 240px; /* KART YÜKSEKLİĞİ SABİT */
     }
 
     .project-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(15,23,42,0.2);
-      background: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border-color: #d1d5db;
     }
 
-    .project-text {
-      padding: 18px 20px 18px 22px;
-      flex: 1;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      overflow: hidden;
-    }
-
-    .project-text::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 16px;
-      bottom: 16px;
-      width: 4px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .project-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .project-role {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--muted);
-    }
-
-    .project-date {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .project-desc {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .project-tech {
-      font-size: 11px;
-      color: #6b7280;
-      margin-top: 8px;
-    }
-
+    /* Görsel Alanı - İSTEĞE GÖRE DÜZENLENDİ */
     .project-image {
-      width: 38%;
-      min-width: 38%;
-      max-width: 38%;
-      background: transparent;    /* transparent background */
-      overflow: hidden;
+      width: 280px;      /* Sabit Genişlik */
+      min-width: 280px;
+      height: 100%;      /* Kart yüksekliği kadar */
+      background: #000;  /* Arkası Siyah */
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .project-image img {
       width: 100%;
       height: 100%;
-      object-fit: contain;        /* fit without cropping */
+      object-fit: contain; /* Resmi kırpma, sığdır. */
       display: block;
+      opacity: 0.9;
+      transition: opacity 0.3s;
+    }
+    
+    .project-card:hover .project-image img { opacity: 1; scale: 1.05; transition: scale 0.5s ease; }
+
+    .project-text {
+      flex: 1;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
     }
 
-    .project-image span {
-      font-size: 12px;
-      color: var(--muted);
+    /* Sol kenar çizgisi efekti */
+    .project-text::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 24px; bottom: 24px;
+      width: 4px;
+      background: var(--accent);
+      border-radius: 0 4px 4px 0;
     }
 
-    /* RESUME BLOCKS */
+    .project-title { font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+    .project-meta { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 2px; text-transform: uppercase; }
+    .project-date { font-size: 12px; color: #9ca3af; margin-bottom: 12px; }
+    
+    .project-desc {
+      font-size: 14px;
+      color: #4b5563;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* 3 satırdan fazlasını ... yap */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: auto; /* Tech etiketlerini en alta it */
+    }
+
+    .project-tech {
+      font-size: 11px;
+      font-family: monospace;
+      color: #6b7280;
+      background: #f3f4f6;
+      padding: 4px 8px;
+      border-radius: 6px;
+      align-self: flex-start;
+      margin-top: 12px;
+    }
+
+    /* RESUME SECTION */
     .resume-block {
       background: #f9fafb;
+      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 14px 16px 14px;
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
-      margin-top: 12px;
-      font-size: 14px;
-      color: var(--muted);
+      padding: 24px;
+      margin-top: 20px;
     }
+    .resume-block h3 { margin-bottom: 12px; font-size: 16px; color: #111827; }
 
-    .resume-block h3 {
-      font-size: 15px;
-      margin-bottom: 4px;
-      color: var(--text);
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag {
-      font-size: 11px;
-      border-radius: 999px;
-      padding: 4px 10px;
+      font-size: 12px;
+      border-radius: 6px;
+      padding: 6px 12px;
       background: #e5e7eb;
       color: #374151;
+      font-weight: 500;
     }
 
     footer {
-      margin-top: 28px;
-      font-size: 12px;
+      margin-top: 40px;
+      font-size: 13px;
       color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-      opacity: 0.85;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
     }
 
     /* MODAL */
     .project-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-      z-index: 100;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: none; justify-content: center; align-items: center; padding: 20px;
     }
-
-    .project-modal.open { display: flex; }
+    .project-modal.open { display: flex; animation: modalFadeIn 0.2s ease-out; }
+    
+    @keyframes modalFadeIn { from{opacity:0; transform:scale(0.95);} to{opacity:1; transform:scale(1);} }
 
     .project-modal-content {
-      background: #fff;
-      border-radius: 20px;
-      max-width: 980px;
-      width: 100%;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 30px 70px rgba(15,23,42,0.4);
-      max-height: 90vh;
+      background: #fff; width: 100%; max-width: 1000px;
+      border-radius: 20px; overflow: hidden;
+      max-height: 90vh; display: flex; flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
 
     .project-modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 20px 8px;
-      border-bottom: 1px solid var(--border);
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
     }
+    .project-modal-close { font-size: 28px; background: none; border: none; cursor: pointer; color: #6b7280; }
+    .project-modal-close:hover { color: #111827; }
 
-    .project-modal-title {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .project-modal-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .project-modal-close {
-      border: none;
-      background: transparent;
-      font-size: 22px;
-      cursor: pointer;
-      line-height: 1;
-      padding: 4px 8px;
-    }
-
-    .project-modal-body {
-      display: flex;
-      gap: 20px;
-      padding: 16px 20px 18px;
-      flex-wrap: wrap;
-      overflow-y: auto;
-    }
-
-    .modal-text {
-      flex: 1 1 260px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .modal-text h4 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      margin-bottom: 6px;
-      opacity: 0.7;
-    }
-
-    .modal-links {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .modal-link-item {
-      font-size: 13px;
-      color: #1d4ed8;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .modal-link-item::before {
-      content: "↗";
-      font-size: 11px;
-    }
-
-    .modal-link-item:hover {
-      text-decoration: underline;
-    }
-
-    .modal-gallery {
-      flex: 1 1 320px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .project-modal-body { display: flex; gap: 32px; padding: 24px; overflow-y: auto; }
+    
+    .modal-text { flex: 1; min-width: 300px; }
+    .modal-gallery { flex: 1.5; display: flex; flex-direction: column; gap: 16px; }
 
     .modal-main-media {
-      width: 100%;
-      background: #000;
-      border-radius: 14px;
-      min-height: 220px;
-      max-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      background: #000; border-radius: 12px; overflow: hidden;
+      aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
     }
+    .modal-main-media img, .modal-main-media iframe, .modal-main-media video { width: 100%; height: 100%; object-fit: contain; }
 
-    .modal-main-media img,
-    .modal-main-media video,
-    .modal-main-media iframe {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      border: none;
-    }
-
-    .modal-main-media span {
-      font-size: 12px;
-      color: var(--muted);
-      background: #f3f4f6;
-      width: 100%;
-      text-align: center;
-      padding: 16px 0;
-    }
-
-    .modal-thumbs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
+    .modal-thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
     .modal-thumb {
-      width: 70px;
-      height: 70px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border: 2px solid transparent;
-      font-size: 11px;
-      color: var(--muted);
+      width: 80px; height: 60px; flex-shrink: 0; border-radius: 8px; overflow: hidden;
+      cursor: pointer; opacity: 0.6; transition: 0.2s; border: 2px solid transparent; background: #000;
     }
+    .modal-thumb.active { opacity: 1; border-color: var(--accent); }
+    .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    .modal-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .modal-links a {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 10px;
+      color: var(--accent); font-weight: 500; font-size: 14px;
     }
+    .modal-links a:hover { text-decoration: underline; }
 
-    .modal-thumb.active {
-      border-color: var(--accent);
-    }
-
-    /* MOBILE */
+    /* MOBILE RESPONSIVE */
     @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-      }
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+      .profile-header { flex-direction: row; text-align: left; }
+      .profile-photo { width: 80px; height: 80px; border-radius: 20px; }
+      .contact-list { flex-direction: row; flex-wrap: wrap; }
+      .contact-card-link { flex: 1 1 45%; }
     }
 
     @media (max-width: 640px) {
-      .main-card {
-        padding: 14px 14px 18px;
-      }
-
-      .projects-grid {
-        gap: 16px;
-      }
-
-      .project-card {
-        flex-direction: column;
-        height: auto;         /* mobilde sabit değil */
-        min-height: 220px;
-      }
-
-      .project-image {
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
-        height: 200px;
-      }
-
-      .project-text::before {
-        top: 12px;
-        bottom: 12px;
-      }
-
-      .project-modal-body {
-        flex-direction: column;
-      }
+      .project-card { height: auto; flex-direction: column; }
+      .project-image { width: 100%; height: 200px; }
+      .project-text::before { top: 0; left: 24px; right: 24px; width: auto; height: 4px; }
+      .project-modal-body { flex-direction: column-reverse; }
+      .sidebar { flex-direction: column; align-items: center; }
+      .profile-header { flex-direction: column; text-align: center; }
+      .contact-card-link { width: 100%; }
     }
   </style>
 </head>
@@ -701,441 +483,311 @@
 
 <div class="page">
   <div class="layout">
-    <!-- LEFT PROFILE -->
+    
     <aside class="sidebar">
       <div class="profile-header">
         <div class="profile-photo">
-          <img src="images/bahadir.jpeg" alt="Bahadır Kuş" loading="lazy">
+          <img src="images/bahadir.jpeg" alt="Bahadır Kuş">
         </div>
-        <div class="profile-name">Bahadır Kuş</div>
-        <div class="profile-role-pill">
-          <span class="profile-role-pill-dot"></span>
-          <span>Simulation Developer &amp; Technical Designer</span>
+        <div>
+          <div class="profile-name">Bahadır Kuş</div>
+          <div class="profile-role-pill">
+            <span class="profile-role-pill-dot"></span>
+            <span>Simulation Dev & Tech Designer</span>
+          </div>
         </div>
       </div>
 
-      <!-- Social icons -->
       <div class="profile-social">
-        <a class="social-btn" href="#" target="_blank" title="Instagram">
-          <img src="images/instagram-icon.png" alt="Instagram" loading="lazy">
-        </a>
-        <a class="social-btn" href="#" target="_blank" title="X / Twitter">
-          <img src="images/x-icon.png" alt="X" loading="lazy">
-        </a>
-        <a class="social-btn" href="#" target="_blank" title="LinkedIn">
-          <img src="images/linkedin-icon.png" alt="LinkedIn" loading="lazy">
-        </a>
+        <a class="social-btn" href="#" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"></a>
+        <a class="social-btn" href="#" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/github.svg" alt="GitHub"></a>
+        <a class="social-btn" href="#" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg" alt="YouTube"></a>
+        <a class="social-btn" href="mailto:email@example.com"><img src="https://unpkg.com/simple-icons@v9/icons/gmail.svg" alt="Mail"></a>
       </div>
 
-      <!-- Contact cards -->
       <div class="contact-list">
-        <a class="contact-card-link" href="mailto:mrbahadirkus@gmail.com">
-          <div class="contact-icon">
-            <img src="images/mail-icon.png" alt="Email icon" loading="lazy">
-          </div>
-          <div class="contact-text">
-            <span class="contact-label">Email</span>
-            <span class="contact-value">mrbahadirkus@gmail.com</span>
-          </div>
-        </a>
-
-        <a class="contact-card-link" href="https://github.com/bahadirkus" target="_blank" rel="noopener noreferrer">
-          <div class="contact-icon">
-            <img src="images/github-icon.png" alt="Game demo icon" loading="lazy">
-          </div>
-          <div class="contact-text">
-            <span class="contact-label">Game Demo</span>
-            <span class="contact-value">github.com/bahadirkus</span>
-          </div>
-        </a>
-
-        <div class="contact-card">
-          <div class="contact-icon">
-            <img src="images/location-icon.png" alt="Location icon" loading="lazy">
-          </div>
+        <a class="contact-card-link" href="#">
+          <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/googlemaps.svg" alt="Loc"></div>
           <div class="contact-text">
             <span class="contact-label">Location</span>
-            <span class="contact-value">Ankara · Toronto (remote)</span>
+            <span class="contact-value">Ankara, TR / Toronto, CA</span>
           </div>
-        </div>
-
-        <a class="contact-card-link" href="#" target="_blank" rel="noopener noreferrer">
-          <div class="contact-icon">
-            <img src="images/youtube-icon.png" alt="YouTube icon" loading="lazy">
-          </div>
+        </a>
+        <a class="contact-card-link" href="#">
+          <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/itchdotio.svg" alt="Itch"></div>
           <div class="contact-text">
-            <span class="contact-label">YouTube</span>
-            <span class="contact-value">YouTube Channel</span>
+            <span class="contact-label">Game Demo</span>
+            <span class="contact-value">itch.io/bahadirkus</span>
           </div>
         </a>
       </div>
     </aside>
 
-    <!-- RIGHT MAIN CARD -->
     <main class="main-card">
       <div class="main-header">
         <div>
-          <h1>Portfolio &amp; Resume</h1>
-          <p>Selected work in simulation, software and interactive design.</p>
+          <h1>Portfolio</h1>
+          <p>Unity, VR/AR, and embedded systems projects.</p>
         </div>
         <div class="top-tabs">
-          <button class="tab-btn active" data-tab="portfolio">Portfolio</button>
+          <button class="tab-btn active" data-tab="portfolio">Projects</button>
           <button class="tab-btn" data-tab="resume">Resume</button>
         </div>
       </div>
 
-      <!-- PORTFOLIO -->
       <section id="portfolio-section" class="tab-section active">
-        <h2>Portfolio</h2>
-        <p>Browse my projects and filter them by type.</p>
-
         <div class="project-filters">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="software">Software</button>
-          <button class="filter-btn" data-filter="design">Design</button>
-          <button class="filter-btn" data-filter="hardware">Hardware</button>
+          <button class="filter-btn active" data-filter="all">All Work</button>
+          <button class="filter-btn" data-filter="software">Software / VR</button>
+          <button class="filter-btn" data-filter="hardware">Hardware Integration</button>
+          <button class="filter-btn" data-filter="design">Technical Design</button>
         </div>
 
-        <div class="projects-grid">
-          <!-- Cards are injected by JS -->
-        </div>
+        <div class="projects-grid" id="projects-grid">
+          </div>
       </section>
 
-      <!-- RESUME -->
       <section id="resume-section" class="tab-section">
-        <h2>Resume</h2>
-        <p>A brief overview of my skills, background and experience.</p>
+        <h2>Professional Summary</h2>
+        <p style="color:var(--text); margin-top:8px;">
+            Experienced Simulation Developer specializing in creating realistic surgical training systems using Unity, VR/AR, and custom hardware. 
+            Bridging the gap between mechanical design and real-time software.
+        </p>
 
-        <div class="resume-block" style="margin-top:10px;">
-          <h3>My Skills</h3>
+        <div class="resume-block">
+          <h3>Technical Stack</h3>
           <div class="skill-tags">
-            <span class="skill-tag">Unity</span>
-            <span class="skill-tag">C#</span>
-            <span class="skill-tag">VR / AR</span>
-            <span class="skill-tag">Medical Simulation</span>
-            <span class="skill-tag">3D Modeling</span>
+            <span class="skill-tag">Unity 3D</span>
+            <span class="skill-tag">C# / C++</span>
+            <span class="skill-tag">VR / AR / MR</span>
             <span class="skill-tag">Fusion 360</span>
-            <span class="skill-tag">Blender</span>
-            <span class="skill-tag">Arduino</span>
+            <span class="skill-tag">Arduino / ESP32</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">3D Printing</span>
           </div>
         </div>
 
         <div class="resume-block">
-          <h3>About Me</h3>
-          <p>
-            I started with IT &amp; software in high school and over the years focused on
-            real-time applications and simulations. Since 2021 I have been working on
-            VR/AR-based medical simulations, combining custom mechanical parts, sensors
-            and software infrastructure to create realistic surgical training systems.
-          </p>
-        </div>
-
-        <div class="resume-block">
-          <h3>Professional Experience</h3>
-          <p><!-- Fill later --></p>
+          <h3>Experience</h3>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+             <div>
+                <h4 style="font-size:15px; font-weight:600;">Lead Simulation Developer</h4>
+                <div style="font-size:12px; color:var(--muted); margin-bottom:4px;">2021 - Present • MedTech Company</div>
+                <p style="font-size:13px; color:#4b5563;">Developing haptic feedback surgical simulators. Integrating sensors with Unity.</p>
+             </div>
+             </div>
         </div>
       </section>
+
     </main>
   </div>
-
+  
   <footer>
-    <span>© <span id="year"></span> Bahadır Kuş</span>
-    <span>Simulation Developer &amp; Technical Designer</span>
+    <p>© <span id="year">2025</span> Bahadır Kuş. All rights reserved.</p>
   </footer>
 </div>
 
-<!-- PROJECT MODAL -->
 <div class="project-modal" id="project-modal">
   <div class="project-modal-content">
     <div class="project-modal-header">
-      <div>
-        <div class="project-modal-title" id="modal-title"></div>
-        <div class="project-modal-sub" id="modal-sub"></div>
-      </div>
-      <button class="project-modal-close" id="modal-close" aria-label="Close">×</button>
+      <h2 style="font-size:18px; margin:0;" id="modal-title">Project Name</h2>
+      <button class="project-modal-close" id="modal-close">&times;</button>
     </div>
     <div class="project-modal-body">
       <div class="modal-text">
-        <h4>Project Description</h4>
-        <p id="modal-desc"></p>
+        <h4 style="font-size:12px; text-transform:uppercase; color:#6b7280; letter-spacing:1px; margin-bottom:8px;">About the Project</h4>
+        <p id="modal-desc" style="font-size:14px; color:#374151; line-height:1.7;"></p>
         <div id="modal-links" class="modal-links"></div>
       </div>
       <div class="modal-gallery">
-        <div class="modal-main-media" id="modal-main-media">
-          <span>No media added yet.</span>
-        </div>
+        <div class="modal-main-media" id="modal-main-media"></div>
         <div class="modal-thumbs" id="modal-thumbs"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- projects.js must define window.projects -->
-<script src="projects.js"></script>
+<script>
+  // Eğer dışarıdan projects.js gelmezse bu datayı kullanır.
+  if (!window.projects) {
+    window.projects = [
+      {
+        id: "sim-1",
+        name: "Laparoscopic Surgery Sim",
+        role: "Lead Developer",
+        date: "2024-02",
+        types: ["software", "hardware"],
+        shortDesc: "A high-fidelity VR simulation with haptic feedback custom controllers.",
+        longDesc: "This project involved creating a custom controller using Arduino and Hall Effect sensors to mimic surgical tools. The Unity simulation receives data via Serial port and updates the physics-based soft tissue model in real-time.",
+        tagline: "Unity • C# • Arduino • PhysX",
+        coverImage: "https://via.placeholder.com/600x400/000000/ffffff?text=Surgery+Sim", // Siyah arkaplanlı görsel örneği
+        gallery: [
+          { type: 'image', src: 'https://via.placeholder.com/800x600/111/fff?text=Screenshot+1' },
+          { type: 'youtube', src: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' } 
+        ],
+        links: [{ label: "View on GitHub", url: "#" }]
+      },
+      {
+        id: "ar-nav",
+        name: "AR Indoor Navigation",
+        role: "Technical Designer",
+        date: "2023-11",
+        types: ["software", "design"],
+        shortDesc: "Mobile AR application for hospital navigation.",
+        longDesc: "Using AR Foundation and Vuforia to help patients find their way in large hospital complexes.",
+        tagline: "AR Foundation • UX Design",
+        coverImage: "https://via.placeholder.com/400x800/222/fff?text=Mobile+AR", // Dikey görsel örneği
+        gallery: [],
+        links: []
+      }
+    ];
+  }
+</script>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // TAB SWITCHING
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const tabSections = document.querySelectorAll('.tab-section');
-
-  tabButtons.forEach(btn => {
+  // --- TAB SİSTEMİ ---
+  const tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(btn => {
     btn.addEventListener('click', () => {
-      const tab = btn.dataset.tab;
-      tabButtons.forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
       btn.classList.add('active');
-
-      tabSections.forEach(sec => {
-        sec.classList.remove('active');
-        if (sec.id === tab + '-section') {
-          sec.classList.add('active');
-        }
-      });
+      document.getElementById(btn.dataset.tab + '-section').classList.add('active');
     });
   });
 
-  // PROJECT DATA FROM projects.js
-  const projects = Array.isArray(window.projects) ? [...window.projects] : [];
-
-  // Helpers: parse and format date
-  function parseProjectDate(value) {
-    if (!value) return null;
-    const parts = value.split('-').map(p => parseInt(p, 10));
-    if (!parts[0] || !parts[1]) return null;
-    const year = parts[0];
-    const month = parts[1] - 1;
-    const day = parts[2] || 1;
-    return new Date(year, month, day);
-  }
-
-  function formatMonthYear(value) {
-    const d = parseProjectDate(value);
-    if (!d || isNaN(d.getTime())) return '';
-    return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-  }
-
-  // Sort projects by date (newest first)
-  projects.sort((a, b) => {
-    const da = parseProjectDate(a.date);
-    const db = parseProjectDate(b.date);
-    if (!da && !db) return 0;
-    if (!da) return 1;
-    if (!db) return -1;
-    return db - da;
-  });
-
-  const projectsGrid = document.querySelector('.projects-grid');
-  const filterButtons = document.querySelectorAll('.filter-btn');
+  // --- PROJE LİSTELEME ---
+  const grid = document.getElementById('projects-grid');
+  const filters = document.querySelectorAll('.filter-btn');
   let activeFilter = 'all';
 
-  function createProjectCard(project) {
-    const card = document.createElement('article');
-    card.className = 'project-card';
-    card.dataset.id = project.id;
-    card.dataset.types = (project.types || []).join(',');
-
-    const hasCover = project.coverImage && project.coverImage.trim() !== '';
-    const dateText = project.date ? `Date: ${formatMonthYear(project.date)}` : '';
-
-    card.innerHTML = `
-      <div class="project-text">
-        <div class="project-title">${project.name}</div>
-        <div class="project-role">${project.role || ''}</div>
-        <div class="project-date">${dateText}</div>
-        <p class="project-desc">${project.shortDesc || ''}</p>
-        ${project.tagline ? `<div class="project-tech">${project.tagline}</div>` : ''}
-      </div>
-      <div class="project-image">
-        ${
-          hasCover
-            ? `<img src="${project.coverImage}" alt="${project.name} cover" loading="lazy">`
-            : `<span>No image</span>`
-        }
-      </div>
-    `;
-    return card;
-  }
-
   function renderProjects() {
-    projectsGrid.innerHTML = '';
-    projects.forEach(project => {
-      const types = project.types || [];
-      if (activeFilter !== 'all' && !types.includes(activeFilter)) return;
-      const card = createProjectCard(project);
-      projectsGrid.appendChild(card);
+    grid.innerHTML = '';
+    const projects = window.projects || [];
+    
+    // Tarihe göre sırala (Yeniden eskiye)
+    projects.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    projects.forEach(p => {
+      if (activeFilter !== 'all' && !p.types.includes(activeFilter)) return;
+
+      const div = document.createElement('article');
+      div.className = 'project-card';
+      div.onclick = () => openModal(p);
+      
+      // Template Literal Hataları Düzeltildi
+      div.innerHTML = `
+        <div class="project-image">
+           <img src="${p.coverImage || 'images/placeholder.jpg'}" alt="${p.name}">
+        </div>
+        <div class="project-text">
+          <div class="project-meta">${p.role || 'Developer'}</div>
+          <div class="project-title">${p.name}</div>
+          <div class="project-date">${p.date}</div>
+          <p class="project-desc">${p.shortDesc}</p>
+          <div class="project-tech">${p.tagline || ''}</div>
+        </div>
+      `;
+      grid.appendChild(div);
     });
-    attachCardEvents();
+
+    if(grid.innerHTML === '') {
+        grid.innerHTML = '<p style="color:#6b7280; text-align:center; padding:20px;">No projects found in this category.</p>';
+    }
   }
 
-  // MODAL ELEMENTS
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      renderProjects();
+    });
+  });
+
+  // --- MODAL SİSTEMİ ---
   const modal = document.getElementById('project-modal');
-  const modalTitle = document.getElementById('modal-title');
-  const modalSub = document.getElementById('modal-sub');
-  const modalDesc = document.getElementById('modal-desc');
-  const modalMainMedia = document.getElementById('modal-main-media');
-  const modalThumbs = document.getElementById('modal-thumbs');
-  const modalCloseBtn = document.getElementById('modal-close');
-  const modalLinks = document.getElementById('modal-links');
+  const mTitle = document.getElementById('modal-title');
+  const mDesc = document.getElementById('modal-desc');
+  const mMedia = document.getElementById('modal-main-media');
+  const mThumbs = document.getElementById('modal-thumbs');
+  const mLinks = document.getElementById('modal-links');
 
-  function youtubeIdFromUrl(url) {
-    if (!url) return null;
-    const m = url.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
-    return m ? m[1] : null;
-  }
-
-  function setMainMedia(item) {
-    modalMainMedia.innerHTML = '';
-    if (!item) {
-      modalMainMedia.innerHTML = '<span>No media added yet.</span>';
-      return;
-    }
-
-    if (item.type === 'image') {
-      const img = document.createElement('img');
-      img.src = item.src;
-      img.alt = item.alt || '';
-      modalMainMedia.appendChild(img);
-    } else if (item.type === 'video') {
-      const vid = document.createElement('video');
-      vid.src = item.src;
-      vid.controls = true;
-      modalMainMedia.appendChild(vid);
-    } else if (item.type === 'youtube') {
-      const id = youtubeIdFromUrl(item.src);
-      if (id) {
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${id}`;
-        iframe.allow =
-          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-        modalMainMedia.appendChild(iframe);
-      } else {
-        modalMainMedia.innerHTML = '<span>Invalid YouTube link.</span>';
-      }
-    } else {
-      modalMainMedia.innerHTML = '<span>Unsupported media type.</span>';
-    }
-  }
-
-  function openModal(projectId) {
-    const project = projects.find(p => p.id === projectId);
-    if (!project) return;
-
-    modalTitle.textContent = project.name;
-
-    const subParts = [];
-    if (project.role) subParts.push(project.role);
-    if (project.date) subParts.push(formatMonthYear(project.date));
-    modalSub.textContent = subParts.join(' • ');
-
-    modalDesc.textContent = project.longDesc || project.shortDesc || '';
-
-    // Links
-    modalLinks.innerHTML = '';
-    if (Array.isArray(project.links) && project.links.length > 0) {
-      project.links.forEach(link => {
-        if (!link || !link.url) return;
-        const a = document.createElement('a');
-        a.href = link.url;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.className = "modal-link-item";
-        a.textContent = link.label || link.url;
-        modalLinks.appendChild(a);
-      });
-    }
-
-    // Gallery
-    modalMainMedia.innerHTML = '';
-    modalThumbs.innerHTML = '';
-
-    let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
-
-    // coverImage'i her zaman en başa ekle (varsa)
-    if (project.coverImage) {
-      const alreadyHasCover = gallery.some(
-        item => item.type === 'image' && item.src === project.coverImage
-      );
-
-      if (!alreadyHasCover) {
-        gallery.unshift({
-          type: 'image',
-          src: project.coverImage,
-          alt: project.name + ' cover'
+  function openModal(project) {
+    mTitle.textContent = project.name;
+    mDesc.textContent = project.longDesc || project.shortDesc;
+    
+    // Linkler
+    mLinks.innerHTML = '';
+    if(project.links) {
+        project.links.forEach(l => {
+            const a = document.createElement('a');
+            a.href = l.url; a.target = "_blank";
+            a.innerHTML = `<span>🔗</span> ${l.label}`;
+            mLinks.appendChild(a);
         });
-      }
     }
 
-    if (gallery.length > 0) {
-      setMainMedia(gallery[0]);
+    // Galeri
+    mMedia.innerHTML = '';
+    mThumbs.innerHTML = '';
+    const gallery = project.gallery && project.gallery.length > 0 ? project.gallery : [{type:'image', src: project.coverImage}];
 
-      gallery.forEach((item, index) => {
-        const thumb = document.createElement('div');
-        thumb.className = 'modal-thumb' + (index === 0 ? ' active' : '');
-        thumb.dataset.index = index;
+    // İlk medyayı göster
+    setMedia(gallery[0]);
 
-        if (item.type === 'image') {
-          thumb.innerHTML = `<img src="${item.src}" alt="${item.alt || ''}">`;
-        } else if (item.type === 'video') {
-          thumb.textContent = 'Video';
-        } else if (item.type === 'youtube') {
-          const id = youtubeIdFromUrl(item.src);
-          if (id) {
-            const thumbImg = document.createElement('img');
-            thumbImg.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-            thumbImg.alt = item.alt || 'YouTube video';
-            thumb.appendChild(thumbImg);
-          } else {
-            thumb.textContent = 'YouTube';
-          }
-        } else {
-          thumb.textContent = 'Media';
-        }
+    // Küçük resimler (thumbnails)
+    if(gallery.length > 1) {
+        gallery.forEach((item, idx) => {
+            const th = document.createElement('div');
+            th.className = 'modal-thumb' + (idx === 0 ? ' active' : '');
+            
+            if(item.type === 'image') {
+                th.innerHTML = `<img src="${item.src}">`;
+            } else if (item.type === 'youtube') {
+                 // Youtube thumbnail çekme
+                 const vidId = item.src.split('v=')[1] || item.src.split('/').pop();
+                 th.innerHTML = `<img src="https://img.youtube.com/vi/${vidId}/0.jpg">`;
+            } else {
+                th.innerHTML = '<div style="color:white; font-size:10px; display:flex; align-items:center; justify-content:center; height:100%;">VIDEO</div>';
+            }
 
-        thumb.addEventListener('click', () => {
-          document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
-          thumb.classList.add('active');
-          setMainMedia(item);
+            th.onclick = () => {
+                document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+                th.classList.add('active');
+                setMedia(item);
+            };
+            mThumbs.appendChild(th);
         });
-
-        modalThumbs.appendChild(thumb);
-      });
-    } else {
-      modalMainMedia.innerHTML = '<span>No media added yet.</span>';
     }
 
     modal.classList.add('open');
   }
 
-  function closeModal() {
-    modal.classList.remove('open');
+  function setMedia(item) {
+      mMedia.innerHTML = '';
+      if(item.type === 'image') {
+          mMedia.innerHTML = `<img src="${item.src}">`;
+      } else if (item.type === 'youtube') {
+          const vidId = item.src.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1];
+          if(vidId) {
+              mMedia.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+          }
+      } else if (item.type === 'video') {
+          mMedia.innerHTML = `<video src="${item.src}" controls autoplay muted></video>`;
+      }
   }
 
-  function attachCardEvents() {
-    document.querySelectorAll('.project-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const id = card.dataset.id;
-        openModal(id);
-      });
-    });
-  }
+  document.getElementById('modal-close').onclick = () => modal.classList.remove('open');
+  modal.onclick = (e) => { if(e.target === modal) modal.classList.remove('open'); }
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') modal.classList.remove('open'); });
 
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeFilter = btn.dataset.filter;
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderProjects();
-    });
-  });
-
-  modalCloseBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
+  // Başlat
   renderProjects();
-</script>
 
+</script>
 </body>
 </html>
