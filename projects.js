@@ -3,6 +3,48 @@
 
 window.projects = [
   {
+    id: "prosthetic-worlds-vr",
+    name: "Prosthetic Worlds – VR Surgery",
+    role: "Simulation Developer",
+    tagline: "VR • Surgical Training • TKA • Medical Sim",
+    date: "2022-11",
+    // HTML'deki hem Software hem Design filtresinde görünsün
+    types: ["software", "design", "simulation"], 
+    shortDesc:
+      "A scientifically validated VR training simulation for Total Knee Arthroplasty (TKA), designed to help surgeons practice without patient risk.",
+    longDesc:
+      "Prosthetic Worlds is a VR surgical training experience focused on Total Knee Arthroplasty (TKA). Trainees can walk through each surgical step at their own pace, repeat critical actions, and build confidence in a risk-free environment. In a controlled study with 20 doctors, the group trained with this VR system achieved significantly higher scores in surgical parameters compared to traditional training methods. This project aims to compress years of operating room learning into a structured, measurable VR workflow.",
+    coverImage: "images/Pw_2.jpg", // Kapak görseli
+    gallery: [
+      {
+        type: "image",
+        src: "images/Pw_1.jpg",
+        alt: "Surgical VR Training Scene"
+      },
+      {
+        type: "image",
+        src: "images/Pw_3.jpg",
+        alt: "User Interface and Haptics"
+      },
+      {
+        type: "youtube",
+        src: "https://www.youtube.com/watch?v=sWOdGYnegjY",
+        alt: "Prosthetic Worlds Demo"
+      }
+    ],
+    links: [
+      {
+        label: "Read Research Article (NCBI)",
+        url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11596432/pdf/medi-103-e40615.pdf"
+      },
+      {
+        label: "View on Instagram",
+        url: "https://www.instagram.com/prostheticworlds"
+      }
+    ]
+  },
+  
+  {
     "id": "new-project-1763923080691",
     "name": "New Project",
     "types": [
