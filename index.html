@@ -25,6 +25,10 @@
       line-height: 1.6;
     }
 
+    body.no-scroll {
+      overflow: hidden; /* modal açıkken arka plan kaymasın */
+    }
+
     a { color: inherit; text-decoration: none; }
 
     .page {
@@ -101,7 +105,6 @@
       font-size: 12px;
       color: #e5e7eb;
       letter-spacing: 0.06em;
-      text-transform: none;
       box-shadow: 0 10px 28px rgba(15, 23, 42, 0.7);
     }
 
@@ -324,8 +327,8 @@
       box-shadow: 0 8px 20px rgba(129, 140, 248, 0.4);
     }
 
-    /* PROJECT LIST – ONE COLUMN, STACKED LAYOUT
-       Title → meta → image → short text */
+    /* PROJECT LIST – MASAÜSTÜ: yazı solda, görsel sağda
+       MOBİL: başlık → görsel → açıklama */
     .projects-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -351,12 +354,18 @@
       background: #ffffff;
     }
 
-    .project-header {
-      padding: 16px 18px 10px 22px;
+    .project-main {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .project-text {
+      flex: 1;
+      padding: 16px 18px 16px 22px;
       position: relative;
     }
 
-    .project-header::before {
+    .project-text::before {
       content: "";
       position: absolute;
       left: 0;
@@ -381,7 +390,8 @@
     }
 
     .project-image-wrapper {
-      width: 100%;
+      flex: 0 0 38%;
+      max-width: 38%;
       height: 220px;
       background: #e5e7eb;
       overflow: hidden;
@@ -390,12 +400,13 @@
     .project-image-wrapper img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* kartta kırp, bozulma yok */
+      object-fit: cover;
       display: block;
     }
 
     .project-body {
-      padding: 12px 18px 18px 22px;
+      padding: 10px 18px 16px 22px;
+      border-top: 1px solid #e5e7eb;
     }
 
     .project-desc {
@@ -508,13 +519,14 @@
 
     .project-modal-body {
       display: flex;
-      flex-direction: column; /* HER YERDE DİKEY */
-      gap: 16px;
+      gap: 20px;
       padding: 16px 20px 18px;
-      overflow-y: auto;
+      flex-wrap: wrap;
+      overflow-y: auto;  /* içerik kendi içinde scroll olsun */
     }
 
     .modal-text {
+      flex: 1 1 260px;
       font-size: 14px;
       color: var(--muted);
     }
@@ -553,6 +565,7 @@
     }
 
     .modal-gallery {
+      flex: 1 1 320px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -575,7 +588,7 @@
     .modal-main-media iframe {
       width: 100%;
       height: 100%;
-      object-fit: contain;   /* panelde TAM görünsün */
+      object-fit: contain;
       display: block;
       border: none;
     }
@@ -621,7 +634,7 @@
       border-color: var(--accent);
     }
 
-    /* MOBILE */
+    /* TABLET / MOBİL AYARLARI */
     @media (max-width: 900px) {
       .layout {
         grid-template-columns: 1fr;
@@ -641,8 +654,29 @@
         gap: 18px;
       }
 
+      /* MOBİL: kartta başlık → görsel → açıklama */
+      .project-main {
+        flex-direction: column;
+      }
+
+      .project-image-wrapper {
+        flex: 0 0 auto;
+        max-width: 100%;
+        width: 100%;
+        height: 210px;
+      }
+
+      .project-body {
+        border-top: 1px solid #e5e7eb;
+      }
+
       .project-modal-content {
         border-radius: 16px;
+      }
+
+      /* MOBİL: panel tamamen dikey */
+      .project-modal-body {
+        flex-direction: column;
       }
     }
   </style>
@@ -679,7 +713,6 @@
 
       <!-- Contact cards -->
       <div class="contact-list">
-        <!-- Email -->
         <a class="contact-card-link" href="mailto:mrbahadirkus@gmail.com">
           <div class="contact-icon">
             <img src="images/mail-icon.png" alt="Email icon">
@@ -690,7 +723,6 @@
           </div>
         </a>
 
-        <!-- GitHub -->
         <a class="contact-card-link"
            href="https://github.com/bahadirkus"
            target="_blank">
@@ -703,7 +735,6 @@
           </div>
         </a>
 
-        <!-- Location -->
         <div class="contact-card">
           <div class="contact-icon">
             <img src="images/location-icon.png" alt="Location icon">
@@ -742,7 +773,7 @@
         </div>
 
         <div class="projects-grid">
-          <!-- Cards are injected by JS -->
+          <!-- Cards injected by JS -->
         </div>
       </section>
 
@@ -882,20 +913,19 @@
 
     const hasCover = project.coverImage && project.coverImage.trim() !== '';
     const dateText = project.date ? formatMonthYear(project.date) : '';
+    const role = project.role || '';
 
     card.innerHTML = `
-      <div class="project-header">
-        <div class="project-title">${project.name}</div>
-        <div class="project-meta">
-          ${(project.role || '')}${project.role && dateText ? ' • ' : ''}${dateText}
+      <div class="project-main">
+        <div class="project-text">
+          <div class="project-title">${project.name}</div>
+          <div class="project-meta">
+            ${role}${role && dateText ? ' • ' : ''}${dateText}
+          </div>
         </div>
-      </div>
-      <div class="project-image-wrapper">
-        ${
-          hasCover
-            ? `<img src="${project.coverImage}" alt="${project.name} cover">`
-            : ''
-        }
+        <div class="project-image-wrapper">
+          ${hasCover ? `<img src="${project.coverImage}" alt="${project.name} cover">` : ''}
+        </div>
       </div>
       <div class="project-body">
         <p class="project-desc">${project.shortDesc || ''}</p>
@@ -980,8 +1010,9 @@
 
     modalDesc.textContent = project.longDesc || project.shortDesc || '';
 
-    // Reset scroll to top every time
+    // Scrollu başa al ve body scroll kilitle
     modalBody.scrollTop = 0;
+    document.body.classList.add('no-scroll');
 
     // Links
     modalLinks.innerHTML = '';
@@ -1004,12 +1035,11 @@
 
     let gallery = Array.isArray(project.gallery) ? [...project.gallery] : [];
 
-    // Her zaman coverImage'i en başa ekle (varsa ve zaten ekli değilse)
+    // coverImage'i en başa ekle (eğer yoksa)
     if (project.coverImage) {
       const alreadyHasCover = gallery.some(
         item => item.type === 'image' && item.src === project.coverImage
       );
-
       if (!alreadyHasCover) {
         gallery.unshift({
           type: 'image',
@@ -1062,6 +1092,7 @@
 
   function closeModal() {
     modal.classList.remove('open');
+    document.body.classList.remove('no-scroll');
   }
 
   function attachCardEvents() {
