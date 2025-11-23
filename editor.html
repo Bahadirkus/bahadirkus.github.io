@@ -46,7 +46,7 @@
     textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
 
     /* CHECKBOXES */
-    .checkbox-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .checkbox-group { display: flex; flex-direction: column; gap: 5px; flex-wrap: wrap; }
     .cb-label { 
       display: flex; align-items: center; gap: 8px; padding: 8px 12px; 
       background: #0f172a; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-size: 13px;
@@ -126,7 +126,7 @@
         <label>Kategoriler</label>
         <div class="checkbox-group">
           <label class="cb-label"><input type="checkbox" value="software" onchange="updateTypes()"> Software</label>
-          <label class="cb-label"><input type="checkbox" value="technical-design" onchange="updateTypes()"> Technical Design & Embedded Systems</label>
+          <label class="cb-label"><input type="checkbox" value="technical-design" onchange="updateTypes()"> Technical Design & Gömülü Yazılım</label>
         </div>
       </div>
 
@@ -169,11 +169,9 @@
   <script src="projects.js"></script>
 
   <script>
-    // Veriyi global değişkene al, yoksa boş başlat
     let projectsData = window.projects || [];
     let activeIndex = -1;
 
-    // --- BAŞLANGIÇ ---
     function init() {
       renderSidebar();
       if (projectsData.length > 0) {
@@ -182,12 +180,10 @@
       updateCodeOutput();
     }
 
-    // --- SIDEBAR YÖNETİMİ ---
     function renderSidebar() {
       const list = document.getElementById('projectList');
       list.innerHTML = '';
       
-      // Tarihe göre sırala (Yeniden eskiye)
       projectsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 
       projectsData.forEach((p, index) => {
@@ -201,7 +197,7 @@
 
     function selectProject(index) {
       activeIndex = index;
-      renderSidebar(); // Aktif class'ı güncellemek için
+      renderSidebar();
       document.getElementById('editorPanel').style.display = 'block';
       loadForm(projectsData[index]);
     }
@@ -210,16 +206,16 @@
       const newProj = {
         id: "yeni-proje-" + Math.floor(Math.random() * 1000),
         name: "Yeni Proje",
-        date: new Date().toISOString().slice(0, 7), // YYYY-MM
+        date: new Date().toISOString().slice(0, 7),
         role: "",
-        types: ["software"],
-        shortDesc: "",
-        longDesc: "",
-        coverImage: "",
+        types: ["software"], // Varsayılan tipi ayarla
+        shortDesc: "Kısa açıklama buraya.",
+        longDesc: "Uzun açıklama buraya.",
+        coverImage: "images/placeholder.jpg",
         gallery: [],
         links: []
       };
-      projectsData.unshift(newProj); // En başa ekle
+      projectsData.unshift(newProj);
       selectProject(0);
       updateCodeOutput();
     }
@@ -234,7 +230,6 @@
       }
     }
 
-    // --- FORM DOLDURMA VE GÜNCELLEME ---
     function loadForm(p) {
       document.getElementById('p_id').value = p.id || '';
       document.getElementById('p_date').value = p.date || '';
@@ -245,10 +240,8 @@
       document.getElementById('p_long').value = p.longDesc || '';
       document.getElementById('p_cover').value = p.coverImage || '';
 
-      // Checkboxes
       const checkboxes = document.querySelectorAll('.checkbox-group input');
       checkboxes.forEach(cb => {
-        // Yeni filtreleme sistemine göre kontrol
         cb.checked = p.types && p.types.includes(cb.value);
       });
 
@@ -256,11 +249,9 @@
       renderLinkInputs();
     }
 
-    // Anlık güncelleme (Input'a her basışta çalışır)
     function updateField(field, value) {
       if (activeIndex === -1) return;
       
-      // ID düzeltme (boşlukları tire yap)
       if (field === 'id') {
         value = value.replace(/\s+/g, '-').toLowerCase();
         document.getElementById('p_id').value = value; 
@@ -280,7 +271,6 @@
       updateCodeOutput();
     }
 
-    // --- GALERİ YÖNETİMİ ---
     function renderGalleryInputs() {
       const container = document.getElementById('galleryContainer');
       container.innerHTML = '';
@@ -314,7 +304,6 @@
 
     function updateGalleryItem(idx, key, val) {
       projectsData[activeIndex].gallery[idx][key] = val;
-      // Alt field'ı otomatik doldur (isteğe bağlı)
       if (key === 'src' && projectsData[activeIndex].gallery[idx].alt === '') {
         projectsData[activeIndex].gallery[idx].alt = projectsData[activeIndex].name + ' media';
       }
@@ -337,7 +326,6 @@
       }
     }
 
-    // --- LİNK YÖNETİMİ ---
     function renderLinkInputs() {
       const container = document.getElementById('linksContainer');
       container.innerHTML = '';
@@ -373,10 +361,8 @@
       updateCodeOutput();
     }
 
-    // --- KOD ÇIKTISI ---
     function updateCodeOutput() {
       const json = JSON.stringify(projectsData, null, 2);
-      // 'alt' alanları JSON.stringify ile otomatik geliyor, temiz bir görüntü için null ile geçiyoruz.
       const cleanedJson = json.replace(/"alt":\s*"[^"]*",?\n/g, '') 
       
       const code = `// projects.js\n// Generated by Portfolio Editor v2.1\n\nwindow.projects = ${cleanedJson};`;
@@ -391,9 +377,7 @@
       });
     }
 
-    // Başlat
     window.onload = init;
-
   </script>
 </body>
 </html>
