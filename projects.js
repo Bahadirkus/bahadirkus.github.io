@@ -115,8 +115,8 @@ window.projects = [
       },
       {
         "type": "image",
-        "src": "images/Prosthetic Worlds – VR Surgery/Pw-03.jpg",
-              },
+        "src": "images/Prosthetic Worlds – VR Surgery/Pw-03.jpg"
+      },
       {
         "type": "youtube",
         "src": "https://www.youtube.com/watch?v=sWOdGYnegjY"
@@ -215,7 +215,7 @@ window.projects = [
     ],
     "shortDesc": "A fast-paced arcade game for iOS utilizing particle systems and rapid gameplay loops.",
     "longDesc": "Dragon Faya is an iOS-exclusive arcade shooter. My contribution focused on optimizing the Unity engine for Apple devices, implementing performant particle effects (VFX) for fire mechanics, and fine-tuning the difficulty curve to maximize user retention.",
-    "coverImage": "images/DragonFaya_1.jpg",
+    "coverImage": "images/DragonFaya/DragonFaya-01.jpg",
     "gallery": [
       {
         "type": "image",
@@ -223,8 +223,8 @@ window.projects = [
       },
       {
         "type": "image",
-        "src": "images/DragonFaya/DragonFaya-02.jpg",
-              },
+        "src": "images/DragonFaya/DragonFaya-02.jpg"
+      },
       {
         "type": "youtube",
         "src": "https://www.youtube.com/watch?v=syhsci_zf4U"
@@ -234,64 +234,6 @@ window.projects = [
       {
         "label": "App Info",
         "url": "https://appadvice.com/app/dragon-faya/1597632362"
-      }
-    ]
-  },
-  {
-    "id": "redline-engine-sounds",
-    "name": "Redline Engine Sounds",
-    "role": "Freelance Developer",
-    "tagline": "Unity • C# • Google AdMob • Audio Programming • Android",
-    "date": "2021-10",
-    "types": [
-      "software"
-    ],
-    "shortDesc": "A sophisticated audio simulation app mimicking supercar engine physics, throttle response, and gear transmission logic.",
-    "longDesc": "Developed an immersive acoustic simulation app for automotive enthusiasts, managing the entire lifecycle from concept to deployment as a freelance developer.\n\nKey Technical Achievements:\n\nAudio Engine Development: Engineered a dynamic sound system using C# in Unity. Implemented algorithms that adjust audio Pitch and Volume in real-time based on user input (throttle position), simulating realistic RPM acceleration and deceleration.\n\nMonetization & SDK Integration: Successfully integrated the Google Mobile Ads (AdMob) SDK to generate revenue, implementing both Banner and Interstitial ad formats while maintaining a non-intrusive user experience.\n\nUI/UX Design: Created an interactive dashboard interface featuring functional pedals and responsive tachometers (RPM gauges) to enhance user immersion.\n\nPerformance Optimization: Optimized audio assets and code architecture to ensure smooth performance across a wide range of Android devices.",
-    "coverImage": "images/redline-engine-sounds/Redline_Engine_Sounds_icon.jpeg",
-    "gallery": [
-      {
-        "type": "youtube",
-        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs"
-      }
-    ],
-    "links": [
-      {
-        "label": "Google Play",
-        "url": "https://play.google.com/store/apps/details?id=com.Okkagames.RedlineEngineSounds&hl=en"
-      }
-    ]
-  },
-  {
-    "id": "redline-moto-sounds",
-    "name": "Redline Motorcycle Sounds",
-    "role": "Freelance Developer",
-    "tagline": "Audio Simulation • DSP • Interactive Systems",
-    "date": "2021-10",
-    "types": [
-      "software"
-    ],
-    "shortDesc": "Specialized acoustic simulation for high-performance motorcycles with rapid throttle response logic.",
-    "longDesc": "A standalone expansion of the Redline series focused on the distinct acoustic properties of motorcycle engines. The challenge was to replicate the rapid RPM acceleration and deceleration characteristic of bikes. I developed a responsive throttle control algorithm that provides instant auditory feedback, essential for user immersion.",
-    "coverImage": "images/RedlineMotorcycleSounds-Icon.png",
-    "gallery": [
-      {
-        "type": "image",
-        "src": "images/RedlineMotorcycleSounds-Icon.png",
-              },
-      {
-        "type": "youtube",
-        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs"
-      },
-      {
-        "type": "image",
-        "src": "",
-              }
-    ],
-    "links": [
-      {
-        "label": "Google Play",
-        "url": "https://play.google.com/store/apps/details?id=com.Okka.RedlineMotorcycleSounds&hl=en"
       }
     ]
   },
@@ -319,5 +261,63 @@ window.projects = [
     "shortDesc": "A sophisticated audio simulation app mimicking supercar engine physics, throttle response, and gear transmission logic.",
     "longDesc": "Developed an immersive acoustic simulation app for automotive enthusiasts, managing the entire lifecycle from concept to deployment as a freelance developer.\n\nKey Technical Achievements:\n\nAudio Engine Development: Engineered a dynamic sound system using C# in Unity. Implemented algorithms that adjust audio Pitch and Volume in real-time based on user input (throttle position), simulating realistic RPM acceleration and deceleration.\n\nMonetization & SDK Integration: Successfully integrated the Google Mobile Ads (AdMob) SDK to generate revenue, implementing both Banner and Interstitial ad formats while maintaining a non-intrusive user experience.\n\nUI/UX Design: Created an interactive dashboard interface featuring functional pedals and responsive tachometers (RPM gauges) to enhance user immersion.\n\nPerformance Optimization: Optimized audio assets and code architecture to ensure smooth performance across a wide range of Android devices.",
     "coverImage": "images/redline-engine-sounds/Redline_Engine_Sounds_icon.jpeg"
+  },
+  {
+    "id": "redline-moto-sounds",
+    "name": "Redline Motorcycle Sounds",
+    "role": "Freelance Developer",
+    "tagline": "Audio Simulation • DSP • Interactive Systems",
+    "date": "2021-10",
+    "types": [
+      "software"
+    ],
+    "shortDesc": "Specialized acoustic simulation for high-performance motorcycles with rapid throttle response logic.",
+    "longDesc": "A standalone expansion of the Redline series focused on the distinct acoustic properties of motorcycle engines. The challenge was to replicate the rapid RPM acceleration and deceleration characteristic of bikes. I developed a responsive throttle control algorithm that provides instant auditory feedback, essential for user immersion.",
+    "coverImage": "images/RedlineMotorcycleSounds-Icon.png",
+    "gallery": [
+      {
+        "type": "image",
+        "src": "images/RedlineMotorcycleSounds-Icon.png"
+      },
+      {
+        "type": "youtube",
+        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs"
+      },
+      {
+        "type": "image",
+        "src": ""
+      }
+    ],
+    "links": [
+      {
+        "label": "Google Play",
+        "url": "https://play.google.com/store/apps/details?id=com.Okka.RedlineMotorcycleSounds&hl=en"
+      }
+    ]
+  },
+  {
+    "id": "redline-engine-sounds",
+    "name": "Redline Engine Sounds",
+    "role": "Freelance Developer",
+    "tagline": "Unity • C# • Google AdMob • Audio Programming • Android",
+    "date": "2021-10",
+    "types": [
+      "software"
+    ],
+    "shortDesc": "A sophisticated audio simulation app mimicking supercar engine physics, throttle response, and gear transmission logic.",
+    "longDesc": "Developed an immersive acoustic simulation app for automotive enthusiasts, managing the entire lifecycle from concept to deployment as a freelance developer.\n\nKey Technical Achievements:\n\nAudio Engine Development: Engineered a dynamic sound system using C# in Unity. Implemented algorithms that adjust audio Pitch and Volume in real-time based on user input (throttle position), simulating realistic RPM acceleration and deceleration.\n\nMonetization & SDK Integration: Successfully integrated the Google Mobile Ads (AdMob) SDK to generate revenue, implementing both Banner and Interstitial ad formats while maintaining a non-intrusive user experience.\n\nUI/UX Design: Created an interactive dashboard interface featuring functional pedals and responsive tachometers (RPM gauges) to enhance user immersion.\n\nPerformance Optimization: Optimized audio assets and code architecture to ensure smooth performance across a wide range of Android devices.",
+    "coverImage": "images/redline-engine-sounds/Redline_Engine_Sounds_icon.jpeg",
+    "gallery": [
+      {
+        "type": "youtube",
+        "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs"
+      }
+    ],
+    "links": [
+      {
+        "label": "Google Play",
+        "url": "https://play.google.com/store/apps/details?id=com.Okkagames.RedlineEngineSounds&hl=en"
+      }
+    ]
   }
 ];
