@@ -532,7 +532,8 @@
             th.className = 'modal-thumb' + (idx === 0 ? ' active' : '');
             if(item.type === 'image') th.innerHTML = `<img src="${item.src}">`;
             else if (item.type === 'youtube') {
-                 const vidId = item.src.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1];
+                 // GÜNCELLEME: Hem 'watch?v=', hem 'youtu.be/' hem de 'shorts/' formatlarını destekler
+                 const vidId = item.src.match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/)?.[1];
                  th.innerHTML = vidId ? `<img src="https://img.youtube.com/vi/${vidId}/0.jpg">` : 'Video';
             } else th.innerHTML = 'Video';
             
@@ -553,7 +554,8 @@
       mMedia.innerHTML = '';
       if(item.type === 'image') mMedia.innerHTML = `<img src="${item.src}">`;
       else if (item.type === 'youtube') {
-          const vidId = item.src.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1];
+          // GÜNCELLEME: Hem 'watch?v=', hem 'youtu.be/' hem de 'shorts/' formatlarını destekler
+          const vidId = item.src.match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/)?.[1];
           if(vidId) mMedia.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
       } else if (item.type === 'video') {
           mMedia.innerHTML = `<video src="${item.src}" controls autoplay muted></video>`;
