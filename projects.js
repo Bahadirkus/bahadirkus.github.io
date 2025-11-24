@@ -223,7 +223,7 @@ window.projects = [
       },
       {
         "type": "image",
-        "src": "images/DragonFaya/DragonFaya-02.jpg"
+        "src": "images/DragonFaya/DragonFaya-02.jpeg"
       },
       {
         "type": "youtube",
