@@ -91,6 +91,30 @@ window.projects = [
     "links": []
   },
   {
+    "id": "height-adjustable-chassis-design",
+    "name": "Height Adjustable Chassis Mechanism & Sheet Metal Body Design",
+    "date": "2023-09",
+    "role": "Mechanical Design & Manufacturing",
+    "types": [
+      "technical-design"
+    ],
+    "shortDesc": "Design and manufacturing of a mobile chassis system with vertical lift capability using linear actuators, featuring a sigma profile skeleton and sheet metal cladding.",
+    "longDesc": "In this project, a height-adjustable mobile machine chassis capable of carrying electronic hardware was manufactured from scratch.\n\nMotion System: Vertical movement (lift) of the chassis was achieved using synchronized electric linear actuators and telescopic rails.\n\nFrame Structure: The supporting body was built using Aluminum Sigma Profiles (T-Slot) for ease of assembly and modularity.\n\nBody Manufacturing: The outer cladding designed in Fusion 360 was shaped via laser cutting and Press Brake Bending, painted, and assembled onto the chassis.\n\nParts Manufacturing: Custom connection parts and plastic components were produced personally using a CNC router and 3D printer.",
+    "coverImage": "images/Chassis Mechanism/ChassisMechanism-01.png",
+    "gallery": [
+      {
+        "type": "image",
+        "src": "images/Chassis Mechanism/ChassisMechanism-01.png",
+              },
+      {
+        "type": "youtube",
+        "src": "https://youtube.com/shorts/b_mTvKPiusM?feature=share",
+              }
+    ],
+    "links": [],
+    "tagline": "Fusion 360 • Sheet Metal • Linear Actuators • Sigma Profiles • CNC & 3D Printing"
+  },
+  {
     "id": "prosthetic-worlds-vr",
     "name": "Prosthetic Worlds – VR Surgery",
     "role": "Simulation Developer",
@@ -240,9 +264,15 @@ window.projects = [
   {
     "id": "redline-engine-sounds",
     "name": "Redline Engine Sounds",
+    "role": "Freelance Developer",
+    "tagline": "Unity • C# • Google AdMob • Audio Programming • Android",
+    "date": "2021-10",
     "types": [
       "software"
     ],
+    "shortDesc": "A sophisticated audio simulation app mimicking supercar engine physics, throttle response, and gear transmission logic.",
+    "longDesc": "Developed an immersive acoustic simulation app for automotive enthusiasts, managing the entire lifecycle from concept to deployment as a freelance developer.\n\nKey Technical Achievements:\n\nAudio Engine Development: Engineered a dynamic sound system using C# in Unity. Implemented algorithms that adjust audio Pitch and Volume in real-time based on user input (throttle position), simulating realistic RPM acceleration and deceleration.\n\nMonetization & SDK Integration: Successfully integrated the Google Mobile Ads (AdMob) SDK to generate revenue, implementing both Banner and Interstitial ad formats while maintaining a non-intrusive user experience.\n\nUI/UX Design: Created an interactive dashboard interface featuring functional pedals and responsive tachometers (RPM gauges) to enhance user immersion.\n\nPerformance Optimization: Optimized audio assets and code architecture to ensure smooth performance across a wide range of Android devices.",
+    "coverImage": "images/redline-engine-sounds/Redline_Engine_Sounds_icon.jpeg",
     "gallery": [
       {
         "type": "youtube",
@@ -254,13 +284,7 @@ window.projects = [
         "label": "Google Play",
         "url": "https://play.google.com/store/apps/details?id=com.Okkagames.RedlineEngineSounds&hl=en"
       }
-    ],
-    "role": "Freelance Developer",
-    "tagline": "Unity • C# • Google AdMob • Audio Programming • Android",
-    "date": "2021-10",
-    "shortDesc": "A sophisticated audio simulation app mimicking supercar engine physics, throttle response, and gear transmission logic.",
-    "longDesc": "Developed an immersive acoustic simulation app for automotive enthusiasts, managing the entire lifecycle from concept to deployment as a freelance developer.\n\nKey Technical Achievements:\n\nAudio Engine Development: Engineered a dynamic sound system using C# in Unity. Implemented algorithms that adjust audio Pitch and Volume in real-time based on user input (throttle position), simulating realistic RPM acceleration and deceleration.\n\nMonetization & SDK Integration: Successfully integrated the Google Mobile Ads (AdMob) SDK to generate revenue, implementing both Banner and Interstitial ad formats while maintaining a non-intrusive user experience.\n\nUI/UX Design: Created an interactive dashboard interface featuring functional pedals and responsive tachometers (RPM gauges) to enhance user immersion.\n\nPerformance Optimization: Optimized audio assets and code architecture to ensure smooth performance across a wide range of Android devices.",
-    "coverImage": "images/redline-engine-sounds/Redline_Engine_Sounds_icon.jpeg"
+    ]
   },
   {
     "id": "redline-moto-sounds",
@@ -298,15 +322,9 @@ window.projects = [
   {
     "id": "redline-engine-sounds",
     "name": "Redline Engine Sounds",
-    "role": "Freelance Developer",
-    "tagline": "Unity • C# • Google AdMob • Audio Programming • Android",
-    "date": "2021-10",
     "types": [
       "software"
     ],
-    "shortDesc": "A sophisticated audio simulation app mimicking supercar engine physics, throttle response, and gear transmission logic.",
-    "longDesc": "Developed an immersive acoustic simulation app for automotive enthusiasts, managing the entire lifecycle from concept to deployment as a freelance developer.\n\nKey Technical Achievements:\n\nAudio Engine Development: Engineered a dynamic sound system using C# in Unity. Implemented algorithms that adjust audio Pitch and Volume in real-time based on user input (throttle position), simulating realistic RPM acceleration and deceleration.\n\nMonetization & SDK Integration: Successfully integrated the Google Mobile Ads (AdMob) SDK to generate revenue, implementing both Banner and Interstitial ad formats while maintaining a non-intrusive user experience.\n\nUI/UX Design: Created an interactive dashboard interface featuring functional pedals and responsive tachometers (RPM gauges) to enhance user immersion.\n\nPerformance Optimization: Optimized audio assets and code architecture to ensure smooth performance across a wide range of Android devices.",
-    "coverImage": "images/redline-engine-sounds/Redline_Engine_Sounds_icon.jpeg",
     "gallery": [
       {
         "type": "youtube",
@@ -318,6 +336,12 @@ window.projects = [
         "label": "Google Play",
         "url": "https://play.google.com/store/apps/details?id=com.Okkagames.RedlineEngineSounds&hl=en"
       }
-    ]
+    ],
+    "role": "Freelance Developer",
+    "tagline": "Unity • C# • Google AdMob • Audio Programming • Android",
+    "date": "2021-10",
+    "shortDesc": "A sophisticated audio simulation app mimicking supercar engine physics, throttle response, and gear transmission logic.",
+    "longDesc": "Developed an immersive acoustic simulation app for automotive enthusiasts, managing the entire lifecycle from concept to deployment as a freelance developer.\n\nKey Technical Achievements:\n\nAudio Engine Development: Engineered a dynamic sound system using C# in Unity. Implemented algorithms that adjust audio Pitch and Volume in real-time based on user input (throttle position), simulating realistic RPM acceleration and deceleration.\n\nMonetization & SDK Integration: Successfully integrated the Google Mobile Ads (AdMob) SDK to generate revenue, implementing both Banner and Interstitial ad formats while maintaining a non-intrusive user experience.\n\nUI/UX Design: Created an interactive dashboard interface featuring functional pedals and responsive tachometers (RPM gauges) to enhance user immersion.\n\nPerformance Optimization: Optimized audio assets and code architecture to ensure smooth performance across a wide range of Android devices.",
+    "coverImage": "images/redline-engine-sounds/Redline_Engine_Sounds_icon.jpeg"
   }
 ];
