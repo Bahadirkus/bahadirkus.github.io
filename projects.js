@@ -273,7 +273,7 @@ window.projects = [
     ],
     "shortDesc": "Specialized acoustic simulation for high-performance motorcycles with rapid throttle response logic.",
     "longDesc": "A standalone expansion of the Redline series focused on the distinct acoustic properties of motorcycle engines. The challenge was to replicate the rapid RPM acceleration and deceleration characteristic of bikes. I developed a responsive throttle control algorithm that provides instant auditory feedback, essential for user immersion.",
-    "coverImage": "images/MotorIcon.png",
+    "coverImage": "images/RedlineMotorcycleSounds-Icon.png",
     "gallery": [
       {
         "type": "image",
@@ -282,7 +282,11 @@ window.projects = [
       {
         "type": "youtube",
         "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs"
-      }
+      },
+      {
+        "type": "image",
+        "src": "",
+              }
     ],
     "links": [
       {
