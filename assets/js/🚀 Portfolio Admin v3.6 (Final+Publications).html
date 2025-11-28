@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
+<!-- saved from url=(0074)file:///Users/bahadirkus/Documents/GitHub/bahadirkus.github.io/editor.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
   <title>🚀 Portfolio Admin v3.6 (Final+Publications)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="./🚀 Portfolio Admin v3.6 (Final+Publications)_files/css2" rel="stylesheet">
   <style>
     :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9; --accent: #3b82f6; --danger: #ef4444; --success: #10b981; --warning: #f59e0b; }
     * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
@@ -63,24 +63,24 @@
   <div class="top-bar">
     <div class="brand">Bahadır Kuş Portfolio Admin</div>
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('profile')">👤 Profile</button>
-      <button class="tab-btn" onclick="switchTab('resume')">📄 Resume & Certs</button>
-      <button class="tab-btn" onclick="switchTab('projects')">🎮 Projects</button>
+      <button class="tab-btn" onclick="switchTab(&#39;profile&#39;)">👤 Profile</button>
+      <button class="tab-btn active" onclick="switchTab(&#39;resume&#39;)">📄 Resume &amp; Certs</button>
+      <button class="tab-btn" onclick="switchTab(&#39;projects&#39;)">🎮 Projects</button>
     </div>
   </div>
 
   <div class="workspace">
     <div class="editor-area">
       
-      <div id="tab-profile" class="tab-content active">
-        <div class="section-header">Kişisel Bilgiler & Fotoğraf</div>
+      <div id="tab-profile" class="tab-content">
+        <div class="section-header">Kişisel Bilgiler &amp; Fotoğraf</div>
         <div class="form-grid">
           <div><label>Ad Soyad</label><input type="text" id="prof-name" oninput="updateData()"></div>
           <div><label>Unvan (Role)</label><input type="text" id="prof-role" oninput="updateData()"></div>
           <div class="full-width"><label>Profil Fotoğrafı Yolu</label><input type="text" id="prof-img" oninput="updateData()"></div>
           <div class="full-width"><label>Kısa Biyografi (Summary)</label><textarea id="prof-bio" oninput="updateData()"></textarea></div>
         </div>
-        <div class="section-header">İletişim & Sosyal Medya</div>
+        <div class="section-header">İletişim &amp; Sosyal Medya</div>
         <div class="form-grid">
           <div><label>Email</label><input type="text" id="prof-email" oninput="updateData()"></div>
           <div><label>Konum</label><input type="text" id="prof-loc" oninput="updateData()"></div>
@@ -92,7 +92,7 @@
         </div>
       </div>
 
-      <div id="tab-resume" class="tab-content">
+      <div id="tab-resume" class="tab-content active">
         
         <div class="section-header">Bilimsel Yayınlar (Publications)</div>
         <div id="pub-list" class="dynamic-list"></div>
@@ -100,17 +100,61 @@
         
         <br><br>
         <div class="section-header">Deneyimler (Experience)</div>
-        <div id="exp-list" class="dynamic-list"></div>
+        <div id="exp-list" class="dynamic-list"><div class="list-item">
+        <div class="list-item-header">DENEYİM #1 <button class="btn-remove" onclick="removeItem(&#39;experience&#39;, 0)">SİL</button></div>
+        <div class="form-grid">
+            <div><label>Pozisyon</label><input type="text" value="Freelance Simulation Developer" oninput="updRes(&#39;experience&#39;,0,&#39;role&#39;,this.value)"></div>
+            <div><label>Şirket</label><input type="text" value="Self-Employed" oninput="updRes(&#39;experience&#39;,0,&#39;company&#39;,this.value)"></div>
+            <div><label>Tarih</label><input type="text" value="2021 - Present" oninput="updRes(&#39;experience&#39;,0,&#39;date&#39;,this.value)"></div>
+            <div class="full-width"><label>Açıklama</label><input type="text" value="Developing bespoke simulation software focusing on Unity, C#, and embedded systems integration. Specialized in vehicle physics and medical training sims." oninput="updRes(&#39;experience&#39;,0,&#39;desc&#39;,this.value)"></div>
+        </div></div><div class="list-item">
+        <div class="list-item-header">DENEYİM #2 <button class="btn-remove" onclick="removeItem(&#39;experience&#39;, 1)">SİL</button></div>
+        <div class="form-grid">
+            <div><label>Pozisyon</label><input type="text" value="Hardware Developer" oninput="updRes(&#39;experience&#39;,1,&#39;role&#39;,this.value)"></div>
+            <div><label>Şirket</label><input type="text" value="Tech Company" oninput="updRes(&#39;experience&#39;,1,&#39;company&#39;,this.value)"></div>
+            <div><label>Tarih</label><input type="text" value="2024" oninput="updRes(&#39;experience&#39;,1,&#39;date&#39;,this.value)"></div>
+            <div class="full-width"><label>Açıklama</label><input type="text" value="Designed and prototyped embedded control systems. Validated sensor logic and managed CNC manufacturing processes for PCB prototyping." oninput="updRes(&#39;experience&#39;,1,&#39;desc&#39;,this.value)"></div>
+        </div></div></div>
         <button class="btn-add" onclick="addExperience()">+ Ekle</button>
         <br><br>
         
         <div class="section-header">Sertifikalar (Certificates)</div>
-        <div id="cert-list" class="dynamic-list"></div>
+        <div id="cert-list" class="dynamic-list"><div class="list-item">
+        <div class="list-item-header">SERTİFİKA #1 <button class="btn-remove" onclick="removeItem(&#39;certificates&#39;, 0)">SİL</button></div>
+        <div class="form-grid">
+            <div><label>Adı</label><input type="text" value="Fusion 360 Certified Associate" oninput="updRes(&#39;certificates&#39;,0,&#39;title&#39;,this.value)"></div>
+            <div><label>Kurum</label><input type="text" value="BTK Academy" oninput="updRes(&#39;certificates&#39;,0,&#39;issuer&#39;,this.value)"></div>
+            <div class="full-width"><label>Görsel Yolu (JPG)</label><input type="text" value="assets/images/certificates/c-sharp.png" oninput="updRes(&#39;certificates&#39;,0,&#39;image&#39;,this.value)"></div>
+            <div class="full-width"><label>Link (URL - Opsiyonel)</label><input type="text" value="" oninput="updRes(&#39;certificates&#39;,0,&#39;link&#39;,this.value)"></div>
+            <div class="full-width"><label>Kısa Açıklama (İsteğe Bağlı)</label><textarea style="height:60px;" oninput="updRes(&#39;certificates&#39;,0,&#39;desc&#39;,this.value)"></textarea></div>
+        </div></div><div class="list-item">
+        <div class="list-item-header">SERTİFİKA #2 <button class="btn-remove" onclick="removeItem(&#39;certificates&#39;, 1)">SİL</button></div>
+        <div class="form-grid">
+            <div><label>Adı</label><input type="text" value="Digital Game Development with Unity" oninput="updRes(&#39;certificates&#39;,1,&#39;title&#39;,this.value)"></div>
+            <div><label>Kurum</label><input type="text" value="BTK Academy" oninput="updRes(&#39;certificates&#39;,1,&#39;issuer&#39;,this.value)"></div>
+            <div class="full-width"><label>Görsel Yolu (JPG)</label><input type="text" value="assets/images/certificates/digital-game-development-with-unity.png" oninput="updRes(&#39;certificates&#39;,1,&#39;image&#39;,this.value)"></div>
+            <div class="full-width"><label>Link (URL - Opsiyonel)</label><input type="text" value="" oninput="updRes(&#39;certificates&#39;,1,&#39;link&#39;,this.value)"></div>
+            <div class="full-width"><label>Kısa Açıklama (İsteğe Bağlı)</label><textarea style="height:60px;" oninput="updRes(&#39;certificates&#39;,1,&#39;desc&#39;,this.value)"></textarea></div>
+        </div></div><div class="list-item">
+        <div class="list-item-header">SERTİFİKA #3 <button class="btn-remove" onclick="removeItem(&#39;certificates&#39;, 2)">SİL</button></div>
+        <div class="form-grid">
+            <div><label>Adı</label><input type="text" value="English Proficiency (C1)" oninput="updRes(&#39;certificates&#39;,2,&#39;title&#39;,this.value)"></div>
+            <div><label>Kurum</label><input type="text" value="Udemy" oninput="updRes(&#39;certificates&#39;,2,&#39;issuer&#39;,this.value)"></div>
+            <div class="full-width"><label>Görsel Yolu (JPG)</label><input type="text" value="assets/images/certificates/cert-english.jpg" oninput="updRes(&#39;certificates&#39;,2,&#39;image&#39;,this.value)"></div>
+            <div class="full-width"><label>Link (URL - Opsiyonel)</label><input type="text" value="" oninput="updRes(&#39;certificates&#39;,2,&#39;link&#39;,this.value)"></div>
+            <div class="full-width"><label>Kısa Açıklama (İsteğe Bağlı)</label><textarea style="height:60px;" oninput="updRes(&#39;certificates&#39;,2,&#39;desc&#39;,this.value)"></textarea></div>
+        </div></div></div>
         <button class="btn-add" onclick="addCertificate()">+ Yeni Sertifika Ekle</button>
         
         <br><br>
         <div class="section-header">Eğitim (Education)</div>
-        <div id="edu-list" class="dynamic-list"></div>
+        <div id="edu-list" class="dynamic-list"><div class="list-item">
+        <div class="list-item-header">EĞİTİM #1 <button class="btn-remove" onclick="removeItem(&#39;education&#39;, 0)">SİL</button></div>
+        <div class="form-grid">
+            <div><label>Bölüm</label><input type="text" value="Information Technologies" oninput="updRes(&#39;education&#39;,0,&#39;degree&#39;,this.value)"></div>
+            <div><label>Okul</label><input type="text" value="Gaziantep Chamber of Commerce High School" oninput="updRes(&#39;education&#39;,0,&#39;school&#39;,this.value)"></div>
+            <div class="full-width"><label>Tarih</label><input type="text" value="2014 - 2018" oninput="updRes(&#39;education&#39;,0,&#39;date&#39;,this.value)"></div>
+        </div></div></div>
         <button class="btn-add" onclick="addEducation()">+ Ekle</button>
         <br><br>
         <div class="section-header">Teknik Yetenekler (Skills)</div>
@@ -120,21 +164,21 @@
       <div id="tab-projects" class="tab-content" style="display: none; height: 100%;">
         <div style="display: flex; height: 100%; margin: -30px;">
           <div class="project-sidebar">
-            <ul id="proj-list-ul" class="project-list"></ul>
+            <ul id="proj-list-ul" class="project-list"><li>Embedded Control System PoC</li><li>EM-Guided Surgical Trainer: Knee Module</li><li>Height Adjustable Chassis Mechanism</li><li>Prosthetic Worlds – VR Surgery</li><li>Fire Evacuation Digital Twin</li><li>Dolmuşçu Dayı</li><li>Redline Drag Racing</li><li>Unity Word Game</li><li>Dragon Faya</li><li>Redline Engine Sounds</li><li>Redline Motorcycle Sounds</li></ul>
             <button class="btn-new-proj" onclick="addProject()">+ YENİ PROJE</button>
           </div>
           <div style="flex: 1; padding: 30px; overflow-y: auto;">
             <div id="project-form-container" style="display:none;">
                 <div class="section-header">Proje Detayları <button class="btn-remove" onclick="deleteProject()">Sil</button></div>
                 <div class="form-grid">
-                    <div><label>Proje Adı</label><input type="text" id="proj-name" oninput="updateProjectField('name', this.value)"></div>
-                    <div><label>Tarih</label><input type="text" id="proj-date" oninput="updateProjectField('date', this.value)"></div>
-                    <div><label>ID</label><input type="text" id="proj-id" oninput="updateProjectField('id', this.value)"></div>
-                    <div><label>Rol</label><input type="text" id="proj-role" oninput="updateProjectField('role', this.value)"></div>
-                    <div class="full-width"><label>Teknolojiler</label><input type="text" id="proj-tagline" oninput="updateProjectField('tagline', this.value)"></div>
-                    <div class="full-width"><label>Kapak Görseli</label><input type="text" id="proj-cover" oninput="updateProjectField('coverImage', this.value)"></div>
-                    <div class="full-width"><label>Kısa Açıklama</label><textarea id="proj-short" oninput="updateProjectField('shortDesc', this.value)"></textarea></div>
-                    <div class="full-width"><label>Uzun Açıklama</label><textarea id="proj-long" style="height:100px" oninput="updateProjectField('longDesc', this.value)"></textarea></div>
+                    <div><label>Proje Adı</label><input type="text" id="proj-name" oninput="updateProjectField(&#39;name&#39;, this.value)"></div>
+                    <div><label>Tarih</label><input type="text" id="proj-date" oninput="updateProjectField(&#39;date&#39;, this.value)"></div>
+                    <div><label>ID</label><input type="text" id="proj-id" oninput="updateProjectField(&#39;id&#39;, this.value)"></div>
+                    <div><label>Rol</label><input type="text" id="proj-role" oninput="updateProjectField(&#39;role&#39;, this.value)"></div>
+                    <div class="full-width"><label>Teknolojiler</label><input type="text" id="proj-tagline" oninput="updateProjectField(&#39;tagline&#39;, this.value)"></div>
+                    <div class="full-width"><label>Kapak Görseli</label><input type="text" id="proj-cover" oninput="updateProjectField(&#39;coverImage&#39;, this.value)"></div>
+                    <div class="full-width"><label>Kısa Açıklama</label><textarea id="proj-short" oninput="updateProjectField(&#39;shortDesc&#39;, this.value)"></textarea></div>
+                    <div class="full-width"><label>Uzun Açıklama</label><textarea id="proj-long" style="height:100px" oninput="updateProjectField(&#39;longDesc&#39;, this.value)"></textarea></div>
                     <div class="full-width"><label>Türler (software, technical-design)</label><input type="text" id="proj-types" oninput="updateProjectTypes(this.value)"></div>
                 </div>
                 <div class="section-header">Galeri</div>
@@ -158,11 +202,11 @@
             <button class="btn-action save-btn" onclick="downloadFile()">💾 DOSYAYI KAYDET</button>
         </div>
       </div>
-      <textarea id="output-code" class="code-box" readonly></textarea>
+      <textarea id="output-code" class="code-box" readonly=""></textarea>
     </div>
   </div>
 
-  <script src="assets/js/projects.js"></script>
+  <script src="./🚀 Portfolio Admin v3.6 (Final+Publications)_files/projects.js"></script>
   <script>
     let data = { profile: { social: {} }, resume: { publications: [], experience: [], education: [], certificates: [], skills: [] }, projects: [] };
     if (window.data) data = window.data; else if (window.projects) data.projects = window.projects;
@@ -317,5 +361,5 @@
     }
     window.onload = init;
   </script>
-</body>
-</html>
+
+</body></html>

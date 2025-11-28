@@ -1,5 +1,5 @@
 // assets/js/projects.js
-// v3.6 Data File
+// v3.5 Data File
 
 window.data = {
   "profile": {
@@ -40,25 +40,22 @@ window.data = {
     ],
     "certificates": [
       {
-        "title": "C#",
+        "title": "Fusion 360 Certified Associate",
         "issuer": "BTK Academy",
         "image": "assets/images/certificates/c-sharp.png",
-        "link": "https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=D2xh1vLgYO",
-        "desc": "CERTIFICATE OF PARTICIPATION\n\nBAHADIR KUŞ\n\nBy successfully completing the online training\n\"C#\"\non \"23.02.2022\",\nhas earned the right to receive this certificate.\n\nMustafa ERMİŞ\nHead of Human Resources and Training Department\nInformation and Communication Technologies Authority\n\nCertificate No: D2xh1vLgY0"
+        "link": ""
       },
       {
-        "title": "Introduction to Digital Game Development with Unity",
+        "title": "Digital Game Development with Unity",
         "issuer": "BTK Academy",
         "image": "assets/images/certificates/digital-game-development-with-unity.png",
-        "link": "https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=rKjhGYabvn",
-        "desc": "CERTIFICATE OF PARTICIPATION\n\nBAHADIR KUŞ\n\nBy successfully completing the online training\n\"Introduction to Digital Game Development with Unity\"\non \"22.02.2022\",\nhas earned the right to receive this certificate.\n\nMustafa ERMİŞ\nHead of Human Resources and Training Department\nInformation and Communication Technologies Authority\n\nCertificate No: rKHjGYabvn"
+        "link": ""
       },
       {
-        "title": "Unity C# | 2D & 3D Game Development from Scratch",
+        "title": "English Proficiency (C1)",
         "issuer": "Udemy",
-        "image": "assets/images/certificates/unity-2D-3D.jpg",
-        "link": "https://www.udemy.com/certificate/UC-2e27a473-5e5d-4422-b65d-50d54e73d36b/",
-        "desc": "CERTIFICATE OF COMPLETION\n\nUnity C# | 2D & 3D Game Development from Scratch\n\nInstructor: Jankat Gürbüz\n\nBahadır Kuş\n\nDate: 22 February 2022\nDuration: Total 26.5 hours\n\nCertificate No: UC-2e27a473-5e5d-4422-b65d-50d54e73d36b\nReference Number: 0004"
+        "image": "assets/images/certificates/cert-english.jpg",
+        "link": ""
       }
     ],
     "skills": [
@@ -70,14 +67,6 @@ window.data = {
       "Embedded Systems",
       "Git",
       "Soft Body Physics"
-    ],
-    "publications": [
-      {
-        "title": "A comparative study on real surgical performance in total knee arthroplasty: Virtual reality headset versus traditional training in orthopedic surgery",
-        "link": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11596432/pdf/medi-103-e40615.pdf",
-        "journal": "Medicine",
-        "date": "2024"
-      }
     ]
   },
   "projects": [

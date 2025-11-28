@@ -2,317 +2,143 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Bahadır Kuş – Simulation Developer & Technical Designer</title>
-  
-  <meta name="description" content="Portfolio of Bahadır Kuş - Simulation Developer, Unity Expert and Technical Designer.">
-  <meta name="author" content="Bahadır Kuş">
-  
-  <meta property="og:title" content="Bahadır Kuş – Simulation Developer Portfolio">
-  <meta property="og:description" content="Unity, VR/AR, and Hardware/Software integration projects.">
-  <meta property="og:image" content="https://bahadirkus.github.io/images/bahadir.jpeg"> 
-  <meta property="og:url" content="https://bahadirkus.github.io/"> 
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Bahadır Kuş – Portfolio">
-  <meta name="twitter:description" content="Simulation Developer & Technical Designer Projects">
-  <meta name="twitter:image" content="https://bahadirkus.github.io/images/bahadir.jpeg">
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <title>Bahadır Kuş Portfolio</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  
   <style>
-    /* CSS kodların aynen korundu */
-    :root {
-      --bg: #f8f9fa;
-      --card-bg: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --accent: #2563eb;
-      --accent-hover: #1d4ed8;
-      --accent-soft: #eff6ff;
-      --sidebar-bg: #111827;
-    }
-
+    :root { --bg: #f8f9fa; --card-bg: #ffffff; --text: #1f2937; --muted: #6b7280; --border: #e5e7eb; --accent: #2563eb; --sidebar-bg: #111827; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at 50% 0%, #dbeafe 0%, #f3f4f6 50%, #f9fafb 100%);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
+    body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at 50% 0%, #dbeafe 0%, #f3f4f6 50%, #f9fafb 100%); color: var(--text); line-height: 1.6; }
     body.no-scroll { overflow: hidden; }
-    a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; }
-
+    a { text-decoration: none; color: inherit; }
+    
     .page { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
     .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px; align-items: flex-start; }
 
-    /* Sidebar */
-    .sidebar {
-      position: sticky; top: 32px;
-      background: var(--sidebar-bg); border-radius: 24px; padding: 32px 24px;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-      display: flex; flex-direction: column; gap: 24px; color: #f9fafb; align-items: center;
-    }
-    .profile-photo {
-      width: 150px; height: 150px; border-radius: 40px; background: #020617;
-      border: 2px solid rgba(255,255,255,0.1); overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .profile-photo img { width: 100%; height: 100%; object-fit: cover;object-position: top center; }
+    /* SIDEBAR */
+    .sidebar { position: sticky; top: 32px; background: var(--sidebar-bg); border-radius: 24px; padding: 32px 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 24px; color: #f9fafb; align-items: center; }
+    .profile-photo { width: 150px; height: 150px; border-radius: 40px; background: #020617; overflow: hidden; border: 2px solid rgba(255,255,255,0.1); }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
     .profile-header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .profile-name { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
-    .profile-role-pill {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
-      background: rgba(255,255,255,0.1); border-radius: 999px;
-      font-size: 12px; font-weight: 500; color: #e2e8f0;
-    }
-    .profile-role-pill-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; }
-
-    /* Social & Contact */
-    .profile-social { display: flex; gap: 12px; justify-content: center; }
-    .social-btn {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-      display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;
-    }
-    .social-btn img { width: 18px; height: 18px; filter: invert(1); opacity: 0.8; }
-    .social-btn:hover { background: #fff; transform: translateY(-2px); }
+    .profile-name { font-size: 24px; font-weight: 700; color: #fff; }
+    .profile-role-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.1); border-radius: 999px; font-size: 12px; font-weight: 500; color: #e2e8f0; }
+    
+    .profile-social { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+    .social-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+    .social-btn:hover { background: #fff; transform: translateY(-2px); border-color: #fff; }
+    .social-btn img { width: 20px; height: 20px; filter: invert(1) brightness(100%); opacity: 0.8; }
     .social-btn:hover img { filter: invert(0); opacity: 1; }
 
-    .contact-list { width: 100%; display: flex; flex-direction: column; gap: 10px; }
-    .contact-card-link {
-      display: flex; align-items: center; gap: 12px; padding: 12px;
-      border-radius: 16px; background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05); transition: all 0.2s;
-    }
+    .contact-list { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+    .contact-card-link { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
     .contact-card-link:hover { background: rgba(255,255,255,0.08); transform: translateX(2px); }
-    .contact-icon {
-      width: 32px; height: 32px; border-radius: 10px; background: #1f2937;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .contact-icon img { width: 16px; height: 16px; filter: invert(1); opacity: 0.9; }
-    .contact-text { display: flex; flex-direction: column; }
-    .contact-label { font-size: 10px; text-transform: uppercase; color: #9ca3af; }
-    .contact-value { font-size: 13px; color: #f3f4f6; font-weight: 500; word-break: break-all; }
+    .contact-icon { width: 36px; height: 36px; border-radius: 10px; background: #1f2937; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-icon img { width: 18px; height: 18px; filter: invert(1); opacity: 0.9; }
+    .contact-text { display: flex; flex-direction: column; overflow: hidden; }
+    .contact-label { font-size: 10px; text-transform: uppercase; color: #9ca3af; letter-spacing: 0.5px; }
+    .contact-value { font-size: 13px; color: #f3f4f6; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* MAIN CARD */
-    .main-card {
-      background: var(--card-bg); border-radius: 24px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); padding: 32px;
-      min-height: 80vh; display: flex; flex-direction: column; gap: 24px;
-    }
-    .main-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      border-bottom: 1px solid var(--border); padding-bottom: 20px; flex-wrap: wrap; gap: 16px;
-    }
-    .main-header h1 { font-size: 24px; font-weight: 700; color: #111827; }
-    .main-header p { font-size: 14px; color: var(--muted); margin-top: 4px; }
-
-    /* TABS & FILTERS */
+    /* MAIN */
+    .main-card { background: var(--card-bg); border-radius: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); padding: 32px; min-height: 80vh; }
+    .main-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--border); padding-bottom: 20px; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
     .top-tabs { display: flex; background: #f3f4f6; padding: 4px; border-radius: 12px; }
-    .tab-btn {
-      padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 500;
-      border: none; background: transparent; cursor: pointer; color: var(--muted); transition: 0.2s;
-    }
+    .tab-btn { padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; border: none; background: transparent; cursor: pointer; color: var(--muted); transition: 0.2s; }
     .tab-btn.active { background: #fff; color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     .tab-section { display: none; animation: fadeIn 0.3s ease; }
     .tab-section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* FILTERS */
-    .project-filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 24px; }
-    .filter-btn {
-      border-radius: 999px; padding: 8px 16px; font-size: 13px;
-      border: 1px solid var(--border); background: #fff; color: var(--muted); cursor: pointer; transition: 0.2s;
-    }
-    .filter-btn:hover { background: #f9fafb; color: var(--text); }
+    /* PROJECTS */
+    .project-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+    .filter-btn { border-radius: 999px; padding: 8px 16px; font-size: 13px; border: 1px solid var(--border); background: #fff; color: var(--muted); cursor: pointer; transition: 0.2s; }
     .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-    /* PROJECTS GRID */
     .projects-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
-    .project-card {
-      display: flex; flex-direction: row; background: #fff;
-      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
-      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; height: 240px;
-    }
-    .project-card:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
-    .project-image {
-      width: 280px; min-width: 280px; height: 100%; background: #f9fafb;
-      display: flex; align-items: center; justify-content: center; overflow: hidden;
-    }
-    .project-image img {
-      width: 100%; height: 100%; object-fit: contain;
-      display: block; opacity: 0.9; transition: opacity 0.3s;
-    }
-    .project-card:hover .project-image img { opacity: 1; scale: 1.05; transition: scale 0.5s ease; }
+    .project-card { display: flex; background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; cursor: pointer; transition: transform 0.2s; height: 240px; }
+    .project-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .project-image { width: 280px; min-width: 280px; background: #f9fafb; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .project-image img { width: 100%; height: 100%; object-fit: contain; transition: 0.3s; }
+    .project-card:hover .project-image img { scale: 1.05; }
     .project-text { flex: 1; padding: 24px; display: flex; flex-direction: column; position: relative; }
-    .project-text::before {
-      content: ""; position: absolute; left: 0; top: 24px; bottom: 24px;
-      width: 4px; background: var(--accent); border-radius: 0 4px 4px 0;
-    }
-    .project-title { font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 4px; }
-    .project-meta { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 2px; text-transform: uppercase; }
+    .project-text::before { content: ""; position: absolute; left: 0; top: 24px; bottom: 24px; width: 4px; background: var(--accent); border-radius: 0 4px 4px 0; }
+    .project-title { font-size: 18px; font-weight: 700; color: #111827; }
+    .project-meta { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; }
     .project-date { font-size: 12px; color: #9ca3af; margin-bottom: 12px; }
-    .project-desc {
-      font-size: 14px; color: #4b5563; display: -webkit-box;
-      -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: auto;
-    }
-    .project-tech {
-      font-size: 11px; font-family: monospace; color: #6b7280;
-      background: #f3f4f6; padding: 4px 8px; border-radius: 6px; align-self: flex-start; margin-top: 12px;
-    }
+    .project-desc { font-size: 14px; color: #4b5563; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: auto; }
+    .project-tech { font-size: 11px; font-family: monospace; color: #6b7280; background: #f3f4f6; padding: 4px 8px; border-radius: 6px; align-self: flex-start; margin-top: 12px; }
 
     /* RESUME */
-    .resume-block { background: #f9fafb; border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-top: 20px; }
-    .resume-block h3 { margin-bottom: 12px; font-size: 16px; color: #111827; }
+    .resume-block { background: #f9fafb; border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+    .resume-block h3 { margin-bottom: 16px; font-size: 16px; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; }
+    .resume-item { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
+    .resume-item:last-child { border: none; margin: 0; padding: 0; }
+    .resume-item h4 { font-size: 15px; font-weight: 600; color: #111827; }
+    .resume-item h4 a { color: var(--accent); text-decoration: none; transition: 0.2s; }
+    .resume-item h4 a:hover { text-decoration: underline; }
+    .resume-item .meta { font-size: 12px; color: var(--accent); font-weight: 600; display: block; margin-bottom: 6px; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag { font-size: 12px; border-radius: 6px; padding: 6px 12px; background: #e5e7eb; color: #374151; font-weight: 500; }
-    .resume-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
-    .resume-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-    .resume-item h4 { font-size: 15px; font-weight: 600; color: #111827; margin-bottom: 2px; }
-    .resume-item .meta { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block; }
-
-    footer { margin-top: 40px; font-size: 13px; color: var(--muted); text-align: center; border-top: 1px solid var(--border); padding-top: 20px; }
+    
+    .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+    .cert-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform 0.2s; display: block; cursor: pointer; }
+    .cert-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .cert-img-wrapper { height: 120px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 1px solid var(--border); }
+    .cert-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+    .cert-info { padding: 10px; }
+    .cert-info h4 { margin: 0; font-size: 13px; font-weight: 600; color: var(--text); }
+    .cert-info span { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; }
 
     /* MODAL */
-    .project-modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(5px); z-index: 1000;
-      display: none; justify-content: center; align-items: center; padding: 20px;
-    }
+    .project-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px; }
     .project-modal.open { display: flex; animation: modalFadeIn 0.2s ease-out; }
-    
-    .project-modal-content {
-      background: #fff; width: 100%; max-width: 1000px;
-      border-radius: 20px; overflow: hidden;
-      max-height: 90vh; display: flex; flex-direction: column;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-    }
-
-    .project-modal-header {
-      padding: 20px 24px; border-bottom: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
-    }
+    .project-modal-content { background: #fff; width: 100%; max-width: 1000px; border-radius: 20px; overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; }
+    .project-modal-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
     .project-modal-close { font-size: 28px; background: none; border: none; cursor: pointer; color: #6b7280; }
-    .project-modal-close:hover { color: #111827; }
-
-    .project-modal-body { 
-      display: flex; gap: 32px; padding: 24px; 
-      overflow-y: auto; overflow-x: hidden; 
-    }
-    
-    .modal-text { flex: 1; min-width: 300px; display: flex; flex-direction: column; }
-    
-    #modal-desc { white-space: pre-line; }
-
+    .project-modal-body { display: flex; gap: 32px; padding: 24px; overflow-y: auto; }
+    .modal-text { flex: 1; display: flex; flex-direction: column; }
     .modal-gallery { flex: 1.5; display: flex; flex-direction: column; gap: 16px; }
-
-    /* Ana Görsel Kutusu */
-    .modal-main-media {
-      width: 100%; height: 400px; 
-      background: #f9fafb; border-radius: 12px; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border);
-      flex-shrink: 0; 
-    }
-
-    .modal-main-media img { width: 100%; height: 100%; object-fit: contain; display: block; }
-    .modal-main-media iframe, .modal-main-media video { width: 100%; height: 100%; aspect-ratio: 16/9; display: block; }
-
-    .modal-links {
-        margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px;
-        padding-bottom: 16px; border-bottom: 1px solid var(--border);
-    }
-    .modal-links a {
-      display: inline-flex; align-items: center; gap: 8px; 
-      color: var(--accent); font-weight: 600; font-size: 14px; text-decoration: none;
-      background: #f3f4f6; padding: 8px 12px; border-radius: 8px; transition: 0.2s;
-    }
-    .modal-links a:hover { background: #e5e7eb; }
-
-    /* THUMBNAILS */
-    .modal-thumbs { display: flex; flex-wrap: wrap; gap: 10px; padding-bottom: 4px; }
-    .modal-thumb {
-      width: 80px; height: 60px; flex-shrink: 0; border-radius: 8px; 
-      overflow: hidden; cursor: pointer; opacity: 0.7; transition: 0.2s; 
-      border: 2px solid transparent; background: #f3f4f6;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .modal-thumb.active { 
-        opacity: 1; border-color: var(--accent); background: transparent;
-        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-    }
+    .modal-main-media { width: 100%; height: 400px; background: #f9fafb; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); flex-shrink: 0; }
+    .modal-main-media img { width: 100%; height: 100%; object-fit: contain; }
+    .modal-main-media iframe { width: 100%; height: 100%; }
+    .modal-thumbs { display: flex; flex-wrap: wrap; gap: 10px; }
+    .modal-thumb { width: 80px; height: 60px; border-radius: 8px; overflow: hidden; cursor: pointer; opacity: 0.6; border: 2px solid transparent; background: #f3f4f6; }
+    .modal-thumb.active { opacity: 1; border-color: var(--accent); }
     .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* MOBILE RESPONSIVE */
-    @media (max-width: 900px) {
-      .layout { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-      .project-modal-body { flex-direction: column; }
-      .modal-gallery { order: -1; } 
-      .modal-text { order: 1; min-width: auto; }
-      .modal-main-media { height: 250px; } 
-      .modal-thumb { width: 70px; height: 50px; }
-    }
-
-    @media (max-width: 640px) {
-      .project-card { height: auto; flex-direction: column; }
-      .project-image { width: 100%; height: 200px; }
-      .project-text::before { top: 0; left: 24px; right: 24px; width: auto; height: 4px; }
-    }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } .project-modal-body { flex-direction: column; } .modal-gallery { order: -1; } .modal-main-media { height: 250px; } }
+    @media (max-width: 640px) { .project-card { height: auto; flex-direction: column; } .project-image { width: 100%; height: 200px; } .project-text::before { top: 0; left: 24px; right: 24px; width: auto; height: 4px; } }
   </style>
 </head>
 <body>
 
 <div class="page">
   <div class="layout">
+    
     <aside class="sidebar">
       <div class="profile-header">
-        <div class="profile-photo">
-    <img src="assets/images/profile/bahadir-profile.jpg" alt="Bahadır Kuş">
-      </div>
+        <div class="profile-photo"><img id="sidebar-img" src="" alt="Profile"></div>
         <div>
-          <div class="profile-name">Bahadır Kuş</div>
-          <div class="profile-role-pill"><span class="profile-role-pill-dot"></span><span>Simulation Dev & Tech Designer</span></div>
+          <div class="profile-name" id="sidebar-name"></div>
+          <div class="profile-role-pill"><span style="width:8px; height:8px; background:#4ade80; border-radius:50%;"></span><span id="sidebar-role"></span></div>
         </div>
       </div>
-      <div class="profile-social">
-        <a class="social-btn" href="https://x.com/mrbahadirkus" target="_blank" title="X / Twitter">
-          <img src="https://unpkg.com/simple-icons@v9/icons/x.svg" alt="X">
-        </a>
-        <a class="social-btn" href="https://www.instagram.com/bahadirkush/" target="_blank" title="Instagram">
-          <img src="https://unpkg.com/simple-icons@v9/icons/instagram.svg" alt="Instagram">
-        </a>
-        <a class="social-btn" href="https://www.linkedin.com/in/bahadir-kus/" target="_blank" title="LinkedIn">
-          <img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn">
-        </a>
-      </div>
+      <div class="profile-social" id="sidebar-social"></div>
       <div class="contact-list">
-        <a class="contact-card-link" href="mailto:mrbahadirkus@gmail.com">
-          <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/gmail.svg" alt="Mail"></div>
-          <div class="contact-text"><span class="contact-label">Email</span><span class="contact-value">mrbahadirkus@gmail.com</span></div>
+        <a class="contact-card-link" id="link-email">
+            <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/gmail.svg"></div>
+            <div class="contact-text"><span class="contact-label">Email</span><span class="contact-value" id="val-email"></span></div>
         </a>
-        <a class="contact-card-link" href="https://github.com/Bahadirkus" target="_blank">
-          <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/github.svg" alt="GitHub"></div>
-          <div class="contact-text"><span class="contact-label">GitHub</span><span class="contact-value">github.com/Bahadirkus</span></div>
+        <a class="contact-card-link" id="link-github" target="_blank" style="display:none;">
+            <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/github.svg"></div>
+            <div class="contact-text"><span class="contact-label">GitHub</span><span class="contact-value" id="val-github"></span></div>
         </a>
-        <a class="contact-card-link" href="https://www.youtube.com/@bahadirkush" target="_blank">
-          <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg" alt="YouTube"></div>
-          <div class="contact-text"><span class="contact-label">YouTube</span><span class="contact-value">@bahadirkush</span></div>
+        <a class="contact-card-link" id="link-loc" style="cursor:default;">
+            <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/googlemaps.svg"></div>
+            <div class="contact-text"><span class="contact-label">Location</span><span class="contact-value" id="val-loc"></span></div>
         </a>
-        <div class="contact-card-link" style="cursor: default;">
-          <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/googlemaps.svg" alt="Loc"></div>
-          <div class="contact-text"><span class="contact-label">Location</span><span class="contact-value">Toronto, Canada</span></div>
-        </div>
       </div>
     </aside>
 
@@ -320,86 +146,48 @@
       <div class="main-header">
         <div><h1>Portfolio</h1><p>Selected work in simulation, software, and technical design.</p></div>
         <div class="top-tabs">
-          <button class="tab-btn active" data-tab="portfolio">Projects</button>
-          <button class="tab-btn" data-tab="resume">Resume</button>
+          <button class="tab-btn active" onclick="openTab('portfolio')">Projects</button>
+          <button class="tab-btn" onclick="openTab('resume')">Resume</button>
         </div>
       </div>
 
-      <section id="portfolio-section" class="tab-section active">
+      <section id="sec-portfolio" class="tab-section active">
         <div class="project-filters">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="software">Software</button>
-          <button class="filter-btn" data-filter="technical-design">Technical Design & Embedded Systems</button>
+          <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+          <button class="filter-btn" onclick="filterProjects('software', this)">Software</button>
+          <button class="filter-btn" onclick="filterProjects('technical-design', this)">Technical Design</button>
         </div>
         <div class="projects-grid" id="projects-grid"></div>
       </section>
 
-      <section id="resume-section" class="tab-section">
-        <h2>Professional Summary</h2>
-        <p style="color:var(--text); margin-top:8px;">
-            I specialize in developing **real-time simulation and training systems** using Unity, focusing on the intersection of physical hardware (sensors, haptics) and software logic. My background allows me to deliver high-fidelity applications, particularly in the **Medical Simulation** and XR/VR space.
-        </p>
+      <section id="sec-resume" class="tab-section">
+        <div class="resume-block"><h3>Professional Summary</h3><p id="resume-bio" style="color:#4b5563; font-size:14px; white-space: pre-line;"></p></div>
         
-        <div class="resume-block">
-          <h3>Technical Stack & Physics Expertise</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Unity 3D</span><span class="skill-tag">C# / C++</span><span class="skill-tag">Soft Body Physics</span>
-            <span class="skill-tag">CSG Physics / Mesh Cutting</span><span class="skill-tag">VR / AR / MR</span>
-            <span class="skill-tag">Medical Simulation</span><span class="skill-tag">Easy EDA / PCB Design</span>
-            <span class="skill-tag">Fusion 360</span><span class="skill-tag">Arduino / ESP32</span>
-            <span class="skill-tag">Python</span><span class="skill-tag">FMOD</span><span class="skill-tag">Git</span>
-          </div>
+        <div class="resume-block" id="block-publications" style="display:none;">
+            <h3>Publications & Research</h3>
+            <div id="resume-pub-list"></div>
         </div>
 
-        <div class="resume-block">
-            <h3>Professional Experience</h3>
-            <div style="display:flex; flex-direction:column; gap:16px;">
-               <div class="resume-item">
-                  <h4>Lead Simulation Developer</h4><span class="meta">2021 - Present • MedTech Company</span>
-                  <p style="font-size:14px; color:#4b5563;">
-                      Developing high-fidelity, haptic-feedback surgical simulators. Responsible for the full development cycle: 
-                      software architecture, sensor integration, physics modeling (**Soft Body Physics**) and optimization for virtual reality (VR) environments.
-                  </p>
-               </div>
-               <div class="resume-item">
-                  <h4>Freelance Developer & Technical Designer</h4><span class="meta">2020 - 2021 • Mobile & Interactive Apps</span>
-                  <p style="font-size:14px; color:#4b5563;">
-                      Engineered physics and audio simulations. Focused on developing custom systems for **CSG physics** and real-time **mesh cutting** algorithms. Also involved in **Easy EDA PCB design** and hardware application.
-                  </p>
-               </div>
-            </div>
-        </div>
-
-        <div class="resume-block">
-            <h3>Education</h3>
-            <div class="resume-item"><h4>B.S. Electrical & Electronics Engineering</h4><span class="meta">2014 - 2018 • University Name (Example)</span></div>
-        </div>
-
-        <div class="resume-block">
-            <h3>Languages</h3>
-            <p style="font-size:14px; color:#4b5563;">Turkish: Native / English: Professional Working Proficiency</p>
-        </div>
+        <div class="resume-block"><h3>Certificates</h3><div class="certificates-grid" id="resume-cert-list"></div></div>
+        <div class="resume-block"><h3>Experience</h3><div id="resume-exp-list"></div></div>
+        <div class="resume-block"><h3>Education</h3><div id="resume-edu-list"></div></div>
+        <div class="resume-block"><h3>Technical Skills</h3><div class="skill-tags" id="resume-skills"></div></div>
       </section>
     </main>
   </div>
-  <footer><p>© <span id="year"></span> Bahadır Kuş. All rights reserved.</p></footer>
 </div>
 
 <div class="project-modal" id="project-modal">
   <div class="project-modal-content">
-    <div class="project-modal-header">
-      <h2 style="font-size:18px; margin:0;" id="modal-title">Project Name</h2>
-      <button class="project-modal-close" id="modal-close">&times;</button>
-    </div>
-    <div class="project-modal-body" id="modal-body-scroll">
-      <div class="modal-text">
-        <div id="modal-links" class="modal-links"></div>
-        <h4 style="font-size:12px; text-transform:uppercase; color:#6b7280; letter-spacing:1px; margin-bottom:8px;">About the Project</h4>
-        <p id="modal-desc" style="font-size:14px; color:#374151; line-height:1.7;"></p>
+    <div class="project-modal-header"><h2 id="m-title" style="font-size:18px;"></h2><button class="project-modal-close" onclick="closeModal()">&times;</button></div>
+    <div class="project-modal-body">
+      <div class="modal-text" id="modal-text-col">
+        <div id="m-links" style="display:flex; flex-direction:column; gap:8px; margin-bottom:15px;"></div>
+        <p id="m-desc" style="font-size:14px; color:#374151; line-height:1.7; white-space: pre-line;"></p>
       </div>
-      <div class="modal-gallery">
-        <div class="modal-main-media" id="modal-main-media"></div>
-        <div class="modal-thumbs" id="modal-thumbs"></div>
+      <div class="modal-gallery" id="modal-gallery-col">
+        <div class="modal-main-media" id="m-media"></div>
+        <div class="modal-thumbs" id="m-thumbs"></div>
       </div>
     </div>
   </div>
@@ -407,177 +195,184 @@
 
 <script src="assets/js/projects.js"></script>
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+  const data = window.data || { profile:{}, resume:{}, projects:[] };
+  function init() {
+      // Profile
+      const p = data.profile;
+      document.getElementById('sidebar-name').textContent = p.name || "My Name";
+      document.getElementById('sidebar-role').textContent = p.role || "Developer";
+      document.getElementById('sidebar-img').src = p.image || "assets/images/profile/placeholder.jpg";
+      document.getElementById('val-email').textContent = p.email || "-";
+      document.getElementById('link-email').href = "mailto:" + p.email;
+      document.getElementById('val-loc').textContent = p.location || "-";
+      
+      const socDiv = document.getElementById('sidebar-social');
+      const soc = p.social || {};
+      
+      if(soc.linkedin) socDiv.innerHTML += `<a class="social-btn" href="${soc.linkedin}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg"></a>`;
+      if(soc.instagram) socDiv.innerHTML += `<a class="social-btn" href="${soc.instagram}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/instagram.svg"></a>`;
+      if(soc.youtube) socDiv.innerHTML += `<a class="social-btn" href="${soc.youtube}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg"></a>`;
+      if(soc.twitter || soc.x) socDiv.innerHTML += `<a class="social-btn" href="${soc.twitter || soc.x}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/x.svg"></a>`;
 
-  const tabs = document.querySelectorAll('.tab-btn');
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab + '-section').classList.add('active');
-    });
-  });
-
-  function formatMonthYear(dateString) {
-    if (!dateString) return '';
-    const parts = dateString.split('-');
-    if (parts.length < 2) return dateString;
-    return new Date(parts[0], parts[1]-1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-  }
-
-  const grid = document.getElementById('projects-grid');
-  const filters = document.querySelectorAll('.filter-btn');
-  let activeFilter = 'all';
-
-  function renderProjects() {
-    if (!window.projects || window.projects.length === 0) {
-        grid.innerHTML = '<p style="color:#6b7280; text-align:center; padding:20px;">Loading projects...</p>';
-        return;
-    }
-
-    grid.innerHTML = '';
-    const projects = window.projects;
-
-    projects.sort((a, b) => {
-        const dateA = a.date || '0';
-        const dateB = b.date || '0';
-        if (dateA < dateB) return 1;
-        if (dateA > dateB) return -1;
-        return 0;
-    });
-
-    projects.forEach(p => {
-      const types = Array.isArray(p.types) ? p.types : [];
-      let show = false;
-      if (activeFilter === 'all') {
-          show = true;
-      } else if (activeFilter === 'software') {
-          if (types.includes('software')) show = true;
-      } else if (activeFilter === 'technical-design') {
-          if (types.includes('design') || types.includes('hardware') || types.includes('technical-design')) show = true;
+      if(soc.github) {
+          const ghLink = document.getElementById('link-github');
+          ghLink.style.display = 'flex'; ghLink.href = soc.github;
+          const cleanGh = soc.github.replace('https://', '').replace('http://', '').replace('www.', '');
+          document.getElementById('val-github').textContent = cleanGh;
       }
 
-      if (!show) return;
-
-      const div = document.createElement('article');
-      div.className = 'project-card';
-      div.onclick = () => { openModal(p); window.history.pushState(null, '', '#' + p.id); };
+      // Resume
+      document.getElementById('resume-bio').textContent = p.bio || "";
+      const r = data.resume || {};
       
-      div.innerHTML = `
-        <div class="project-image"><img src="${p.coverImage || 'images/placeholder.jpg'}" alt="${p.name || 'Project'}"></div>
-        <div class="project-text">
-          <div class="project-meta">${p.role || ''}</div>
-          <div class="project-title">${p.name || '(İsimsiz Proje)'}</div>
-          <div class="project-date">${formatMonthYear(p.date)}</div>
-          <p class="project-desc">${p.shortDesc || ''}</p>
-          <div class="project-tech">${p.tagline || ''}</div>
-        </div>`;
-      grid.appendChild(div);
-    });
+      // PUBLICATIONS
+      if(r.publications && r.publications.length > 0) {
+          document.getElementById('block-publications').style.display = 'block';
+          const pubDiv = document.getElementById('resume-pub-list');
+          r.publications.forEach(item => {
+              // Eğer link varsa tıklanabilir yap
+              const titleHtml = item.link ? `<a href="${item.link}" target="_blank">${item.title} 🔗</a>` : item.title;
+              pubDiv.innerHTML += `<div class="resume-item"><h4>${titleHtml}</h4><span class="meta">${item.date} • ${item.journal}</span></div>`;
+          });
+      }
 
-    if(grid.innerHTML === '') {
-        grid.innerHTML = '<p style="color:#6b7280; text-align:center; padding:20px;">Bu kategoride proje bulunamadı.</p>';
-    }
+      const expDiv = document.getElementById('resume-exp-list');
+      (r.experience||[]).forEach(item => {
+          expDiv.innerHTML += `<div class="resume-item"><h4>${item.role}</h4><span class="meta">${item.date} • ${item.company}</span><p style="font-size:14px; color:#555;">${item.desc}</p></div>`;
+      });
+      const eduDiv = document.getElementById('resume-edu-list');
+      (r.education||[]).forEach(item => {
+          eduDiv.innerHTML += `<div class="resume-item"><h4>${item.degree}</h4><span class="meta">${item.date} • ${item.school}</span></div>`;
+      });
+      
+      // CERTIFICATES (Modal Logic: Hide text if empty)
+      const certDiv = document.getElementById('resume-cert-list');
+      (r.certificates||[]).forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'cert-card';
+          // Açıklama var mı? Link var mı?
+          let links = [];
+          if(item.link) links.push({label:'View Original / Verify', url:item.link});
+          
+          div.onclick = () => openModal({
+              name: item.title,
+              role: item.issuer,
+              date: '',
+              longDesc: item.desc || "", // Boşsa UI gizlenecek
+              coverImage: item.image,
+              gallery: [{type: 'image', src: item.image}],
+              links: links
+          });
+          div.innerHTML = `<div class="cert-img-wrapper"><img src="${item.image}" onerror="this.src='https://placehold.co/200?text=Cert'"></div><div class="cert-info"><h4>${item.title}</h4><span>${item.issuer}</span></div>`;
+          certDiv.appendChild(div);
+      });
+
+      const skillDiv = document.getElementById('resume-skills');
+      (r.skills||[]).forEach(s => skillDiv.innerHTML += `<span class="skill-tag">${s}</span>`);
+
+      renderProjects('all');
   }
 
-  filters.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filters.forEach(b => b.classList.remove('active'));
+  function filterProjects(type, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      activeFilter = btn.dataset.filter;
-      renderProjects();
-    });
-  });
+      renderProjects(type);
+  }
+
+  function renderProjects(filter) {
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = '';
+      const projs = data.projects || [];
+      projs.sort((a,b) => (a.date < b.date ? 1 : -1));
+
+      projs.forEach(p => {
+          const types = p.types || [];
+          let show = (filter === 'all') 
+             || (filter === 'software' && types.includes('software'))
+             || (filter === 'technical-design' && (types.includes('design') || types.includes('technical-design')));
+          
+          if(!show) return;
+
+          const card = document.createElement('article');
+          card.className = 'project-card';
+          card.onclick = () => openModal(p);
+          card.innerHTML = `<div class="project-image"><img src="${p.coverImage}" alt="${p.name}"></div><div class="project-text"><div class="project-meta">${p.role}</div><div class="project-title">${p.name}</div><div class="project-date">${p.date}</div><p class="project-desc">${p.shortDesc}</p><div class="project-tech">${p.tagline}</div></div>`;
+          grid.appendChild(card);
+      });
+  }
+
+  function openTab(name) {
+      document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('sec-' + name).classList.add('active');
+      event.target.classList.add('active');
+  }
 
   const modal = document.getElementById('project-modal');
-  const modalBody = document.getElementById('modal-body-scroll');
-  const mTitle = document.getElementById('modal-title');
-  const mDesc = document.getElementById('modal-desc');
-  const mMedia = document.getElementById('modal-main-media');
-  const mThumbs = document.getElementById('modal-thumbs');
-  const mLinks = document.getElementById('modal-links');
+  function openModal(p) {
+      document.body.classList.add('no-scroll');
+      modal.classList.add('open');
+      document.getElementById('m-title').textContent = p.name;
+      document.getElementById('m-desc').textContent = p.longDesc || "";
+      
+      const linkDiv = document.getElementById('m-links');
+      linkDiv.innerHTML = '';
+      (p.links||[]).forEach(l => {
+          linkDiv.innerHTML += `<a href="${l.url}" target="_blank" style="color:#2563eb; font-weight:600; display:block; margin-bottom:5px;">🔗 ${l.label}</a>`;
+      });
 
-  function openModal(project) {
-    document.body.classList.add('no-scroll');
-    mTitle.textContent = project.name;
-    mDesc.textContent = project.longDesc || project.shortDesc;
-    
-    mLinks.innerHTML = '';
-    if(project.links) {
-        project.links.forEach(l => {
-            const a = document.createElement('a');
-            a.href = l.url; a.target = "_blank";
-            a.innerHTML = `<span>🔗</span> ${l.label}`;
-            mLinks.appendChild(a);
-        });
-    }
+      // AKILLI MODAL: Metin Yoksa Gizle
+      const textCol = document.getElementById('modal-text-col');
+      const galleryCol = document.getElementById('modal-gallery-col');
+      
+      // Eğer Link YOKSA ve Açıklama BOŞSA -> Tam ekran resim
+      if (!p.longDesc && (!p.links || p.links.length === 0)) {
+          textCol.style.display = 'none';
+          galleryCol.style.flex = '1';
+      } else {
+          textCol.style.display = 'flex';
+          galleryCol.style.flex = '1.5';
+      }
 
-    mMedia.innerHTML = '';
-    mThumbs.innerHTML = '';
-    let gallery = project.gallery ? [...project.gallery] : [];
-    if (project.coverImage && !gallery.some(i => i.src === project.coverImage)) {
-        gallery.unshift({ type: 'image', src: project.coverImage });
-    }
-
-    if (gallery.length > 0) {
-        setMedia(gallery[0]);
-        gallery.forEach((item, idx) => {
-            const th = document.createElement('div');
-            th.className = 'modal-thumb' + (idx === 0 ? ' active' : '');
-            
-            if(item.type === 'image') th.innerHTML = `<img src="${item.src}">`;
-            else if (item.type === 'youtube') {
-                 const vidId = item.src.match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/)?.[1];
-                 th.innerHTML = vidId ? `<img src="https://img.youtube.com/vi/${vidId}/0.jpg">` : 'Video';
-            } else th.innerHTML = 'Video';
-            
-            th.onclick = () => {
-                document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
-                th.classList.add('active');
-                setMedia(item);
-            };
-            mThumbs.appendChild(th);
-        });
-    }
-    modal.classList.add('open');
-    modalBody.scrollTop = 0;
+      const gal = p.gallery || [];
+      if(p.coverImage && (!gal.length || gal[0].src !== p.coverImage)) gal.unshift({type:'image', src:p.coverImage});
+      const thumbs = document.getElementById('m-thumbs');
+      thumbs.innerHTML = '';
+      document.getElementById('m-media').innerHTML = '';
+      if(gal.length > 0) {
+          setMedia(gal[0]);
+          gal.forEach(item => {
+              const th = document.createElement('div');
+              th.className = 'modal-thumb';
+              let src = item.src;
+              if(item.type === 'youtube') src = `https://img.youtube.com/vi/${item.src.split('v=')[1]}/0.jpg`;
+              th.innerHTML = `<img src="${src}">`;
+              th.onclick = () => {
+                  document.querySelectorAll('.modal-thumb').forEach(t=>t.classList.remove('active'));
+                  th.classList.add('active');
+                  setMedia(item);
+              }
+              thumbs.appendChild(th);
+          });
+      }
   }
 
   function setMedia(item) {
-      mMedia.innerHTML = '';
-      if(item.type === 'image') mMedia.innerHTML = `<img src="${item.src}">`;
-      else if (item.type === 'youtube') {
-          const vidId = item.src.match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/)?.[1];
-          if(vidId) mMedia.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-      } else if (item.type === 'video') {
-          mMedia.innerHTML = `<video src="${item.src}" controls autoplay muted></video>`;
+      const m = document.getElementById('m-media');
+      m.innerHTML = '';
+      if(item.type === 'image') m.innerHTML = `<img src="${item.src}">`;
+      else if(item.type === 'youtube') {
+          const vid = item.src.split('v=')[1];
+          m.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen></iframe>`;
       }
   }
 
   function closeModal() {
-    modal.classList.remove('open');
-    mMedia.innerHTML = ''; 
-    document.body.classList.remove('no-scroll');
-    // URL'i temizle ama sayfa yenileme
-    history.pushState("", document.title, window.location.pathname + window.location.search);
+      modal.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      document.getElementById('m-media').innerHTML = '';
   }
-
-  document.getElementById('modal-close').onclick = closeModal;
-  modal.onclick = (e) => { if(e.target === modal) closeModal(); }
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-  
-  function checkDeepLink() {
-    // Hash var mı kontrol et (örn: #prosthetic-worlds-vr)
-    const hash = window.location.hash.substring(1);
-    if (hash && window.projects) {
-      const project = window.projects.find(p => p.id === hash);
-      if (project) openModal(project);
-    }
-  }
-
-  window.addEventListener('load', () => { renderProjects(); checkDeepLink(); });
-  window.addEventListener('hashchange', checkDeepLink);
+  window.addEventListener('load', init);
 </script>
 </body>
 </html>
