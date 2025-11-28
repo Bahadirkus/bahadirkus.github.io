@@ -104,12 +104,12 @@ window.projects = [
     "gallery": [
       {
         "type": "image",
-        "src": "images/Chassis Mechanism/ChassisMechanism-01.png",
-              },
+        "src": "images/Chassis Mechanism/ChassisMechanism-01.png"
+      },
       {
         "type": "youtube",
-        "src": "https://youtube.com/shorts/b_mTvKPiusM?feature=share",
-              }
+        "src": "https://youtube.com/shorts/b_mTvKPiusM?feature=share"
+      }
     ],
     "links": [],
     "tagline": "Fusion 360 • Sheet Metal • Linear Actuators • Sigma Profiles • CNC & 3D Printing"
@@ -227,6 +227,39 @@ window.projects = [
         "url": "https://play.google.com/store/apps/details?id=com.okkagames.redlinedragracing&hl=en"
       }
     ]
+  },
+  {
+    "id": "unity-word-game",
+    "name": "Unity Word Game",
+    "date": "2021-11",
+    "role": "Game Developer",
+    "types": [
+      "software"
+    ],
+    "shortDesc": "A simple, mobile-ready word-finding puzzle game developed in Unity, focusing on core gameplay mechanics and user interface design.",
+    "longDesc": "As the developer, I handled the complete implementation of this word game designed for mobile devices. My main focus was on creating a clean and functional codebase in C# that manages the word pool and game states. I implemented the system for checking if formed words are valid based on the built-in dictionary. Additionally, I designed a responsive UI system to ensure a consistent layout across different mobile screens and integrated the core touch-based input mechanics for selecting letters. The project demonstrates fundamental Unity and C# development skills.",
+    "coverImage": "images/WordGame/WordGame-01.png",
+    "gallery": [
+      {
+        "type": "image",
+        "src": "images/WordGame/WordGame-01.png",
+              },
+      {
+        "type": "image",
+        "src": "images/WordGame/WordGame-02.png",
+              }
+    ],
+    "links": [
+      {
+        "label": "GitHub Repository",
+        "url": "https://github.com/Bahadirkus/Unity-WordGame"
+      },
+      {
+        "label": "Play the Web Demo",
+        "url": "https://bahadirkus.github.io/Unity-WordGame/"
+      }
+    ],
+    "tagline": "Unity • C# • OOP • UI/UX"
   },
   {
     "id": "dragon-faya",
