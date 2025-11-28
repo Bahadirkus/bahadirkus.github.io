@@ -9,9 +9,14 @@
   
   <meta property="og:title" content="Bahadır Kuş – Simulation Developer Portfolio">
   <meta property="og:description" content="Unity, VR/AR, and Hardware/Software integration projects.">
-  <meta property="og:image" content="images/bahadir.jpeg"> 
+  <meta property="og:image" content="https://bahadirkus.github.io/images/bahadir.jpeg"> 
   <meta property="og:url" content="https://bahadirkus.github.io/"> 
   <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bahadır Kuş – Portfolio">
+  <meta name="twitter:description" content="Simulation Developer & Technical Designer Projects">
+  <meta name="twitter:image" content="https://bahadirkus.github.io/images/bahadir.jpeg">
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -20,6 +25,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* CSS kodların aynen korundu */
     :root {
       --bg: #f8f9fa;
       --card-bg: #ffffff;
@@ -42,15 +48,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Modal açıkken scroll engelleme sınıfı */
-    body.no-scroll {
-      overflow: hidden;
-    }
-
+    body.no-scroll { overflow: hidden; }
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; }
 
-    /* Layout */
     .page { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
     .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px; align-items: flex-start; }
 
@@ -66,7 +67,7 @@
       border: 2px solid rgba(255,255,255,0.1); overflow: hidden;
       display: flex; align-items: center; justify-content: center;
     }
-    .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover;object-position: top center; }
     .profile-header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
     .profile-name { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
     .profile-role-pill {
@@ -246,7 +247,6 @@
       border: 2px solid transparent; background: #f3f4f6;
       display: flex; align-items: center; justify-content: center;
     }
-    /* Düzeltilmiş Active Durumu: Arka plan şeffaf */
     .modal-thumb.active { 
         opacity: 1; border-color: var(--accent); background: transparent;
         box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
@@ -277,7 +277,9 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="profile-header">
-        <div class="profile-photo"><img src="images/bahadir.jpeg" alt="Bahadır Kuş"></div>
+        <div class="profile-photo">
+    <img src="assets/images/profile/bahadir-profile.jpg" alt="Bahadır Kuş">
+      </div>
         <div>
           <div class="profile-name">Bahadır Kuş</div>
           <div class="profile-role-pill"><span class="profile-role-pill-dot"></span><span>Simulation Dev & Tech Designer</span></div>
@@ -403,7 +405,7 @@
   </div>
 </div>
 
-<script src="projects.js"></script>
+<script src="assets/js/projects.js"></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -429,7 +431,6 @@
   let activeFilter = 'all';
 
   function renderProjects() {
-    // SAĞLAM KONTROL: Veri yoksa çökme, uyarı ver.
     if (!window.projects || window.projects.length === 0) {
         grid.innerHTML = '<p style="color:#6b7280; text-align:center; padding:20px;">Loading projects...</p>';
         return;
@@ -438,7 +439,6 @@
     grid.innerHTML = '';
     const projects = window.projects;
 
-    // SAĞLAM SIRALAMA: Null check
     projects.sort((a, b) => {
         const dateA = a.date || '0';
         const dateB = b.date || '0';
@@ -449,16 +449,13 @@
 
     projects.forEach(p => {
       const types = Array.isArray(p.types) ? p.types : [];
-      
-      // FİLTRE MANTIĞI (Technical Design & Embedded Systems)
       let show = false;
       if (activeFilter === 'all') {
           show = true;
       } else if (activeFilter === 'software') {
           if (types.includes('software')) show = true;
       } else if (activeFilter === 'technical-design') {
-          // Bu filtre "design" VEYA "hardware" etiketlerini kapsar
-          if (types.includes('design') || types.includes('hardware')) show = true;
+          if (types.includes('design') || types.includes('hardware') || types.includes('technical-design')) show = true;
       }
 
       if (!show) return;
@@ -501,10 +498,8 @@
   const mThumbs = document.getElementById('modal-thumbs');
   const mLinks = document.getElementById('modal-links');
 
-  // --- Modal Aç ---
   function openModal(project) {
-    document.body.classList.add('no-scroll'); // KAYDIRMA KİLİDİ AKTİF
-    
+    document.body.classList.add('no-scroll');
     mTitle.textContent = project.name;
     mDesc.textContent = project.longDesc || project.shortDesc;
     
@@ -530,9 +525,9 @@
         gallery.forEach((item, idx) => {
             const th = document.createElement('div');
             th.className = 'modal-thumb' + (idx === 0 ? ' active' : '');
+            
             if(item.type === 'image') th.innerHTML = `<img src="${item.src}">`;
             else if (item.type === 'youtube') {
-                 // GÜNCELLEME: Hem 'watch?v=', hem 'youtu.be/' hem de 'shorts/' formatlarını destekler
                  const vidId = item.src.match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/)?.[1];
                  th.innerHTML = vidId ? `<img src="https://img.youtube.com/vi/${vidId}/0.jpg">` : 'Video';
             } else th.innerHTML = 'Video';
@@ -545,7 +540,6 @@
             mThumbs.appendChild(th);
         });
     }
-
     modal.classList.add('open');
     modalBody.scrollTop = 0;
   }
@@ -554,7 +548,6 @@
       mMedia.innerHTML = '';
       if(item.type === 'image') mMedia.innerHTML = `<img src="${item.src}">`;
       else if (item.type === 'youtube') {
-          // GÜNCELLEME: Hem 'watch?v=', hem 'youtu.be/' hem de 'shorts/' formatlarını destekler
           const vidId = item.src.match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/)?.[1];
           if(vidId) mMedia.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
       } else if (item.type === 'video') {
@@ -562,12 +555,12 @@
       }
   }
 
-  // --- Modal Kapat ---
   function closeModal() {
     modal.classList.remove('open');
     mMedia.innerHTML = ''; 
-    document.body.classList.remove('no-scroll'); // KAYDIRMA KİLİDİNİ KALDIR
-    window.history.pushState(null, '', window.location.pathname + window.location.search);
+    document.body.classList.remove('no-scroll');
+    // URL'i temizle ama sayfa yenileme
+    history.pushState("", document.title, window.location.pathname + window.location.search);
   }
 
   document.getElementById('modal-close').onclick = closeModal;
@@ -575,6 +568,7 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   
   function checkDeepLink() {
+    // Hash var mı kontrol et (örn: #prosthetic-worlds-vr)
     const hash = window.location.hash.substring(1);
     if (hash && window.projects) {
       const project = window.projects.find(p => p.id === hash);
