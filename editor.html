@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🚀 Portfolio Admin v3.6 (Final+Publications)</title>
+  <title>🚀 Portfolio Admin v5.1</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9; --accent: #3b82f6; --danger: #ef4444; --success: #10b981; --warning: #f59e0b; }
@@ -34,9 +34,16 @@
     .dynamic-list { display: flex; flex-direction: column; gap: 15px; }
     .list-item { background: #1e293b; padding: 15px; border-radius: 8px; border: 1px solid var(--border); position: relative; }
     .list-item-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; font-weight: bold; color: #cbd5e1; }
+    .sub-projects-container { margin-top: 15px; padding-top: 15px; border-top: 1px dashed #334155; }
+    .sub-project-item { background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #334155; margin-bottom: 10px; }
+    .sub-header { font-size: 11px; color: #94a3b8; margin-bottom: 5px; font-weight: bold; display: flex; justify-content: space-between; }
+
     .btn-remove { background: var(--danger); color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
     .btn-add { background: var(--panel); border: 1px dashed #64748b; color: #94a3b8; width: 100%; padding: 12px; border-radius: 6px; cursor: pointer; transition: 0.2s; margin-top: 10px; }
     .btn-add:hover { border-color: var(--accent); color: var(--accent); background: #1e293b; }
+    .btn-add-sub { background: #334155; color: #cbd5e1; border: none; padding: 8px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 10px; }
+    .btn-add-sub:hover { background: #475569; color: white; }
+
     .gallery-item-row { display: grid; grid-template-columns: 100px 1fr 50px; gap: 10px; align-items: center; margin-bottom: 10px; }
 
     /* CODE AREA */
@@ -78,7 +85,8 @@
           <div><label>Ad Soyad</label><input type="text" id="prof-name" oninput="updateData()"></div>
           <div><label>Unvan (Role)</label><input type="text" id="prof-role" oninput="updateData()"></div>
           <div class="full-width"><label>Profil Fotoğrafı Yolu</label><input type="text" id="prof-img" oninput="updateData()"></div>
-          <div class="full-width"><label>Kısa Biyografi (Summary)</label><textarea id="prof-bio" oninput="updateData()"></textarea></div>
+          <div class="full-width"><label>CV PDF Dosya Yolu</label><input type="text" id="prof-cv" oninput="updateData()"></div>
+          <div class="full-width"><label>Kısa Biyografi (Summary)</label><textarea id="prof-bio" oninput="updateData()" style="height:100px;"></textarea></div>
         </div>
         <div class="section-header">İletişim & Sosyal Medya</div>
         <div class="form-grid">
@@ -99,9 +107,9 @@
         <button class="btn-add" onclick="addPublication()">+ Yeni Makale Ekle</button>
         
         <br><br>
-        <div class="section-header">Deneyimler (Experience)</div>
+        <div class="section-header">Deneyimler (Experience) ve Alt Projeler</div>
         <div id="exp-list" class="dynamic-list"></div>
-        <button class="btn-add" onclick="addExperience()">+ Ekle</button>
+        <button class="btn-add" onclick="addExperience()">+ Yeni İş Deneyimi Ekle</button>
         <br><br>
         
         <div class="section-header">Sertifikalar (Certificates)</div>
@@ -111,7 +119,7 @@
         <br><br>
         <div class="section-header">Eğitim (Education)</div>
         <div id="edu-list" class="dynamic-list"></div>
-        <button class="btn-add" onclick="addEducation()">+ Ekle</button>
+        <button class="btn-add" onclick="addEducation()">+ Yeni Eğitim Ekle</button>
         <br><br>
         <div class="section-header">Teknik Yetenekler (Skills)</div>
         <textarea id="skills-text" oninput="updateSkills()" style="height: 80px;"></textarea>
@@ -135,7 +143,7 @@
                     <div class="full-width"><label>Kapak Görseli</label><input type="text" id="proj-cover" oninput="updateProjectField('coverImage', this.value)"></div>
                     <div class="full-width"><label>Kısa Açıklama</label><textarea id="proj-short" oninput="updateProjectField('shortDesc', this.value)"></textarea></div>
                     <div class="full-width"><label>Uzun Açıklama</label><textarea id="proj-long" style="height:100px" oninput="updateProjectField('longDesc', this.value)"></textarea></div>
-                    <div class="full-width"><label>Türler (software, technical-design)</label><input type="text" id="proj-types" oninput="updateProjectTypes(this.value)"></div>
+                    <div class="full-width"><label>Türler</label><input type="text" id="proj-types" oninput="updateProjectTypes(this.value)"></div>
                 </div>
                 <div class="section-header">Galeri</div>
                 <div id="proj-gallery-list" class="dynamic-list"></div>
@@ -166,8 +174,6 @@
   <script>
     let data = { profile: { social: {} }, resume: { publications: [], experience: [], education: [], certificates: [], skills: [] }, projects: [] };
     if (window.data) data = window.data; else if (window.projects) data.projects = window.projects;
-    
-    // Ensure publications array exists for older data
     if(!data.resume.publications) data.resume.publications = [];
 
     let activeProjectIndex = -1;
@@ -184,7 +190,7 @@
     // PROFILE
     function loadProfile() {
         const p = data.profile || {}; const s = p.social || {};
-        ['name','role','img','bio','email','loc'].forEach(k => document.getElementById('prof-'+k).value = p[k==='img'?'image':k==='loc'?'location':k]||"");
+        ['name','role','img','cv','bio','email','loc'].forEach(k => document.getElementById('prof-'+k).value = p[k==='img'?'image':k==='loc'?'location':k==='cv'?'cvPath':k]||"");
         ['github','linkedin','insta','youtube','x'].forEach(k => document.getElementById('prof-'+k).value = s[k]||"");
     }
     function updateData() {
@@ -192,6 +198,7 @@
             name: document.getElementById('prof-name').value,
             role: document.getElementById('prof-role').value,
             image: document.getElementById('prof-img').value,
+            cvPath: document.getElementById('prof-cv').value,
             bio: document.getElementById('prof-bio').value,
             email: document.getElementById('prof-email').value,
             location: document.getElementById('prof-loc').value,
@@ -206,20 +213,69 @@
         updateOutput();
     }
 
-    // RESUME
+    // RESUME LOGIC (With Nested Projects)
     function loadResume() {
         renderList('pub-list', data.resume.publications, pubTemplate);
-        renderList('exp-list', data.resume.experience, expTemplate);
+        
+        // EXPERIENCE (Nested)
+        const expDiv = document.getElementById('exp-list'); expDiv.innerHTML='';
+        (data.resume.experience||[]).forEach((item, i) => {
+            const div = document.createElement('div'); div.className='list-item';
+            let projectsHtml = '';
+            (item.projects || []).forEach((proj, pIndex) => {
+                projectsHtml += `
+                <div class="sub-project-item">
+                    <div class="sub-header">PROJE #${pIndex+1} <button class="btn-remove" onclick="removeExpProject(${i}, ${pIndex})" style="padding:2px 6px;">Sil</button></div>
+                    <div class="form-grid" style="margin-bottom:0; gap:10px;">
+                        <div class="full-width"><input type="text" placeholder="Proje Başlığı" value="${proj.title||''}" oninput="updExpProj(${i}, ${pIndex}, 'title', this.value)"></div>
+                        <div class="full-width"><textarea placeholder="Proje Detayları" style="height:60px;" oninput="updExpProj(${i}, ${pIndex}, 'desc', this.value)">${proj.desc||''}</textarea></div>
+                    </div>
+                </div>`;
+            });
+
+            div.innerHTML = `
+            <div class="list-item-header">DENEYİM #${i+1} <button class="btn-remove" onclick="removeItem('experience', ${i})">SİL</button></div>
+            <div class="form-grid">
+                <div><label>Pozisyon</label><input type="text" value="${item.role||''}" oninput="updRes('experience',${i},'role',this.value)"></div>
+                <div><label>Şirket</label><input type="text" value="${item.company||''}" oninput="updRes('experience',${i},'company',this.value)"></div>
+                <div><label>Tarih</label><input type="text" value="${item.date||''}" oninput="updRes('experience',${i},'date',this.value)"></div>
+                <div class="full-width"><label>Genel Açıklama</label><textarea style="height:60px;" oninput="updRes('experience',${i},'desc',this.value)">${item.desc||''}</textarea></div>
+            </div>
+            <div class="sub-projects-container">
+                <label>BU İŞE AİT PROJELER</label>
+                <div id="exp-proj-list-${i}">${projectsHtml}</div>
+                <button class="btn-add-sub" onclick="addExpProject(${i})">+ Bu İşe Proje Ekle</button>
+            </div>`;
+            expDiv.appendChild(div);
+        });
+
         renderList('edu-list', data.resume.education, eduTemplate);
         renderList('cert-list', data.resume.certificates, certTemplate);
         document.getElementById('skills-text').value = (data.resume.skills || []).join(', ');
     }
+
     function renderList(id, arr, tpl) {
         const c = document.getElementById(id); c.innerHTML='';
         arr.forEach((it,i) => { const d=document.createElement('div'); d.className='list-item'; d.innerHTML=tpl(it,i); c.appendChild(d); });
     }
     
-    // Templates
+    // Alt Proje Fonksiyonları
+    function addExpProject(expIndex) {
+        if(!data.resume.experience[expIndex].projects) data.resume.experience[expIndex].projects = [];
+        data.resume.experience[expIndex].projects.push({title:"", desc:""});
+        loadResume(); updateOutput();
+    }
+    function removeExpProject(expIndex, projIndex) {
+        if(confirm('Projeyi sil?')) {
+            data.resume.experience[expIndex].projects.splice(projIndex, 1);
+            loadResume(); updateOutput();
+        }
+    }
+    function updExpProj(expIndex, projIndex, key, value) {
+        data.resume.experience[expIndex].projects[projIndex][key] = value;
+        updateOutput();
+    }
+
     const pubTemplate = (item, i) => `
         <div class="list-item-header">YAYIN #${i+1} <button class="btn-remove" onclick="removeItem('publications', ${i})">SİL</button></div>
         <div class="form-grid">
@@ -228,15 +284,6 @@
             <div><label>Tarih</label><input type="text" value="${item.date||''}" oninput="updRes('publications',${i},'date',this.value)"></div>
             <div class="full-width"><label>Link (URL)</label><input type="text" value="${item.link||''}" oninput="updRes('publications',${i},'link',this.value)"></div>
         </div>`;
-
-    const expTemplate = (item, i) => `
-        <div class="list-item-header">DENEYİM #${i+1} <button class="btn-remove" onclick="removeItem('experience', ${i})">SİL</button></div>
-        <div class="form-grid">
-            <div><label>Pozisyon</label><input type="text" value="${item.role||''}" oninput="updRes('experience',${i},'role',this.value)"></div>
-            <div><label>Şirket</label><input type="text" value="${item.company||''}" oninput="updRes('experience',${i},'company',this.value)"></div>
-            <div><label>Tarih</label><input type="text" value="${item.date||''}" oninput="updRes('experience',${i},'date',this.value)"></div>
-            <div class="full-width"><label>Açıklama</label><input type="text" value="${item.desc||''}" oninput="updRes('experience',${i},'desc',this.value)"></div>
-        </div>`;
     
     const eduTemplate = (item, i) => `
         <div class="list-item-header">EĞİTİM #${i+1} <button class="btn-remove" onclick="removeItem('education', ${i})">SİL</button></div>
@@ -244,6 +291,7 @@
             <div><label>Bölüm</label><input type="text" value="${item.degree||''}" oninput="updRes('education',${i},'degree',this.value)"></div>
             <div><label>Okul</label><input type="text" value="${item.school||''}" oninput="updRes('education',${i},'school',this.value)"></div>
             <div class="full-width"><label>Tarih</label><input type="text" value="${item.date||''}" oninput="updRes('education',${i},'date',this.value)"></div>
+            <div class="full-width"><label>Açıklama / Detay</label><textarea style="height:60px;" oninput="updRes('education',${i},'desc',this.value)">${item.desc||''}</textarea></div>
         </div>`;
     
     const certTemplate = (item, i) => `
@@ -252,19 +300,19 @@
             <div><label>Adı</label><input type="text" value="${item.title||''}" oninput="updRes('certificates',${i},'title',this.value)"></div>
             <div><label>Kurum</label><input type="text" value="${item.issuer||''}" oninput="updRes('certificates',${i},'issuer',this.value)"></div>
             <div class="full-width"><label>Görsel Yolu (JPG)</label><input type="text" value="${item.image||''}" oninput="updRes('certificates',${i},'image',this.value)"></div>
-            <div class="full-width"><label>Link (URL - Opsiyonel)</label><input type="text" value="${item.link||''}" oninput="updRes('certificates',${i},'link',this.value)"></div>
-            <div class="full-width"><label>Kısa Açıklama (İsteğe Bağlı)</label><textarea style="height:60px;" oninput="updRes('certificates',${i},'desc',this.value)">${item.desc||''}</textarea></div>
+            <div class="full-width"><label>Link (URL)</label><input type="text" value="${item.link||''}" oninput="updRes('certificates',${i},'link',this.value)"></div>
+            <div class="full-width"><label>Kısa Açıklama</label><textarea style="height:60px;" oninput="updRes('certificates',${i},'desc',this.value)">${item.desc||''}</textarea></div>
         </div>`;
 
     function addPublication() { data.resume.publications.push({}); loadResume(); updateOutput(); }
-    function addExperience() { data.resume.experience.push({}); loadResume(); updateOutput(); }
+    function addExperience() { data.resume.experience.push({projects:[]}); loadResume(); updateOutput(); }
     function addEducation() { data.resume.education.push({}); loadResume(); updateOutput(); }
     function addCertificate() { data.resume.certificates.push({}); loadResume(); updateOutput(); }
     function removeItem(t, i) { if(confirm('Sil?')) { data.resume[t].splice(i,1); loadResume(); updateOutput(); } }
     function updRes(t, i, k, v) { data.resume[t][i][k] = v; updateOutput(); }
     function updateSkills() { data.resume.skills = document.getElementById('skills-text').value.split(',').map(s=>s.trim()).filter(s=>s); updateOutput(); }
 
-    // PROJECTS (Same as before)
+    // PROJECTS (Standard)
     function loadProjectsSidebar() {
         const l = document.getElementById('proj-list-ul'); l.innerHTML='';
         data.projects.forEach((p,i) => { const li=document.createElement('li'); li.innerText=p.name||'(No Name)'; if(i===activeProjectIndex) li.classList.add('active'); li.onclick=()=>selProj(i); l.appendChild(li); });
@@ -307,7 +355,7 @@
     function updateProjectTypes(v) { if(activeProjectIndex<0)return; data.projects[activeProjectIndex].types=v.split(',').map(s=>s.trim()); updateOutput(); }
 
     function updateOutput() {
-        const code = `// assets/js/projects.js\n// v3.6 Data File\n\nwindow.data = ${JSON.stringify(data, null, 2)};`;
+        const code = `// assets/js/projects.js\n// v5.1 Data File\n\nwindow.data = ${JSON.stringify(data, null, 2)};`;
         document.getElementById('output-code').value = code;
     }
     function copyCode() { navigator.clipboard.writeText(document.getElementById('output-code').value).then(()=>alert('Kopyalandı!')); }

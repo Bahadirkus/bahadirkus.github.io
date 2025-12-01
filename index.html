@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bahadır Kuş Portfolio</title>
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,17 +14,30 @@
     body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at 50% 0%, #dbeafe 0%, #f3f4f6 50%, #f9fafb 100%); color: var(--text); line-height: 1.6; }
     body.no-scroll { overflow: hidden; }
     a { text-decoration: none; color: inherit; }
-    
     .page { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
     .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px; align-items: flex-start; }
 
     /* SIDEBAR */
     .sidebar { position: sticky; top: 32px; background: var(--sidebar-bg); border-radius: 24px; padding: 32px 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 24px; color: #f9fafb; align-items: center; }
     .profile-photo { width: 150px; height: 150px; border-radius: 40px; background: #020617; overflow: hidden; border: 2px solid rgba(255,255,255,0.1); }
-    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
     .profile-header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
     .profile-name { font-size: 24px; font-weight: 700; color: #fff; }
-    .profile-role-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.1); border-radius: 999px; font-size: 12px; font-weight: 500; color: #e2e8f0; }
+    
+    /* TEK SATIR (HIZALI) YEŞİL NOKTA DÜZENİ */
+    .profile-role-pill {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        padding: 8px 12px; background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 999px;
+        font-size: 11.5px; font-weight: 600; color: #e2e8f0;
+        white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .profile-role-pill span:first-child {
+        display: block; min-width: 8px; width: 8px; height: 8px;
+        background-color: #4ade80; border-radius: 50%;
+        box-shadow: 0 0 8px #4ade80; flex-shrink: 0;
+    }
     
     .profile-social { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
     .social-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: 0.2s; }
@@ -73,15 +85,18 @@
     /* RESUME */
     .resume-block { background: #f9fafb; border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
     .resume-block h3 { margin-bottom: 16px; font-size: 16px; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; }
-    .resume-item { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
+    .resume-item { margin-bottom: 25px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
     .resume-item:last-child { border: none; margin: 0; padding: 0; }
-    .resume-item h4 { font-size: 15px; font-weight: 600; color: #111827; }
+    .resume-item h4 { font-size: 16px; font-weight: 600; color: #111827; }
     .resume-item h4 a { color: var(--accent); text-decoration: none; transition: 0.2s; }
     .resume-item h4 a:hover { text-decoration: underline; }
-    .resume-item .meta { font-size: 12px; color: var(--accent); font-weight: 600; display: block; margin-bottom: 6px; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .skill-tag { font-size: 12px; border-radius: 6px; padding: 6px 12px; background: #e5e7eb; color: #374151; font-weight: 500; }
+    .resume-item .meta { font-size: 12px; color: var(--accent); font-weight: 600; display: block; margin-bottom: 8px; }
     
+    /* Nested Projects */
+    .job-project { margin-top: 15px; padding-left: 15px; border-left: 3px solid #e2e8f0; }
+    .job-project h5 { font-size: 14px; font-weight: 700; color: #374151; margin: 0 0 4px 0; }
+    .job-project p { font-size: 13px; color: #6b7280; white-space: pre-line; margin: 0; }
+
     .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
     .cert-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform 0.2s; display: block; cursor: pointer; }
     .cert-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -90,6 +105,8 @@
     .cert-info { padding: 10px; }
     .cert-info h4 { margin: 0; font-size: 13px; font-weight: 600; color: var(--text); }
     .cert-info span { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag { font-size: 12px; border-radius: 6px; padding: 6px 12px; background: #e5e7eb; color: #374151; font-weight: 500; }
 
     /* MODAL */
     .project-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px; }
@@ -122,11 +139,25 @@
         <div class="profile-photo"><img id="sidebar-img" src="" alt="Profile"></div>
         <div>
           <div class="profile-name" id="sidebar-name"></div>
-          <div class="profile-role-pill"><span style="width:8px; height:8px; background:#4ade80; border-radius:50%;"></span><span id="sidebar-role"></span></div>
+          <div class="profile-role-pill"><span></span><span id="sidebar-role"></span></div>
         </div>
       </div>
+      
       <div class="profile-social" id="sidebar-social"></div>
+      
       <div class="contact-list">
+        
+        <a class="contact-card-link" id="link-cv" href="#" target="_blank" style="display:none; background: rgba(37, 99, 235, 0.15); border-color: #2563eb;">
+            <div class="contact-icon" style="background:#2563eb;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 15V3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="contact-text"><span class="contact-label" style="color:#60a5fa;font-weight:700;">RESUME</span><span class="contact-value">View CV</span></div>
+        </a>
+
         <a class="contact-card-link" id="link-email">
             <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/gmail.svg"></div>
             <div class="contact-text"><span class="contact-label">Email</span><span class="contact-value" id="val-email"></span></div>
@@ -163,15 +194,13 @@
       <section id="sec-resume" class="tab-section">
         <div class="resume-block"><h3>Professional Summary</h3><p id="resume-bio" style="color:#4b5563; font-size:14px; white-space: pre-line;"></p></div>
         
-        <div class="resume-block" id="block-publications" style="display:none;">
-            <h3>Publications & Research</h3>
-            <div id="resume-pub-list"></div>
-        </div>
-
-        <div class="resume-block"><h3>Certificates</h3><div class="certificates-grid" id="resume-cert-list"></div></div>
         <div class="resume-block"><h3>Experience</h3><div id="resume-exp-list"></div></div>
-        <div class="resume-block"><h3>Education</h3><div id="resume-edu-list"></div></div>
         <div class="resume-block"><h3>Technical Skills</h3><div class="skill-tags" id="resume-skills"></div></div>
+        
+        <div class="resume-block" id="block-publications" style="display:none;"><h3>Publications & Research</h3><div id="resume-pub-list"></div></div>
+        
+        <div class="resume-block"><h3>Certificates</h3><div class="certificates-grid" id="resume-cert-list"></div></div>
+        <div class="resume-block"><h3>Education</h3><div id="resume-edu-list"></div></div>
       </section>
     </main>
   </div>
@@ -206,6 +235,14 @@
       document.getElementById('link-email').href = "mailto:" + p.email;
       document.getElementById('val-loc').textContent = p.location || "-";
       
+      // CV BUTTON (Open New Tab)
+      if(p.cvPath) {
+          const cvBtn = document.getElementById('link-cv');
+          cvBtn.style.display = 'flex';
+          cvBtn.href = p.cvPath;
+          // target="_blank" zaten HTML'de var, download'u JS'den kaldirdik.
+      }
+
       const socDiv = document.getElementById('sidebar-social');
       const soc = p.social || {};
       
@@ -225,32 +262,36 @@
       document.getElementById('resume-bio').textContent = p.bio || "";
       const r = data.resume || {};
       
+      // EXPERIENCE (Nested)
+      const expDiv = document.getElementById('resume-exp-list');
+      (r.experience||[]).forEach(item => {
+          let projectsHtml = '';
+          (item.projects || []).forEach(proj => {
+              projectsHtml += `<div class="job-project"><h5>${proj.title}</h5><p>${proj.desc}</p></div>`;
+          });
+          expDiv.innerHTML += `<div class="resume-item"><h4>${item.role}</h4><span class="meta">${item.date} • ${item.company}</span><p style="font-size:14px; color:#555; white-space:pre-line;">${item.desc||''}</p>${projectsHtml}</div>`;
+      });
+
       // PUBLICATIONS
       if(r.publications && r.publications.length > 0) {
           document.getElementById('block-publications').style.display = 'block';
           const pubDiv = document.getElementById('resume-pub-list');
           r.publications.forEach(item => {
-              // Eğer link varsa tıklanabilir yap
-              const titleHtml = item.link ? `<a href="${item.link}" target="_blank">${item.title} 🔗</a>` : item.title;
+              const titleHtml = item.link ? `<a href="${item.link}" target="_blank" style="color:#2563eb;text-decoration:underline;">${item.title} 🔗</a>` : item.title;
               pubDiv.innerHTML += `<div class="resume-item"><h4>${titleHtml}</h4><span class="meta">${item.date} • ${item.journal}</span></div>`;
           });
       }
 
-      const expDiv = document.getElementById('resume-exp-list');
-      (r.experience||[]).forEach(item => {
-          expDiv.innerHTML += `<div class="resume-item"><h4>${item.role}</h4><span class="meta">${item.date} • ${item.company}</span><p style="font-size:14px; color:#555;">${item.desc}</p></div>`;
-      });
       const eduDiv = document.getElementById('resume-edu-list');
       (r.education||[]).forEach(item => {
-          eduDiv.innerHTML += `<div class="resume-item"><h4>${item.degree}</h4><span class="meta">${item.date} • ${item.school}</span></div>`;
+          const descHtml = item.desc ? `<p style="font-size:13px; color:#666; margin-top:5px; white-space:pre-line;">${item.desc}</p>` : '';
+          eduDiv.innerHTML += `<div class="resume-item"><h4>${item.degree}</h4><span class="meta">${item.date} • ${item.school}</span>${descHtml}</div>`;
       });
       
-      // CERTIFICATES (Modal Logic: Hide text if empty)
       const certDiv = document.getElementById('resume-cert-list');
       (r.certificates||[]).forEach(item => {
           const div = document.createElement('div');
           div.className = 'cert-card';
-          // Açıklama var mı? Link var mı?
           let links = [];
           if(item.link) links.push({label:'View Original / Verify', url:item.link});
           
@@ -258,7 +299,7 @@
               name: item.title,
               role: item.issuer,
               date: '',
-              longDesc: item.desc || "", // Boşsa UI gizlenecek
+              longDesc: item.desc || "", 
               coverImage: item.image,
               gallery: [{type: 'image', src: item.image}],
               links: links
@@ -309,6 +350,17 @@
   }
 
   const modal = document.getElementById('project-modal');
+  
+  // CLOSE LOGIC
+  function closeModal() {
+      modal.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      document.getElementById('m-media').innerHTML = '';
+  }
+  
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
   function openModal(p) {
       document.body.classList.add('no-scroll');
       modal.classList.add('open');
@@ -321,11 +373,9 @@
           linkDiv.innerHTML += `<a href="${l.url}" target="_blank" style="color:#2563eb; font-weight:600; display:block; margin-bottom:5px;">🔗 ${l.label}</a>`;
       });
 
-      // AKILLI MODAL: Metin Yoksa Gizle
       const textCol = document.getElementById('modal-text-col');
       const galleryCol = document.getElementById('modal-gallery-col');
       
-      // Eğer Link YOKSA ve Açıklama BOŞSA -> Tam ekran resim
       if (!p.longDesc && (!p.links || p.links.length === 0)) {
           textCol.style.display = 'none';
           galleryCol.style.flex = '1';
@@ -367,11 +417,6 @@
       }
   }
 
-  function closeModal() {
-      modal.classList.remove('open');
-      document.body.classList.remove('no-scroll');
-      document.getElementById('m-media').innerHTML = '';
-  }
   window.addEventListener('load', init);
 </script>
 </body>
