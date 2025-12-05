@@ -4,6 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bahadır Kuş Portfolio</title>
+
+  <meta property="og:title" content="Bahadır Kuş | Simulation Architect & Developer">
+  
+  <meta property="og:description" content="Portfolio of Bahadır Kuş. Expert in Unity, Medical Simulation, Embedded Systems and Technical Design.">
+  
+  <meta property="og:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
+  
+  <meta property="og:url" content="https://bahadirkus.github.io/">
+  
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bahadır Kuş | Simulation Developer">
+  <meta name="twitter:description" content="Developing high-fidelity surgical simulators and interactive systems using Unity & Hardware integration.">
+  <meta name="twitter:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,13 +30,16 @@
     body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at 50% 0%, #dbeafe 0%, #f3f4f6 50%, #f9fafb 100%); color: var(--text); line-height: 1.6; }
     body.no-scroll { overflow: hidden; }
     a { text-decoration: none; color: inherit; }
+    
     .page { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
     .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px; align-items: flex-start; }
 
     /* SIDEBAR */
     .sidebar { position: sticky; top: 32px; background: var(--sidebar-bg); border-radius: 24px; padding: 32px 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 24px; color: #f9fafb; align-items: center; }
+    
     .profile-photo { width: 150px; height: 150px; border-radius: 40px; background: #020617; overflow: hidden; border: 2px solid rgba(255,255,255,0.1); }
     .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+    
     .profile-header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
     .profile-name { font-size: 24px; font-weight: 700; color: #fff; }
     
@@ -235,12 +254,12 @@
       document.getElementById('link-email').href = "mailto:" + p.email;
       document.getElementById('val-loc').textContent = p.location || "-";
       
-      // CV BUTTON (Open New Tab)
+      // CV BUTTON
       if(p.cvPath) {
           const cvBtn = document.getElementById('link-cv');
           cvBtn.style.display = 'flex';
           cvBtn.href = p.cvPath;
-          // target="_blank" zaten HTML'de var, download'u JS'den kaldirdik.
+          // target="_blank" handled in HTML
       }
 
       const socDiv = document.getElementById('sidebar-social');
@@ -311,7 +330,15 @@
       const skillDiv = document.getElementById('resume-skills');
       (r.skills||[]).forEach(s => skillDiv.innerHTML += `<span class="skill-tag">${s}</span>`);
 
+      // Initial Project Load
       renderProjects('all');
+      
+      // CHECK DEEP LINK (Hash Routing)
+      const hash = window.location.hash.substring(1);
+      if(hash) {
+          const found = data.projects.find(pr => pr.id === hash);
+          if(found) openModal(found);
+      }
   }
 
   function filterProjects(type, btn) {
@@ -351,17 +378,28 @@
 
   const modal = document.getElementById('project-modal');
   
-  // CLOSE LOGIC
+  // CLOSE LOGIC (Updated Hash Handling)
   function closeModal() {
       modal.classList.remove('open');
       document.body.classList.remove('no-scroll');
       document.getElementById('m-media').innerHTML = '';
+      // Clear hash silently
+      history.pushState("", document.title, window.location.pathname + window.location.search);
   }
   
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
+  // SHORTS PARSER
+  function getYouTubeId(url) {
+      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+      return match ? match[1] : null;
+  }
+
   function openModal(p) {
+      // UPDATE HASH FOR DEEP LINKING
+      if(p.id) window.history.pushState(null, '', '#' + p.id);
+
       document.body.classList.add('no-scroll');
       modal.classList.add('open');
       document.getElementById('m-title').textContent = p.name;
@@ -395,7 +433,10 @@
               const th = document.createElement('div');
               th.className = 'modal-thumb';
               let src = item.src;
-              if(item.type === 'youtube') src = `https://img.youtube.com/vi/${item.src.split('v=')[1]}/0.jpg`;
+              if(item.type === 'youtube') {
+                  const vidId = getYouTubeId(item.src);
+                  src = vidId ? `https://img.youtube.com/vi/${vidId}/0.jpg` : '';
+              }
               th.innerHTML = `<img src="${src}">`;
               th.onclick = () => {
                   document.querySelectorAll('.modal-thumb').forEach(t=>t.classList.remove('active'));
@@ -412,8 +453,10 @@
       m.innerHTML = '';
       if(item.type === 'image') m.innerHTML = `<img src="${item.src}">`;
       else if(item.type === 'youtube') {
-          const vid = item.src.split('v=')[1];
-          m.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen></iframe>`;
+          const vidId = getYouTubeId(item.src);
+          if (vidId) {
+              m.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}" frameborder="0" allowfullscreen></iframe>`;
+          }
       }
   }
 
