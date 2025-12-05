@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🚀 Portfolio Admin v5.4</title>
+  <title>🚀 Portfolio Admin v6.0</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9; --accent: #3b82f6; --danger: #ef4444; --success: #10b981; --warning: #f59e0b; }
+    :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9; --accent: #3b82f6; --danger: #ef4444; --success: #10b981; --warning: #f59e0b; --purple: #8b5cf6; }
     * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
@@ -35,7 +35,6 @@
     .list-item { background: #1e293b; padding: 15px; border-radius: 8px; border: 1px solid var(--border); position: relative; }
     .list-item-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; font-weight: bold; color: #cbd5e1; }
     
-    /* SUB PROJECTS CONTAINER (Experience) */
     .sub-projects-container { margin-top: 15px; padding-top: 15px; border-top: 1px dashed #334155; }
     .sub-project-item { background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #334155; margin-bottom: 10px; }
     .sub-header { font-size: 11px; color: #94a3b8; margin-bottom: 5px; font-weight: bold; display: flex; justify-content: space-between; }
@@ -45,6 +44,7 @@
     .btn-add:hover { border-color: var(--accent); color: var(--accent); background: #1e293b; }
     .btn-add-sub { background: #334155; color: #cbd5e1; border: none; padding: 8px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 10px; }
     .btn-add-sub:hover { background: #475569; color: white; }
+    .btn-share { background: var(--purple); color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; }
 
     .gallery-item-row { display: grid; grid-template-columns: 100px 1fr 50px; gap: 10px; align-items: center; margin-bottom: 10px; }
 
@@ -88,7 +88,7 @@
           <div><label>Unvan (Role)</label><input type="text" id="prof-role" oninput="updateData()"></div>
           <div class="full-width"><label>Profil Fotoğrafı Yolu</label><input type="text" id="prof-img" oninput="updateData()"></div>
           <div class="full-width"><label>CV PDF Dosya Yolu</label><input type="text" id="prof-cv" oninput="updateData()"></div>
-          <div class="full-width"><label>Kısa Biyografi (Summary)</label><textarea id="prof-bio" oninput="updateData()" style="height:100px;"></textarea></div>
+          <div class="full-width"><label>Kısa Biyografi</label><textarea id="prof-bio" oninput="updateData()" style="height:100px;"></textarea></div>
         </div>
         <div class="section-header">İletişim & Sosyal Medya</div>
         <div class="form-grid">
@@ -103,27 +103,23 @@
       </div>
 
       <div id="tab-resume" class="tab-content">
-        
-        <div class="section-header">Bilimsel Yayınlar (Publications)</div>
+        <div class="section-header">Bilimsel Yayınlar</div>
         <div id="pub-list" class="dynamic-list"></div>
-        <button class="btn-add" onclick="addPublication()">+ Yeni Makale Ekle</button>
-        
+        <button class="btn-add" onclick="addPublication()">+ Ekle</button>
         <br><br>
-        <div class="section-header">Deneyimler (Experience) ve Alt Projeler</div>
+        <div class="section-header">Deneyimler (Experience)</div>
         <div id="exp-list" class="dynamic-list"></div>
-        <button class="btn-add" onclick="addExperience()">+ Yeni İş Deneyimi Ekle</button>
+        <button class="btn-add" onclick="addExperience()">+ Ekle</button>
         <br><br>
-        
-        <div class="section-header">Sertifikalar (Certificates)</div>
+        <div class="section-header">Sertifikalar</div>
         <div id="cert-list" class="dynamic-list"></div>
-        <button class="btn-add" onclick="addCertificate()">+ Yeni Sertifika Ekle</button>
-        
+        <button class="btn-add" onclick="addCertificate()">+ Ekle</button>
         <br><br>
-        <div class="section-header">Eğitim (Education)</div>
+        <div class="section-header">Eğitim</div>
         <div id="edu-list" class="dynamic-list"></div>
-        <button class="btn-add" onclick="addEducation()">+ Yeni Eğitim Ekle</button>
+        <button class="btn-add" onclick="addEducation()">+ Ekle</button>
         <br><br>
-        <div class="section-header">Teknik Yetenekler (Skills)</div>
+        <div class="section-header">Teknik Yetenekler</div>
         <textarea id="skills-text" oninput="updateSkills()" style="height: 80px;"></textarea>
       </div>
 
@@ -135,14 +131,20 @@
           </div>
           <div style="flex: 1; padding: 30px; overflow-y: auto;">
             <div id="project-form-container" style="display:none;">
-                <div class="section-header">Proje Detayları <button class="btn-remove" onclick="deleteProject()">Sil</button></div>
+                <div class="section-header">
+                    Proje Detayları
+                    <div style="display:flex; gap:5px;">
+                        <button class="btn-share" onclick="downloadShareFile()">🔗 Paylaşım Dosyası İndir</button>
+                        <button class="btn-remove" onclick="deleteProject()">Sil</button>
+                    </div>
+                </div>
                 <div class="form-grid">
                     <div><label>Proje Adı</label><input type="text" id="proj-name" oninput="updateProjectField('name', this.value)"></div>
                     <div><label>Tarih</label><input type="text" id="proj-date" oninput="updateProjectField('date', this.value)"></div>
-                    <div><label>ID</label><input type="text" id="proj-id" oninput="updateProjectField('id', this.value)"></div>
+                    <div><label>ID (Link için)</label><input type="text" id="proj-id" oninput="updateProjectField('id', this.value)"></div>
                     <div><label>Rol</label><input type="text" id="proj-role" oninput="updateProjectField('role', this.value)"></div>
                     <div class="full-width"><label>Teknolojiler</label><input type="text" id="proj-tagline" oninput="updateProjectField('tagline', this.value)"></div>
-                    <div class="full-width"><label>Kapak Görseli</label><input type="text" id="proj-cover" oninput="updateProjectField('coverImage', this.value)"></div>
+                    <div class="full-width"><label>Kapak Görseli (Tam Link önerilir)</label><input type="text" id="proj-cover" oninput="updateProjectField('coverImage', this.value)"></div>
                     <div class="full-width"><label>Kısa Açıklama</label><textarea id="proj-short" oninput="updateProjectField('shortDesc', this.value)"></textarea></div>
                     <div class="full-width"><label>Uzun Açıklama</label><textarea id="proj-long" style="height:100px" oninput="updateProjectField('longDesc', this.value)"></textarea></div>
                     <div class="full-width"><label>Türler</label><input type="text" id="proj-types" oninput="updateProjectTypes(this.value)"></div>
@@ -215,11 +217,10 @@
         updateOutput();
     }
 
-    // RESUME LOGIC (Nested Projects)
+    // RESUME
     function loadResume() {
         renderList('pub-list', data.resume.publications, pubTemplate);
         
-        // EXPERIENCE (Nested)
         const expDiv = document.getElementById('exp-list'); expDiv.innerHTML='';
         (data.resume.experience||[]).forEach((item, i) => {
             const div = document.createElement('div'); div.className='list-item';
@@ -234,7 +235,6 @@
                     </div>
                 </div>`;
             });
-
             div.innerHTML = `
             <div class="list-item-header">DENEYİM #${i+1} <button class="btn-remove" onclick="removeItem('experience', ${i})">SİL</button></div>
             <div class="form-grid">
@@ -261,7 +261,6 @@
         arr.forEach((it,i) => { const d=document.createElement('div'); d.className='list-item'; d.innerHTML=tpl(it,i); c.appendChild(d); });
     }
     
-    // Alt Proje Fonksiyonları
     function addExpProject(expIndex) {
         if(!data.resume.experience[expIndex].projects) data.resume.experience[expIndex].projects = [];
         data.resume.experience[expIndex].projects.push({title:"", desc:""});
@@ -314,7 +313,7 @@
     function updRes(t, i, k, v) { data.resume[t][i][k] = v; updateOutput(); }
     function updateSkills() { data.resume.skills = document.getElementById('skills-text').value.split(',').map(s=>s.trim()).filter(s=>s); updateOutput(); }
 
-    // PROJECTS (Standard)
+    // PROJECTS
     function loadProjectsSidebar() {
         const l = document.getElementById('proj-list-ul'); l.innerHTML='';
         data.projects.forEach((p,i) => { const li=document.createElement('li'); li.innerText=p.name||'(No Name)'; if(i===activeProjectIndex) li.classList.add('active'); li.onclick=()=>selProj(i); l.appendChild(li); });
@@ -357,7 +356,7 @@
     function updateProjectTypes(v) { if(activeProjectIndex<0)return; data.projects[activeProjectIndex].types=v.split(',').map(s=>s.trim()); updateOutput(); }
 
     function updateOutput() {
-        const code = `// assets/js/projects.js\n// v5.4 Data File\n\nwindow.data = ${JSON.stringify(data, null, 2)};`;
+        const code = `// assets/js/projects.js\n// v6.0 Data File\n\nwindow.data = ${JSON.stringify(data, null, 2)};`;
         document.getElementById('output-code').value = code;
     }
     function copyCode() { navigator.clipboard.writeText(document.getElementById('output-code').value).then(()=>alert('Kopyalandı!')); }
@@ -365,6 +364,45 @@
         const b = new Blob([document.getElementById('output-code').value], {type:'text/javascript'});
         const a = document.createElement('a'); a.href=URL.createObjectURL(b); a.download='projects.js'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
+    
+    // --- SHARE FILE GENERATOR ---
+    function downloadShareFile() {
+        const p = data.projects[activeProjectIndex];
+        if(!p) return;
+        
+        // Tam resim yolunu oluştur (Mutlaka https://... olmalı)
+        let imgUrl = p.coverImage;
+        if(!imgUrl.startsWith('http')) {
+            imgUrl = 'https://bahadirkus.github.io/' + imgUrl;
+        }
+
+        const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${p.name} | Bahadır Kuş</title>
+    <meta property="og:title" content="${p.name}">
+    <meta property="og:description" content="${p.shortDesc || 'Project details'}">
+    <meta property="og:image" content="${imgUrl}">
+    <meta property="og:url" content="https://bahadirkus.github.io/${p.id}.html">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="${imgUrl}">
+    <meta http-equiv="refresh" content="0; url=https://bahadirkus.github.io/#${p.id}">
+    <script>window.location.href = "https://bahadirkus.github.io/#${p.id}";<\/script>
+</head>
+<body><p>Redirecting...</p></body>
+</html>`;
+
+        const b = new Blob([htmlContent], {type:'text/html'});
+        const a = document.createElement('a'); 
+        a.href = URL.createObjectURL(b); 
+        a.download = (p.id || 'project') + '.html'; 
+        document.body.appendChild(a); 
+        a.click(); 
+        document.body.removeChild(a);
+    }
+
     window.onload = init;
   </script>
 </body>
