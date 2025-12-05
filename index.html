@@ -4,24 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bahadır Kuş Portfolio</title>
-
+  
   <meta property="og:title" content="Bahadır Kuş | Simulation Architect & Developer">
   <meta property="og:description" content="Portfolio of Bahadır Kuş. Expert in Unity, Medical Simulation, Embedded Systems and Technical Design.">
   <meta property="og:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
   <meta property="og:url" content="https://bahadirkus.github.io/">
   <meta property="og:type" content="website">
-  
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Bahadır Kuş | Simulation Developer">
-  <meta name="twitter:description" content="Expert in Unity, Medical Simulation and Embedded Systems.">
   <meta name="twitter:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
-    :root { --bg: #f8f9fa; --card-bg: #ffffff; --text: #1f2937; --muted: #6b7280; --border: #e5e7eb; --accent: #2563eb; --sidebar-bg: #111827; }
+    :root { --bg: #f8f9fa; --card-bg: #ffffff; --text: #1f2937; --muted: #6b7280; --border: #e5e7eb; --accent: #2563eb; --sidebar-bg: #111827; --neon: #4ade80; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at 50% 0%, #dbeafe 0%, #f3f4f6 50%, #f9fafb 100%); color: var(--text); line-height: 1.6; overflow-x: hidden; }
     body.no-scroll { overflow: hidden; }
@@ -29,28 +26,40 @@
     .page { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
     .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px; align-items: flex-start; }
 
-    /* PRELOADER (Senin Beğendiğin Hali) */
+    /* --- TERMINAL BOOT PRELOADER (SİYAH EKRAN) --- */
     #preloader {
-        position: fixed; inset: 0; background: #0f172a; z-index: 99999;
-        display: flex; flex-direction: column; justify-content: center; align-items: center;
-        transition: opacity 0.6s ease-out, visibility 0.6s;
+        position: fixed; inset: 0; background: #0a0a0a; z-index: 99999;
+        display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+        padding: 40px;
+        font-family: 'JetBrains Mono', 'Courier New', monospace;
+        color: #4ade80; /* Matrix Yeşili */
+        font-size: 13px; line-height: 1.6;
+        transition: opacity 0.5s ease-out, visibility 0.5s;
     }
-    .loader-ring {
-        width: 80px; height: 80px; border-radius: 50%;
-        border: 2px solid rgba(74, 222, 128, 0.1); border-top-color: #4ade80;
-        animation: spin 1s infinite linear; position: relative;
-        box-shadow: 0 0 30px rgba(74, 222, 128, 0.1);
+
+    .terminal-line {
+        display: block; opacity: 0;
+        animation: fadeInLine 0.05s forwards;
+        white-space: pre-wrap; margin-bottom: 2px;
     }
-    .loader-ring::before {
-        content: ''; position: absolute; inset: 10px; border-radius: 50%;
-        border: 2px solid rgba(37, 99, 235, 0.1); border-bottom-color: var(--accent);
-        animation: spin 2s infinite linear reverse;
+
+    /* Satır başındaki > işareti */
+    .terminal-line::before { content: '> '; color: #60a5fa; font-weight: bold; }
+    /* Başarılı işlem rengi */
+    .status-ok { color: #fff; margin-left: 5px; font-weight: bold; }
+    
+    /* Yanıp sönen imleç */
+    .cursor {
+        display: inline-block; width: 8px; height: 15px;
+        background: #4ade80; animation: blink 1s infinite;
+        vertical-align: text-bottom; margin-left: 5px;
     }
-    .loader-text-container { margin-top: 25px; text-align: center; font-family: monospace; }
-    .loader-title { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 1px; margin-bottom: 5px; }
-    .loader-status { font-size: 12px; color: #4ade80; text-transform: uppercase; letter-spacing: 2px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes fadeInLine { from { opacity: 0; transform: translateX(-5px); } to { opacity: 1; transform: translateX(0); } }
+
     body.loaded #preloader { opacity: 0; visibility: hidden; pointer-events: none; }
+    @media (max-width: 600px) { #preloader { padding: 20px; font-size: 11px; } }
 
     /* SIDEBAR */
     .sidebar { position: sticky; top: 32px; background: var(--sidebar-bg); border-radius: 24px; padding: 32px 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 24px; color: #f9fafb; align-items: center; }
@@ -59,16 +68,29 @@
     .profile-header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
     .profile-name { font-size: 24px; font-weight: 700; color: #fff; }
     
-    /* PILL */
-    .profile-role-pill { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 999px; font-size: 11.5px; font-weight: 600; color: #e2e8f0; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-    .profile-role-pill span:first-child { display: block; min-width: 8px; width: 8px; height: 8px; background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 8px #4ade80; flex-shrink: 0; }
+    /* Single Line Pill */
+    .profile-role-pill {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        padding: 8px 12px; background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 999px;
+        font-size: 11.5px; font-weight: 600; color: #e2e8f0;
+        white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .profile-role-pill span:first-child {
+        display: block; min-width: 8px; width: 8px; height: 8px;
+        background-color: #4ade80; border-radius: 50%;
+        box-shadow: 0 0 8px #4ade80; flex-shrink: 0;
+    }
     
+    /* White Icons */
     .profile-social { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
     .social-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: 0.2s; }
     .social-btn:hover { background: #fff; transform: translateY(-2px); border-color: #fff; }
     .social-btn img { width: 20px; height: 20px; filter: invert(1) brightness(100%); opacity: 0.8; }
     .social-btn:hover img { filter: invert(0); opacity: 1; }
 
+    /* Large Cards */
     .contact-list { width: 100%; display: flex; flex-direction: column; gap: 12px; }
     .contact-card-link { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
     .contact-card-link:hover { background: rgba(255,255,255,0.08); transform: translateX(2px); }
@@ -78,6 +100,7 @@
     .contact-label { font-size: 10px; text-transform: uppercase; color: #9ca3af; letter-spacing: 0.5px; }
     .contact-value { font-size: 13px; color: #f3f4f6; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+    /* MAIN */
     .main-card { background: var(--card-bg); border-radius: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); padding: 32px; min-height: 80vh; }
     .main-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--border); padding-bottom: 20px; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
     .top-tabs { display: flex; background: #f3f4f6; padding: 4px; border-radius: 12px; }
@@ -87,6 +110,7 @@
     .tab-section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* PROJECTS */
     .project-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
     .filter-btn { border-radius: 999px; padding: 8px 16px; font-size: 13px; border: 1px solid var(--border); background: #fff; color: var(--muted); cursor: pointer; transition: 0.2s; }
     .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
@@ -114,6 +138,7 @@
     .resume-item h4 a:hover { text-decoration: underline; }
     .resume-item .meta { font-size: 12px; color: var(--accent); font-weight: 600; display: block; margin-bottom: 8px; }
     
+    /* Nested Projects */
     .job-project { margin-top: 15px; padding-left: 15px; border-left: 3px solid #e2e8f0; }
     .job-project h5 { font-size: 14px; font-weight: 700; color: #374151; margin: 0 0 4px 0; }
     .job-project p { font-size: 13px; color: #6b7280; white-space: pre-line; margin: 0; }
@@ -129,6 +154,7 @@
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag { font-size: 12px; border-radius: 6px; padding: 6px 12px; background: #e5e7eb; color: #374151; font-weight: 500; }
 
+    /* MODAL */
     .project-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px; }
     .project-modal.open { display: flex; animation: modalFadeIn 0.2s ease-out; }
     .project-modal-content { background: #fff; width: 100%; max-width: 1000px; border-radius: 20px; overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; }
@@ -152,11 +178,8 @@
 <body>
 
 <div id="preloader">
-    <div class="loader-ring"></div>
-    <div class="loader-text-container">
-        <div class="loader-title">BAHADIR KUŞ</div>
-        <div class="loader-status" id="loader-status">INITIALIZING...</div>
-    </div>
+    <div id="terminal-output"></div>
+    <div class="cursor"></div>
 </div>
 
 <div class="page">
@@ -184,7 +207,6 @@
             </div>
             <div class="contact-text"><span class="contact-label" style="color:#60a5fa;font-weight:700;">RESUME</span><span class="contact-value">View CV</span></div>
         </a>
-
         <a class="contact-card-link" id="link-email">
             <div class="contact-icon"><img src="https://unpkg.com/simple-icons@v9/icons/gmail.svg"></div>
             <div class="contact-text"><span class="contact-label">Email</span><span class="contact-value" id="val-email"></span></div>
@@ -250,20 +272,42 @@
 <script>
   const data = window.data || { profile:{}, resume:{}, projects:[] };
   
-  // PRELOADER
+  // --- TERMINAL BOOT ANIMATION ---
+  const bootLogs = [
+      "Initializing Kernel...",
+      "Loading BAHADIR_KUS_PORTFOLIO v5.6...",
+      "Allocating Memory: 64GB OK",
+      "Mounting Unity Engine Modules...",
+      "Loading C# Scripts... [Done]",
+      "Calibrating Embedded Sensors... [OK]",
+      "Connecting to GitHub API... [200 OK]",
+      "Importing 3D Assets (Lidar Scans)...",
+      "Physics Engine: ACTIVE",
+      "System Ready. Access Granted."
+  ];
+
   function runLoader() {
-      const status = document.getElementById('loader-status');
-      const messages = ["INITIALIZING CORE...", "LOADING ASSETS...", "CONNECTING MODULES...", "SYSTEM READY"];
-      let i = 0;
-      const interval = setInterval(() => {
-          if(i < messages.length) {
-              status.innerText = messages[i];
-              i++;
-          } else {
-              clearInterval(interval);
-              document.body.classList.add('loaded');
-          }
-      }, 400);
+      const output = document.getElementById('terminal-output');
+      let delay = 0;
+      
+      bootLogs.forEach((log, index) => {
+          const randomSpeed = Math.random() * 200 + 50; 
+          delay += randomSpeed;
+          setTimeout(() => {
+              const line = document.createElement('div');
+              line.className = 'terminal-line';
+              if (index > 1 && index < bootLogs.length - 1) {
+                  line.innerHTML = `${log} <span class="status-ok"></span>`;
+              } else {
+                  line.innerHTML = log;
+              }
+              output.appendChild(line);
+              window.scrollTo(0, document.body.scrollHeight);
+              if (index === bootLogs.length - 1) {
+                  setTimeout(() => { document.body.classList.add('loaded'); }, 600);
+              }
+          }, delay);
+      });
   }
 
   function init() {
@@ -287,12 +331,17 @@
       const socDiv = document.getElementById('sidebar-social');
       const soc = p.social || {};
       
+      // ICONS (Fixed White Filter)
       if(soc.linkedin) socDiv.innerHTML += `<a class="social-btn" href="${soc.linkedin}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg"></a>`;
       if(soc.instagram) socDiv.innerHTML += `<a class="social-btn" href="${soc.instagram}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/instagram.svg"></a>`;
       if(soc.youtube) socDiv.innerHTML += `<a class="social-btn" href="${soc.youtube}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg"></a>`;
       if(soc.twitter || soc.x) socDiv.innerHTML += `<a class="social-btn" href="${soc.twitter || soc.x}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/x.svg"></a>`;
 
+      // GitHub LARGE CARD only (as requested before, but icons are back above)
       if(soc.github) {
+          // Also add small icon if desired (optional, but let's keep it consistent)
+          socDiv.innerHTML += `<a class="social-btn" href="${soc.github}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/github.svg"></a>`;
+
           const ghLink = document.getElementById('link-github');
           ghLink.style.display = 'flex'; ghLink.href = soc.github;
           const cleanGh = soc.github.replace('https://', '').replace('http://', '').replace('www.', '');
@@ -352,7 +401,7 @@
 
       renderProjects('all');
 
-      // Deep Linking Check
+      // DEEP LINKING
       const hash = window.location.hash.substring(1);
       if(hash) {
           const found = data.projects.find(pr => pr.id === hash);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🚀 Portfolio Admin v5.5</title>
+  <title>🚀 Portfolio Admin v6.1</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9; --accent: #3b82f6; --danger: #ef4444; --success: #10b981; --warning: #f59e0b; --purple: #8b5cf6; }
@@ -40,7 +40,10 @@
     .btn-add:hover { border-color: var(--accent); color: var(--accent); background: #1e293b; }
     .btn-add-sub { background: #334155; color: #cbd5e1; border: none; padding: 8px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 10px; }
     .btn-add-sub:hover { background: #475569; color: white; }
-    .btn-share { background: var(--purple); color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+    
+    /* Share Button Style */
+    .btn-share { background: var(--purple); color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .btn-share:hover { background: #7c3aed; transform: translateY(-1px); }
 
     .gallery-item-row { display: grid; grid-template-columns: 100px 1fr 50px; gap: 10px; align-items: center; margin-bottom: 10px; }
 
@@ -128,7 +131,7 @@
             <div id="project-form-container" style="display:none;">
                 <div class="section-header">
                     Proje Detayları
-                    <div style="display:flex; gap:5px;">
+                    <div style="display:flex; gap:10px;">
                         <button class="btn-share" onclick="downloadShareFile()">🔗 Paylaşım Dosyası İndir</button>
                         <button class="btn-remove" onclick="deleteProject()">Sil</button>
                     </div>
@@ -136,10 +139,10 @@
                 <div class="form-grid">
                     <div><label>Proje Adı</label><input type="text" id="proj-name" oninput="updateProjectField('name', this.value)"></div>
                     <div><label>Tarih</label><input type="text" id="proj-date" oninput="updateProjectField('date', this.value)"></div>
-                    <div><label>ID (Link için)</label><input type="text" id="proj-id" oninput="updateProjectField('id', this.value)"></div>
+                    <div><label>ID (Link için örn: my-game)</label><input type="text" id="proj-id" oninput="updateProjectField('id', this.value)"></div>
                     <div><label>Rol</label><input type="text" id="proj-role" oninput="updateProjectField('role', this.value)"></div>
                     <div class="full-width"><label>Teknolojiler</label><input type="text" id="proj-tagline" oninput="updateProjectField('tagline', this.value)"></div>
-                    <div class="full-width"><label>Kapak Görseli (Tam Link önerilir)</label><input type="text" id="proj-cover" oninput="updateProjectField('coverImage', this.value)"></div>
+                    <div class="full-width"><label>Kapak Görseli (assets/...)</label><input type="text" id="proj-cover" oninput="updateProjectField('coverImage', this.value)"></div>
                     <div class="full-width"><label>Kısa Açıklama</label><textarea id="proj-short" oninput="updateProjectField('shortDesc', this.value)"></textarea></div>
                     <div class="full-width"><label>Uzun Açıklama</label><textarea id="proj-long" style="height:100px" oninput="updateProjectField('longDesc', this.value)"></textarea></div>
                     <div class="full-width"><label>Türler</label><input type="text" id="proj-types" oninput="updateProjectTypes(this.value)"></div>
@@ -308,7 +311,7 @@
     function updRes(t, i, k, v) { data.resume[t][i][k] = v; updateOutput(); }
     function updateSkills() { data.resume.skills = document.getElementById('skills-text').value.split(',').map(s=>s.trim()).filter(s=>s); updateOutput(); }
 
-    // PROJECTS
+    // PROJECTS (Standard)
     function loadProjectsSidebar() {
         const l = document.getElementById('proj-list-ul'); l.innerHTML='';
         data.projects.forEach((p,i) => { const li=document.createElement('li'); li.innerText=p.name||'(No Name)'; if(i===activeProjectIndex) li.classList.add('active'); li.onclick=()=>selProj(i); l.appendChild(li); });
@@ -351,7 +354,7 @@
     function updateProjectTypes(v) { if(activeProjectIndex<0)return; data.projects[activeProjectIndex].types=v.split(',').map(s=>s.trim()); updateOutput(); }
 
     function updateOutput() {
-        const code = `// assets/js/projects.js\n// v6.0 Data File\n\nwindow.data = ${JSON.stringify(data, null, 2)};`;
+        const code = `// assets/js/projects.js\n// v6.1 Data File\n\nwindow.data = ${JSON.stringify(data, null, 2)};`;
         document.getElementById('output-code').value = code;
     }
     function copyCode() { navigator.clipboard.writeText(document.getElementById('output-code').value).then(()=>alert('Kopyalandı!')); }
@@ -359,12 +362,14 @@
         const b = new Blob([document.getElementById('output-code').value], {type:'text/javascript'});
         const a = document.createElement('a'); a.href=URL.createObjectURL(b); a.download='projects.js'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
-    
-    // --- SHARE FILE GENERATOR ---
+
+    // --- MAGIC SHARE FILE GENERATOR ---
     function downloadShareFile() {
         const p = data.projects[activeProjectIndex];
-        if(!p) return;
+        if(!p) { alert("Lütfen bir proje seçin."); return; }
         
+        // Tam resim URL'sini oluştur (Github Pages URL'i varsayılarak)
+        // NOT: 'bahadirkus.github.io' kısmını kendi domaininle değiştirebilirsin
         let imgUrl = p.coverImage;
         if(!imgUrl.startsWith('http')) {
             imgUrl = 'https://bahadirkus.github.io/' + imgUrl;
@@ -375,22 +380,28 @@
 <head>
     <meta charset="UTF-8">
     <title>${p.name} | Bahadır Kuş</title>
+    
     <meta property="og:title" content="${p.name}">
     <meta property="og:description" content="${p.shortDesc || 'Project details'}">
     <meta property="og:image" content="${imgUrl}">
     <meta property="og:url" content="https://bahadirkus.github.io/${p.id}.html">
     <meta property="og:type" content="article">
+    
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="${imgUrl}">
+    
     <meta http-equiv="refresh" content="0; url=https://bahadirkus.github.io/#${p.id}">
     <script>window.location.href = "https://bahadirkus.github.io/#${p.id}";<\/script>
 </head>
-<body><p>Redirecting...</p></body>
+<body>
+    <p>Redirecting to project details...</p>
+</body>
 </html>`;
 
         const b = new Blob([htmlContent], {type:'text/html'});
         const a = document.createElement('a'); 
         a.href = URL.createObjectURL(b); 
+        // Dosya adı: project-id.html (örn: dragon-faya.html)
         a.download = (p.id || 'project') + '.html'; 
         document.body.appendChild(a); 
         a.click(); 
