@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🚀 Portfolio Admin v6.0</title>
+  <title>🚀 Portfolio Admin v5.5</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9; --accent: #3b82f6; --danger: #ef4444; --success: #10b981; --warning: #f59e0b; --purple: #8b5cf6; }
     * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-    /* HEADER */
     .top-bar { background: var(--panel); border-bottom: 1px solid var(--border); padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
     .brand { font-weight: 700; color: var(--accent); font-size: 18px; }
     .tabs { display: flex; gap: 5px; height: 100%; }
@@ -17,12 +16,10 @@
     .tab-btn:hover { color: white; background: #334155; }
     .tab-btn.active { color: white; border-bottom-color: var(--accent); background: #1e293b; }
 
-    /* LAYOUT */
     .workspace { display: flex; flex: 1; overflow: hidden; }
     .editor-area { flex: 2; padding: 30px; overflow-y: auto; background: #0f172a; }
     .code-area { flex: 1; background: #020617; border-left: 1px solid var(--border); display: flex; flex-direction: column; }
 
-    /* FORMS */
     .section-header { font-size: 18px; font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
     .full-width { grid-column: span 2; }
@@ -30,7 +27,6 @@
     input, textarea, select { width: 100%; background: #1e293b; border: 1px solid var(--border); color: white; padding: 12px; border-radius: 6px; font-family: inherit; transition: 0.2s; }
     input:focus, textarea:focus { border-color: var(--accent); background: #253045; }
     
-    /* LISTS & BUTTONS */
     .dynamic-list { display: flex; flex-direction: column; gap: 15px; }
     .list-item { background: #1e293b; padding: 15px; border-radius: 8px; border: 1px solid var(--border); position: relative; }
     .list-item-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; font-weight: bold; color: #cbd5e1; }
@@ -48,7 +44,6 @@
 
     .gallery-item-row { display: grid; grid-template-columns: 100px 1fr 50px; gap: 10px; align-items: center; margin-bottom: 10px; }
 
-    /* CODE AREA */
     .code-header { padding: 15px; background: var(--panel); border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap:10px; }
     .code-box { flex: 1; background: #0b1120; color: #4ade80; padding: 20px; font-family: 'Consolas', monospace; font-size: 12px; border: none; resize: none; }
     .btn-action { border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 12px; display: flex; align-items: center; gap: 5px; }
@@ -88,7 +83,7 @@
           <div><label>Unvan (Role)</label><input type="text" id="prof-role" oninput="updateData()"></div>
           <div class="full-width"><label>Profil Fotoğrafı Yolu</label><input type="text" id="prof-img" oninput="updateData()"></div>
           <div class="full-width"><label>CV PDF Dosya Yolu</label><input type="text" id="prof-cv" oninput="updateData()"></div>
-          <div class="full-width"><label>Kısa Biyografi</label><textarea id="prof-bio" oninput="updateData()" style="height:100px;"></textarea></div>
+          <div class="full-width"><label>Kısa Biyografi (Summary)</label><textarea id="prof-bio" oninput="updateData()" style="height:100px;"></textarea></div>
         </div>
         <div class="section-header">İletişim & Sosyal Medya</div>
         <div class="form-grid">
@@ -370,7 +365,6 @@
         const p = data.projects[activeProjectIndex];
         if(!p) return;
         
-        // Tam resim yolunu oluştur (Mutlaka https://... olmalı)
         let imgUrl = p.coverImage;
         if(!imgUrl.startsWith('http')) {
             imgUrl = 'https://bahadirkus.github.io/' + imgUrl;
