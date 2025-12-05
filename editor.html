@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🚀 Portfolio Admin v5.1</title>
+  <title>🚀 Portfolio Admin v5.4</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9; --accent: #3b82f6; --danger: #ef4444; --success: #10b981; --warning: #f59e0b; }
@@ -34,6 +34,8 @@
     .dynamic-list { display: flex; flex-direction: column; gap: 15px; }
     .list-item { background: #1e293b; padding: 15px; border-radius: 8px; border: 1px solid var(--border); position: relative; }
     .list-item-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; font-weight: bold; color: #cbd5e1; }
+    
+    /* SUB PROJECTS CONTAINER (Experience) */
     .sub-projects-container { margin-top: 15px; padding-top: 15px; border-top: 1px dashed #334155; }
     .sub-project-item { background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #334155; margin-bottom: 10px; }
     .sub-header { font-size: 11px; color: #94a3b8; margin-bottom: 5px; font-weight: bold; display: flex; justify-content: space-between; }
@@ -213,7 +215,7 @@
         updateOutput();
     }
 
-    // RESUME LOGIC (With Nested Projects)
+    // RESUME LOGIC (Nested Projects)
     function loadResume() {
         renderList('pub-list', data.resume.publications, pubTemplate);
         
@@ -355,7 +357,7 @@
     function updateProjectTypes(v) { if(activeProjectIndex<0)return; data.projects[activeProjectIndex].types=v.split(',').map(s=>s.trim()); updateOutput(); }
 
     function updateOutput() {
-        const code = `// assets/js/projects.js\n// v5.1 Data File\n\nwindow.data = ${JSON.stringify(data, null, 2)};`;
+        const code = `// assets/js/projects.js\n// v5.4 Data File\n\nwindow.data = ${JSON.stringify(data, null, 2)};`;
         document.getElementById('output-code').value = code;
     }
     function copyCode() { navigator.clipboard.writeText(document.getElementById('output-code').value).then(()=>alert('Kopyalandı!')); }

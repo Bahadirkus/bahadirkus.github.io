@@ -1,12 +1,12 @@
 // assets/js/projects.js
-// v5.3 Data File - Full Gallery + Nested Projects + CV
+// v5.4 Data File - Final CV Synced
 
 window.data = {
   "profile": {
     "name": "Bahadır Kuş",
     "role": "Simulation Developer & Technical Designer",
     "image": "assets/images/profile/bahadir-profile.jpg",
-    "cvPath": "assets/docs/Bahadir_Kus_CV.pdf", 
+    "cvPath": "assets/docs/Bahadir_Kus_CV.pdf",
     "bio": "Results-oriented Simulation Architect & Lead Developer with a proven track record of engineering high-fidelity training systems that bridge the gap between physical hardware and virtual environments. Founder of a med-tech startup, successfully delivering clinically validated surgical simulators using Unity 3D, embedded systems, and custom haptics. Expert in Digital Twins, sensor fusion, and full-cycle product development from prototyping (CNC/PCB) to deployment.",
     "email": "mrbahadirkus@gmail.com",
     "location": "Toronto, Canada",
@@ -80,7 +80,7 @@ window.data = {
         "degree": "Information Technologies (High School Degree)",
         "school": "Gaziantep Chamber of Commerce High School",
         "date": "Sep 2014 - May 2018",
-        "desc": "Field of Study: Information Technologies.\nAcquired a strong technical foundation in software development."
+        "desc": "Field of Study: Information Technologies.\nAcquired a strong technical foundation in software development, enabling an immediate transition into professional freelance projects upon graduation."
       }
     ],
     "certificates": [
@@ -122,15 +122,7 @@ window.data = {
       "longDesc": "Part of Prosthetic Worlds R&D.\n\n• Architected a high-performance simulation environment in Unity URP using Real-time CSG algorithms for soft-body cutting and tissue deformation.\n• Developed a proprietary high-speed bi-directional communication protocol integrating industrial motors and EMF sensors.\n• Overcame critical electromagnetic interference issues by redesigning the chassis, achieving 97-100% sensor accuracy.",
       "coverImage": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-01.jpg",
       "gallery": [
-        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-01.jpg" },
-        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-02.jpg" },
-        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-03.jpg" },
-        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-04.jpg" },
-        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-05.jpg" },
-        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-06.jpg" },
-        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-07.jpg" },
-        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-08.jpg" },
-        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-09.jpg" }
+        { "type": "image", "src": "assets/images/projects/em-guided-surgical-trainer/em-guided-surgical-trainer-01.jpg" }
       ],
       "links": []
     },
@@ -145,15 +137,10 @@ window.data = {
       "longDesc": "Part of Prosthetic Worlds R&D.\n\n• Programmed a complete 30-minute surgical procedure optimized for standalone VR headsets.\n• Designed a robust Task Management System using Finite State Machines (FSM).\n• Software successfully validated through clinical utility studies with orthopedic surgeons.\n• Published in Medicine Journal, 2024.",
       "coverImage": "assets/images/projects/prosthetic-worlds-vr/prosthetic-worlds-vr-01.jpg",
       "gallery": [
-        { "type": "image", "src": "assets/images/projects/prosthetic-worlds-vr/prosthetic-worlds-vr-01.jpg" },
-        { "type": "image", "src": "assets/images/projects/prosthetic-worlds-vr/prosthetic-worlds-vr-02.jpg" },
-        { "type": "image", "src": "assets/images/projects/prosthetic-worlds-vr/prosthetic-worlds-vr-03.jpg" },
-        { "type": "image", "src": "assets/images/projects/prosthetic-worlds-vr/prosthetic-worlds-vr-04.jpg" },
-        { "type": "youtube", "src": "https://www.youtube.com/watch?v=sWOdGYnegjY" }
+        { "type": "image", "src": "assets/images/projects/prosthetic-worlds-vr/prosthetic-worlds-vr-01.jpg" }
       ],
       "links": [
-        { "label": "Read Research Article", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11596432/pdf/medi-103-e40615.pdf" },
-        { "label": "View on Instagram", "url": "https://www.instagram.com/prostheticworlds" }
+        { "label": "Read Research Article", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11596432/pdf/medi-103-e40615.pdf" }
       ]
     },
     {
@@ -306,8 +293,7 @@ window.data = {
       "longDesc": "A standalone expansion of the Redline series focused on the distinct acoustic properties of motorcycle engines. The challenge was to replicate the rapid RPM acceleration and deceleration characteristic of bikes.",
       "coverImage": "assets/images/projects/redline-moto-sounds/redline-moto-sounds-01.png",
       "gallery": [
-        { "type": "image", "src": "assets/images/projects/redline-moto-sounds/redline-moto-sounds-01.png" },
-        { "type": "youtube", "src": "https://www.youtube.com/watch?v=Tp5mlPiPLVs" }
+        { "type": "image", "src": "assets/images/projects/redline-moto-sounds/redline-moto-sounds-01.png" }
       ],
       "links": [
         { "label": "Google Play", "url": "https://play.google.com/store/apps/details?id=com.Okka.RedlineMotorcycleSounds&hl=en" }

@@ -4,22 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bahadır Kuş Portfolio</title>
-
-  <meta property="og:title" content="Bahadır Kuş | Simulation Architect & Developer">
-  
-  <meta property="og:description" content="Portfolio of Bahadır Kuş. Expert in Unity, Medical Simulation, Embedded Systems and Technical Design.">
-  
-  <meta property="og:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
-  
-  <meta property="og:url" content="https://bahadirkus.github.io/">
-  
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Bahadır Kuş | Simulation Developer">
-  <meta name="twitter:description" content="Developing high-fidelity surgical simulators and interactive systems using Unity & Hardware integration.">
-  <meta name="twitter:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -30,7 +14,6 @@
     body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at 50% 0%, #dbeafe 0%, #f3f4f6 50%, #f9fafb 100%); color: var(--text); line-height: 1.6; }
     body.no-scroll { overflow: hidden; }
     a { text-decoration: none; color: inherit; }
-    
     .page { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
     .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px; align-items: flex-start; }
 
@@ -43,7 +26,7 @@
     .profile-header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
     .profile-name { font-size: 24px; font-weight: 700; color: #fff; }
     
-    /* TEK SATIR (HIZALI) YEŞİL NOKTA DÜZENİ */
+    /* TEK SATIR YEŞİL NOKTA DÜZENİ */
     .profile-role-pill {
         display: flex; align-items: center; justify-content: center; gap: 8px;
         padding: 8px 12px; background: rgba(255, 255, 255, 0.05);
@@ -111,7 +94,7 @@
     .resume-item h4 a:hover { text-decoration: underline; }
     .resume-item .meta { font-size: 12px; color: var(--accent); font-weight: 600; display: block; margin-bottom: 8px; }
     
-    /* Nested Projects */
+    /* NESTED PROJECTS */
     .job-project { margin-top: 15px; padding-left: 15px; border-left: 3px solid #e2e8f0; }
     .job-project h5 { font-size: 14px; font-weight: 700; color: #374151; margin: 0 0 4px 0; }
     .job-project p { font-size: 13px; color: #6b7280; white-space: pre-line; margin: 0; }
@@ -330,15 +313,7 @@
       const skillDiv = document.getElementById('resume-skills');
       (r.skills||[]).forEach(s => skillDiv.innerHTML += `<span class="skill-tag">${s}</span>`);
 
-      // Initial Project Load
       renderProjects('all');
-      
-      // CHECK DEEP LINK (Hash Routing)
-      const hash = window.location.hash.substring(1);
-      if(hash) {
-          const found = data.projects.find(pr => pr.id === hash);
-          if(found) openModal(found);
-      }
   }
 
   function filterProjects(type, btn) {
