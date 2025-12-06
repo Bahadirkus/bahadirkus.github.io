@@ -337,16 +337,6 @@
       if(soc.youtube) socDiv.innerHTML += `<a class="social-btn" href="${soc.youtube}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg"></a>`;
       if(soc.twitter || soc.x) socDiv.innerHTML += `<a class="social-btn" href="${soc.twitter || soc.x}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/x.svg"></a>`;
 
-      // GitHub LARGE CARD only (as requested before, but icons are back above)
-      if(soc.github) {
-          // Also add small icon if desired (optional, but let's keep it consistent)
-          socDiv.innerHTML += `<a class="social-btn" href="${soc.github}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/github.svg"></a>`;
-
-          const ghLink = document.getElementById('link-github');
-          ghLink.style.display = 'flex'; ghLink.href = soc.github;
-          const cleanGh = soc.github.replace('https://', '').replace('http://', '').replace('www.', '');
-          document.getElementById('val-github').textContent = cleanGh;
-      }
 
       // Resume
       document.getElementById('resume-bio').textContent = p.bio || "";
