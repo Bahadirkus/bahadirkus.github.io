@@ -348,7 +348,7 @@ window.data = {
         },
         {
           "type": "image",
-          "src": "assets/images/projects/dragon-faya/dragon-faya-02.jpg"
+          "src": "assets/images/projects/dragon-faya/dragon-faya-02.jpeg"
         },
         {
           "type": "youtube",
