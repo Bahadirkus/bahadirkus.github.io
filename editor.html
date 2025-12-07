@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎛️ Portfolio Editor v7.1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9; --accent: #3b82f6; --danger: #ef4444; --success: #10b981; --warning: #f59e0b; --purple: #8b5cf6; }
+    * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+    .top-bar { background: var(--panel); border-bottom: 1px solid var(--border); padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .brand { font-weight: 700; color: var(--accent); font-size: 18px; }
+    .tabs { display: flex; gap: 5px; height: 100%; }
+    .tab-btn { background: transparent; border: none; color: #94a3b8; padding: 0 20px; cursor: pointer; height: 100%; font-weight: 600; border-bottom: 2px solid transparent; transition: 0.2s; }
+    .tab-btn:hover { color: white; background: #334155; }
+    .tab-btn.active { color: white; border-bottom-color: var(--accent); background: #1e293b; }
+
+    .workspace { display: flex; flex: 1; overflow: hidden; }
+    .editor-area { flex: 2; padding: 30px; overflow-y: auto; background: #0f172a; }
+    .code-area { flex: 1; background: #020617; border-left: 1px solid var(--border); display: flex; flex-direction: column; }
+
+    .section-header { font-size: 18px; font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .full-width { grid-column: span 2; }
+    label { display: block; font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 6px; font-weight: 600; }
+    input, textarea, select { width: 100%; background: #1e293b; border: 1px solid var(--border); color: white; padding: 12px; border-radius: 6px; font-family: inherit; transition: 0.2s; }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent); background: #253045; }
+    
+    .list-item { background: #1e293b; padding: 15px; border-radius: 8px; border: 1px solid var(--border); position: relative; margin-bottom: 15px; }
+    .list-item-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; font-weight: bold; color: #cbd5e1; }
+    
+    .sub-projects-container { margin-top: 15px; padding-top: 15px; border-top: 1px dashed #334155; }
+    .sub-project-item { background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid #334155; margin-bottom: 10px; }
+    .sub-header { font-size: 11px; color: #94a3b8; margin-bottom: 5px; font-weight: bold; display: flex; justify-content: space-between; }
+
+    .btn-remove { background: var(--danger); color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+    .btn-add { background: var(--panel); border: 1px dashed #64748b; color: #94a3b8; width: 100%; padding: 12px; border-radius: 6px; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+    .btn-add:hover { border-color: var(--accent); color: var(--accent); background: #1e293b; }
+    .btn-add-sub { background: #334155; color: #cbd5e1; border: none; padding: 8px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 10px; }
+    .btn-add-sub:hover { background: #475569; color: white; }
+    
+    .btn-share { background: var(--purple); color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .gallery-item-row { display: grid; grid-template-columns: 100px 1fr 50px; gap: 10px; align-items: center; margin-bottom: 10px; }
+
+    .code-header { padding: 15px; background: var(--panel); border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap:10px; }
+    .code-box { flex: 1; background: #0b1120; color: #4ade80; padding: 20px; font-family: 'Consolas', monospace; font-size: 12px; border: none; resize: none; }
+    .btn-action { border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 12px; display: flex; align-items: center; gap: 5px; }
+    .copy-btn { background: #334155; color: white; }
+    .save-btn { background: var(--warning); color: #000; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .project-sidebar { width: 250px; background: var(--panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+    .project-list { list-style: none; overflow-y: auto; flex: 1; }
+    .project-list li { padding: 15px; border-bottom: 1px solid var(--border); cursor: pointer; font-size: 14px; }
+    .project-list li:hover { background: #334155; }
+    .project-list li.active { background: var(--accent); color: white; }
+    .btn-new-proj { padding: 15px; background: var(--success); color: white; border: none; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="brand">Portfolio Editor</div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('profile')">👤 Profile</button>
+      <button class="tab-btn" onclick="switchTab('resume')">📄 Resume</button>
+      <button class="tab-btn" onclick="switchTab('projects')">🎮 Projects</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <div class="editor-area">
+      
+      <div id="tab-profile" class="tab-content active">
+        <div class="section-header">Kişisel Bilgiler & Fotoğraf</div>
+        <div class="form-grid">
+          <div><label>Ad Soyad</label><input type="text" id="prof-name" oninput="updateData()"></div>
+          <div><label>Unvan (Role)</label><input type="text" id="prof-role" oninput="updateData()"></div>
+          <div class="full-width"><label>Profil Fotoğrafı Yolu</label><input type="text" id="prof-img" oninput="updateData()"></div>
+          <div class="full-width"><label>CV PDF Dosya Yolu</label><input type="text" id="prof-cv" oninput="updateData()"></div>
+          <div class="full-width"><label>Kısa Biyografi (Summary)</label><textarea id="prof-bio" oninput="updateData()" style="height:100px;"></textarea></div>
+        </div>
+        <div class="section-header">İletişim & Sosyal Medya</div>
+        <div class="form-grid">
+          <div><label>Email</label><input type="text" id="prof-email" oninput="updateData()"></div>
+          <div><label>Konum</label><input type="text" id="prof-loc" oninput="updateData()"></div>
+          <div><label>GitHub URL</label><input type="text" id="prof-github" oninput="updateData()"></div>
+          <div><label>LinkedIn URL</label><input type="text" id="prof-linkedin" oninput="updateData()"></div>
+          <div><label>Instagram URL</label><input type="text" id="prof-insta" oninput="updateData()"></div>
+          <div><label>YouTube URL</label><input type="text" id="prof-youtube" oninput="updateData()"></div>
+          <div><label>X (Twitter) URL</label><input type="text" id="prof-x" oninput="updateData()"></div>
+        </div>
+      </div>
+
+      <div id="tab-resume" class="tab-content">
+        <div class="section-header">Bilimsel Yayınlar</div>
+        <div id="pub-list" class="dynamic-list"></div>
+        <button class="btn-add" onclick="addPublication()">+ Ekle</button>
+        <br><br>
+        <div class="section-header">Deneyimler (Experience)</div>
+        <div id="exp-list" class="dynamic-list"></div>
+        <button class="btn-add" onclick="addExperience()">+ Ekle</button>
+        <br><br>
+        <div class="section-header">Sertifikalar</div>
+        <div id="cert-list" class="dynamic-list"></div>
+        <button class="btn-add" onclick="addCertificate()">+ Ekle</button>
+        <br><br>
+        <div class="section-header">Eğitim</div>
+        <div id="edu-list" class="dynamic-list"></div>
+        <button class="btn-add" onclick="addEducation()">+ Ekle</button>
+        <br><br>
+        <div class="section-header">Teknik Yetenekler</div>
+        <textarea id="skills-text" oninput="updateSkills()" style="height: 80px;"></textarea>
+      </div>
+
+      <div id="tab-projects" class="tab-content" style="display: none; height: 100%;">
+        <div style="display: flex; height: 100%; margin: -30px;">
+          <div class="project-sidebar">
+            <ul id="proj-list-ul" class="project-list"></ul>
+            <button class="btn-new-proj" onclick="addProject()">+ YENİ PROJE</button>
+          </div>
+          <div style="flex: 1; padding: 30px; overflow-y: auto;">
+            <div id="project-form-container" style="display:none;">
+                <div class="section-header">
+                    Proje Detayları
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn-share" onclick="downloadShareFile()">🔗 Paylaşım Dosyası İndir</button>
+                        <button class="btn-remove" onclick="deleteProject()">Sil</button>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div><label>Proje Adı</label><input type="text" id="proj-name" oninput="updateProjectField('name', this.value)"></div>
+                    <div><label>Tarih</label><input type="text" id="proj-date" oninput="updateProjectField('date', this.value)"></div>
+                    <div><label>ID (Link için: my-game)</label><input type="text" id="proj-id" oninput="updateProjectField('id', this.value)"></div>
+                    <div><label>Rol</label><input type="text" id="proj-role" oninput="updateProjectField('role', this.value)"></div>
+                    <div class="full-width"><label>Teknolojiler</label><input type="text" id="proj-tagline" oninput="updateProjectField('tagline', this.value)"></div>
+                    <div class="full-width"><label>Kapak Görseli (assets/...)</label><input type="text" id="proj-cover" oninput="updateProjectField('coverImage', this.value)"></div>
+                    <div class="full-width"><label>Kısa Açıklama</label><textarea id="proj-short" oninput="updateProjectField('shortDesc', this.value)"></textarea></div>
+                    <div class="full-width"><label>Uzun Açıklama</label><textarea id="proj-long" style="height:100px" oninput="updateProjectField('longDesc', this.value)"></textarea></div>
+                    <div class="full-width"><label>Türler</label><input type="text" id="proj-types" oninput="updateProjectTypes(this.value)"></div>
+                </div>
+                <div class="section-header">Galeri</div>
+                <div id="proj-gallery-list" class="dynamic-list"></div>
+                <button class="btn-add" onclick="addProjGalleryItem()">+ Medya Ekle</button>
+                <br><br>
+                <div class="section-header">Linkler</div>
+                <div id="proj-links-list" class="dynamic-list"></div>
+                <button class="btn-add" onclick="addProjLinkItem()">+ Link Ekle</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-area">
+      <div class="code-header">
+        <span>assets/js/projects.js</span>
+        <div style="display:flex; gap:10px;">
+            <button class="btn-action copy-btn" onclick="copyCode()">📄 Kopyala</button>
+            <button class="btn-action save-btn" onclick="downloadFile()">💾 DOSYAYI KAYDET</button>
+        </div>
+      </div>
+      <textarea id="output-code" class="code-box" readonly></textarea>
+    </div>
+  </div>
+
+  <script src="assets/js/projects.js"></script>
+  <script>
+    let data = { profile: { social: {} }, resume: { publications: [], experience: [], education: [], certificates: [], skills: [] }, projects: [] };
+    if (window.data) data = window.data; else if (window.projects) data.projects = window.projects;
+    if(!data.resume.publications) data.resume.publications = [];
+
+    let activeProjectIndex = -1;
+
+    function init() { loadProfile(); loadResume(); loadProjectsSidebar(); updateOutput(); }
+    function switchTab(name) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + name).classList.add('active');
+        document.querySelector(`button[onclick="switchTab('${name}')"]`).classList.add('active');
+        document.getElementById('tab-projects').style.display = name === 'projects' ? 'block' : 'none';
+    }
+
+    // PROFILE
+    function loadProfile() {
+        const p = data.profile || {}; const s = p.social || {};
+        ['name','role','img','cv','bio','email','loc'].forEach(k => document.getElementById('prof-'+k).value = p[k==='img'?'image':k==='loc'?'location':k==='cv'?'cvPath':k]||"");
+        ['github','linkedin','insta','youtube','x'].forEach(k => document.getElementById('prof-'+k).value = s[k]||"");
+    }
+    function updateData() {
+        data.profile = {
+            name: document.getElementById('prof-name').value,
+            role: document.getElementById('prof-role').value,
+            image: document.getElementById('prof-img').value,
+            cvPath: document.getElementById('prof-cv').value,
+            bio: document.getElementById('prof-bio').value,
+            email: document.getElementById('prof-email').value,
+            location: document.getElementById('prof-loc').value,
+            social: {
+                github: document.getElementById('prof-github').value,
+                linkedin: document.getElementById('prof-linkedin').value,
+                instagram: document.getElementById('prof-insta').value,
+                youtube: document.getElementById('prof-youtube').value,
+                x: document.getElementById('prof-x').value
+            }
+        };
+        updateOutput();
+    }
+
+    // --- ÖNEMLİ: PROJE SEÇİM LİSTESİ OLUŞTURUCU (SLIDER/DROPDOWN) ---
+    function getProjectSelectHTML(currentVal, expIdx, projIdx) {
+        let opts = '<option value="">-- Bağlantı Yok --</option>';
+        data.projects.forEach(p => {
+            if(p.id) {
+                const sel = p.id === currentVal ? 'selected' : '';
+                opts += `<option value="${p.id}" ${sel}>📂 ${p.name} (ID: ${p.id})</option>`;
+            }
+        });
+        // Eğer dış link ise (http...) ve listede yoksa, onu da göster
+        let isExternal = currentVal && currentVal.startsWith('http');
+        if(isExternal) {
+             opts += `<option value="${currentVal}" selected>🔗 Dış Link: ${currentVal}</option>`;
+        }
+        
+        // Bu kısım senin istediğin "Slider" mantığı (Select box olarak çalışır)
+        return `<select style="border: 2px solid #3b82f6; width:100%;" onchange="updExpProj(${expIdx}, ${projIdx}, 'link', this.value)">${opts}</select>`;
+    }
+
+    // RESUME
+    function loadResume() {
+        renderList('pub-list', data.resume.publications, pubTemplate);
+        
+        const expDiv = document.getElementById('exp-list'); expDiv.innerHTML='';
+        (data.resume.experience||[]).forEach((item, i) => {
+            const div = document.createElement('div'); div.className='list-item';
+            let projectsHtml = '';
+            (item.projects || []).forEach((proj, pIndex) => {
+                
+                // --- SEÇİM KUTUSUNU BURADA ÇAĞIRIYORUZ ---
+                const selectBox = getProjectSelectHTML(proj.link, i, pIndex);
+
+                projectsHtml += `
+                <div class="sub-project-item">
+                    <div class="sub-header">PROJE #${pIndex+1} <button class="btn-remove" onclick="removeExpProject(${i}, ${pIndex})" style="padding:2px 6px;">Sil</button></div>
+                    <div class="form-grid" style="margin-bottom:0; gap:10px;">
+                        <div class="full-width"><input type="text" placeholder="Proje Başlığı" value="${proj.title||''}" oninput="updExpProj(${i}, ${pIndex}, 'title', this.value)"></div>
+                        <div class="full-width">
+                             <label style="color:#60a5fa;">BAĞLANACAK PROJE</label>
+                             ${selectBox}
+                             <div style="font-size:10px; color:#64748b; margin-top:4px;">* Listede proje yoksa önce "Projects" sekmesinden oluşturun.</div>
+                        </div>
+                        <div class="full-width"><textarea placeholder="Proje Detayları" style="height:60px;" oninput="updExpProj(${i}, ${pIndex}, 'desc', this.value)">${proj.desc||''}</textarea></div>
+                    </div>
+                </div>`;
+            });
+            div.innerHTML = `
+            <div class="list-item-header">DENEYİM #${i+1} <button class="btn-remove" onclick="removeItem('experience', ${i})">SİL</button></div>
+            <div class="form-grid">
+                <div><label>Pozisyon</label><input type="text" value="${item.role||''}" oninput="updRes('experience',${i},'role',this.value)"></div>
+                <div><label>Şirket</label><input type="text" value="${item.company||''}" oninput="updRes('experience',${i},'company',this.value)"></div>
+                <div><label>Tarih</label><input type="text" value="${item.date||''}" oninput="updRes('experience',${i},'date',this.value)"></div>
+                <div class="full-width"><label>Genel Açıklama</label><textarea style="height:60px;" oninput="updRes('experience',${i},'desc',this.value)">${item.desc||''}</textarea></div>
+            </div>
+            <div class="sub-projects-container">
+                <label>BU İŞE AİT PROJELER</label>
+                <div id="exp-proj-list-${i}">${projectsHtml}</div>
+                <button class="btn-add-sub" onclick="addExpProject(${i})">+ Bu İşe Proje Ekle</button>
+            </div>`;
+            expDiv.appendChild(div);
+        });
+
+        renderList('edu-list', data.resume.education, eduTemplate);
+        renderList('cert-list', data.resume.certificates, certTemplate);
+        document.getElementById('skills-text').value = (data.resume.skills || []).join(', ');
+    }
+
+    function renderList(id, arr, tpl) {
+        const c = document.getElementById(id); c.innerHTML='';
+        arr.forEach((it,i) => { const d=document.createElement('div'); d.className='list-item'; d.innerHTML=tpl(it,i); c.appendChild(d); });
+    }
+    
+    function addExpProject(expIndex) {
+        if(!data.resume.experience[expIndex].projects) data.resume.experience[expIndex].projects = [];
+        data.resume.experience[expIndex].projects.push({title:"", desc:"", link:""});
+        loadResume(); updateOutput();
+    }
+    function removeExpProject(expIndex, projIndex) {
+        if(confirm('Projeyi sil?')) {
+            data.resume.experience[expIndex].projects.splice(projIndex, 1);
+            loadResume(); updateOutput();
+        }
+    }
+    function updExpProj(expIndex, projIndex, key, value) {
+        data.resume.experience[expIndex].projects[projIndex][key] = value;
+        updateOutput(); 
+    }
+
+    const pubTemplate = (item, i) => `
+        <div class="list-item-header">YAYIN #${i+1} <button class="btn-remove" onclick="removeItem('publications', ${i})">SİL</button></div>
+        <div class="form-grid">
+            <div class="full-width"><label>Makale Başlığı</label><input type="text" value="${item.title||''}" oninput="updRes('publications',${i},'title',this.value)"></div>
+            <div><label>Yayın Yeri / Dergi</label><input type="text" value="${item.journal||''}" oninput="updRes('publications',${i},'journal',this.value)"></div>
+            <div><label>Tarih</label><input type="text" value="${item.date||''}" oninput="updRes('publications',${i},'date',this.value)"></div>
+            <div class="full-width"><label>Link (URL)</label><input type="text" value="${item.link||''}" oninput="updRes('publications',${i},'link',this.value)"></div>
+        </div>`;
+    
+    const eduTemplate = (item, i) => `
+        <div class="list-item-header">EĞİTİM #${i+1} <button class="btn-remove" onclick="removeItem('education', ${i})">SİL</button></div>
+        <div class="form-grid">
+            <div><label>Bölüm</label><input type="text" value="${item.degree||''}" oninput="updRes('education',${i},'degree',this.value)"></div>
+            <div><label>Okul</label><input type="text" value="${item.school||''}" oninput="updRes('education',${i},'school',this.value)"></div>
+            <div class="full-width"><label>Tarih</label><input type="text" value="${item.date||''}" oninput="updRes('education',${i},'date',this.value)"></div>
+            <div class="full-width"><label>Açıklama / Detay</label><textarea style="height:60px;" oninput="updRes('education',${i},'desc',this.value)">${item.desc||''}</textarea></div>
+        </div>`;
+    
+    const certTemplate = (item, i) => `
+        <div class="list-item-header">SERTİFİKA #${i+1} <button class="btn-remove" onclick="removeItem('certificates', ${i})">SİL</button></div>
+        <div class="form-grid">
+            <div><label>Adı</label><input type="text" value="${item.title||''}" oninput="updRes('certificates',${i},'title',this.value)"></div>
+            <div><label>Kurum</label><input type="text" value="${item.issuer||''}" oninput="updRes('certificates',${i},'issuer',this.value)"></div>
+            <div class="full-width"><label>Görsel Yolu (JPG)</label><input type="text" value="${item.image||''}" oninput="updRes('certificates',${i},'image',this.value)"></div>
+            <div class="full-width"><label>Link (URL)</label><input type="text" value="${item.link||''}" oninput="updRes('certificates',${i},'link',this.value)"></div>
+            <div class="full-width"><label>Kısa Açıklama</label><textarea style="height:60px;" oninput="updRes('certificates',${i},'desc',this.value)">${item.desc||''}</textarea></div>
+        </div>`;
+
+    function addPublication() { data.resume.publications.push({}); loadResume(); updateOutput(); }
+    function addExperience() { data.resume.experience.push({projects:[]}); loadResume(); updateOutput(); }
+    function addEducation() { data.resume.education.push({}); loadResume(); updateOutput(); }
+    function addCertificate() { data.resume.certificates.push({}); loadResume(); updateOutput(); }
+    function removeItem(t, i) { if(confirm('Sil?')) { data.resume[t].splice(i,1); loadResume(); updateOutput(); } }
+    function updRes(t, i, k, v) { data.resume[t][i][k] = v; updateOutput(); }
+    function updateSkills() { data.resume.skills = document.getElementById('skills-text').value.split(',').map(s=>s.trim()).filter(s=>s); updateOutput(); }
+
+    // PROJECTS
+    function loadProjectsSidebar() {
+        const l = document.getElementById('proj-list-ul'); l.innerHTML='';
+        data.projects.forEach((p,i) => { const li=document.createElement('li'); li.innerText=p.name||'(No Name)'; if(i===activeProjectIndex) li.classList.add('active'); li.onclick=()=>selProj(i); l.appendChild(li); });
+    }
+    function selProj(i) {
+        activeProjectIndex=i; loadProjectsSidebar(); document.getElementById('project-form-container').style.display='block';
+        const p=data.projects[i];
+        ['name','date','id','role','tagline','coverImage','shortDesc','longDesc'].forEach(k => {
+             const el = document.getElementById('proj-'+ (k==='coverImage'?'cover':k==='shortDesc'?'short':k==='longDesc'?'long':k));
+             if(el) el.value = p[k]||"";
+        });
+        document.getElementById('proj-types').value = (p.types||[]).join(', ');
+        renGal(); renLink();
+    }
+    function renGal() {
+        const c=document.getElementById('proj-gallery-list'); c.innerHTML='';
+        (data.projects[activeProjectIndex].gallery||[]).forEach((it,i) => {
+            const d=document.createElement('div'); d.className='gallery-item-row';
+            d.innerHTML=`<select onchange="updGal(${i},'type',this.value)"><option value="image" ${it.type==='image'?'selected':''}>Resim</option><option value="youtube" ${it.type==='youtube'?'selected':''}>YouTube</option></select><input value="${it.src||''}" oninput="updGal(${i},'src',this.value)"><button class="btn-remove" onclick="delGal(${i})">X</button>`;
+            c.appendChild(d);
+        });
+    }
+    function renLink() {
+        const c=document.getElementById('proj-links-list'); c.innerHTML='';
+        (data.projects[activeProjectIndex].links||[]).forEach((it,i) => {
+            const d=document.createElement('div'); d.className='gallery-item-row';
+            d.innerHTML=`<input value="${it.label||''}" placeholder="Label" oninput="updLink(${i},'label',this.value)"><input value="${it.url||''}" placeholder="Url" oninput="updLink(${i},'url',this.value)"><button class="btn-remove" onclick="delLink(${i})">X</button>`;
+            c.appendChild(d);
+        });
+    }
+    function addProjGalleryItem() { if(!data.projects[activeProjectIndex].gallery) data.projects[activeProjectIndex].gallery=[]; data.projects[activeProjectIndex].gallery.push({type:'image'}); renGal(); updateOutput(); }
+    function updGal(i,k,v) { data.projects[activeProjectIndex].gallery[i][k]=v; updateOutput(); }
+    function delGal(i) { data.projects[activeProjectIndex].gallery.splice(i,1); renGal(); updateOutput(); }
+    function addProjLinkItem() { if(!data.projects[activeProjectIndex].links) data.projects[activeProjectIndex].links=[]; data.projects[activeProjectIndex].links.push({}); renLink(); updateOutput(); }
+    function updLink(i,k,v) { data.projects[activeProjectIndex].links[i][k]=v; updateOutput(); }
+    function delLink(i) { data.projects[activeProjectIndex].links.splice(i,1); renLink(); updateOutput(); }
+    function addProject() { data.projects.unshift({name:'New Project', date: new Date().toISOString().slice(0,7), types:['software']}); selProj(0); updateOutput(); }
+    function deleteProject() { if(confirm('Sil?')) { data.projects.splice(activeProjectIndex,1); activeProjectIndex=-1; document.getElementById('project-form-container').style.display='none'; loadProjectsSidebar(); updateOutput(); } }
+    function updateProjectField(k,v) { if(activeProjectIndex<0)return; data.projects[activeProjectIndex][k]=v; if(k==='name') loadProjectsSidebar(); updateOutput(); }
+    function updateProjectTypes(v) { if(activeProjectIndex<0)return; data.projects[activeProjectIndex].types=v.split(',').map(s=>s.trim()); updateOutput(); }
+
+    function updateOutput() {
+        const code = `// assets/js/projects.js\n// v7.1 Data File\n\nwindow.data = ${JSON.stringify(data, null, 2)};`;
+        document.getElementById('output-code').value = code;
+    }
+    function copyCode() { navigator.clipboard.writeText(document.getElementById('output-code').value).then(()=>alert('Kopyalandı!')); }
+    function downloadFile() {
+        const b = new Blob([document.getElementById('output-code').value], {type:'text/javascript'});
+        const a = document.createElement('a'); a.href=URL.createObjectURL(b); a.download='projects.js'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+    function downloadShareFile() {
+        const p = data.projects[activeProjectIndex];
+        if(!p) { alert("Lütfen bir proje seçin."); return; }
+        let imgUrl = p.coverImage;
+        if(!imgUrl.startsWith('http')) { imgUrl = 'https://bahadirkus.github.io/' + imgUrl; }
+        const htmlContent = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>${p.name} | Bahadır Kuş</title><meta property="og:title" content="${p.name}"><meta property="og:description" content="${p.shortDesc}"><meta property="og:image" content="${imgUrl}"><meta property="og:url" content="https://bahadirkus.github.io/${p.id}.html"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${imgUrl}"><meta http-equiv="refresh" content="0; url=https://bahadirkus.github.io/#${p.id}"><script>window.location.href="https://bahadirkus.github.io/#${p.id}";<\/script></head><body>Redirecting...</body></html>`;
+        const b = new Blob([htmlContent], {type:'text/html'});
+        const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = (p.id || 'project') + '.html'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
