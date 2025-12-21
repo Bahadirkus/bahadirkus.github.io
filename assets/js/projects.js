@@ -191,6 +191,31 @@ window.data = {
   },
   "projects": [
     {
+      "name": "Visual Portfolio Builder",
+      "date": "2025-12",
+      "types": [
+        "software"
+      ],
+      "id": "portfolio-editor",
+      "role": "Tool Creator & Lead Developer",
+      "tagline": "Vanilla JS • File API • DOM Manipulation • CSS3 • JSON",
+      "coverImage": "assets/images/projects/portfolio-editor/portfolio-editor-01.jpg",
+      "shortDesc": "A browser-based visual tool that enables developers to build and manage professional portfolios without writing code. Features a real-time JSON generator, local file handling, and a cinematic 3D preloader.",
+      "longDesc": "This project was developed to solve a common problem for developers: the hassle of manually editing code or managing complex CMSs for a simple personal portfolio. I designed a standalone \"Visual Editor\" that runs entirely in the browser without any backend or database requirements.\n\nKey Technical Features:\n\nCustom JSON Engine: Developed a logic that maps visual form inputs directly to a complex JSON data structure in real-time.\n\nLocal File System API: Utilized the Blob and URL.createObjectURL APIs to generate and download the configuration file (projects.js) client-side, ensuring data privacy and ease of use.\n\nDynamic DOM Manipulation: The entire UI (Resume, Projects, Gallery) renders dynamically based on the data, making the template highly reusable.\n\nPerformance: Optimized with a lightweight structure and a custom CSS-based 3D preloader animation.\n\nThis tool is now open-source and helps other developers showcase their work effortlessly.",
+      "gallery": [
+        {
+          "type": "youtube",
+          "src": "https://www.youtube.com/watch?v=G1R4V7UP-W0"
+        }
+      ],
+      "links": [
+        {
+          "label": "GitHub Repository",
+          "url": "https://github.com/Bahadirkus/bahadirkus.github.io/tree/main"
+        }
+      ]
+    },
+    {
       "name": "Covid-19 & Hygiene Awareness AR Simulation",
       "date": "2022-02 ",
       "types": [
