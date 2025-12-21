@@ -8,11 +8,11 @@ With the built-in **Visual Editor**, you don't need a database or backend. You c
 
 ---
 
-## 📺 How It Works (Video)
+## 📺 How It Works
 
 Watch the 1-minute workflow to see how easy it is to set up:
 
-[![Portfolio Editor Setup](https://img.youtube.com/vi/G1R4V7UP-W0/0.jpg)](https://www.youtube.com/watch?v=G1R4V7UP-W0)
+[![Watch Tutorial Video](https://img.shields.io/badge/Watch_Tutorial_Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=G1R4V7UP-W0)
 
 ---
 
