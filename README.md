@@ -1,37 +1,61 @@
-# 🚀 Modern Portfolio Template & Visual Editor
+# ⚡ Visual Portfolio Builder (No-Code)
 
-This project is a modern, fast, and fully customizable **Personal Portfolio Website** template designed for developers, designers, and technical professionals.
+This project is a modern, JSON-based tool that allows you to build and manage your own **Personal Portfolio Website** without writing a single line of code.
 
-Its key feature is the built-in **Visual Editor**, which allows you to build and manage your entire portfolio content **without writing a single line of code**.
+With the built-in **Visual Editor**, you don't need a database or backend. You can update your entire site simply by replacing a single data file.
 
 🔗 **Live Demo:** [bahadirkus.github.io](https://bahadirkus.github.io/)
 
-## ✨ Features
+---
 
-* **Built-in Visual Editor:** Manage all content via the user-friendly `editor.html` interface.
-* **JSON-Based Structure:** No database, no backend. Just pure JavaScript.
-* **3D Preloader:** An impressive, cinematic loading animation.
-* **Responsive Design:** Fully compatible with mobile and desktop devices.
-* **Dynamic Project & CV Management:** Easily add, edit, or delete projects and resume details.
+## 📺 How It Works (Video)
+
+Watch the 1-minute workflow to see how easy it is to set up:
+
+[![Portfolio Editor Setup](https://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=G1R4V7UP-W0)
 
 ---
 
-## 📺 Installation and Usage Video
+## 🚀 Quick Start Guide
 
-You can watch the step-by-step installation guide in the video below:
-
-[![Installation Video](https://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/0.jpg)](YOUR_VIDEO_LINK_HERE)
-
-*(Link will be updated once the video is uploaded)*
-
----
-
-## 🛠️ How to Use (Step-by-Step)
-
-Follow these steps to create your own portfolio. No coding required!
+Follow these steps to publish your site:
 
 ### 1. Download the Project
-Clone this repository to your computer or download it as a ZIP file.
+Clone this repository or download it as a ZIP file to your computer.
 
-```bash
-git clone [https://github.com/Bahadirkus/bahadirkus.github.io.git](https://github.com/Bahadirkus/bahadirkus.github.io.git)
+### 2. Open the Visual Editor
+Navigate to the project folder and double-click the `editor.html` file. This opens the management panel in your browser.
+* **To start fresh:** Click the **"✨ CREATE NEW PORTFOLIO"** button at the top to clear all example data.
+
+### 3. Prepare Your Images (Important ⚠️)
+Since this system runs locally, you must place your image files inside the project folder:
+1.  Copy your photos (profile picture, project covers, etc.) into the **`assets/images/`** folder on your computer.
+2.  In the Editor, when asked for an "Image Path", enter it like this:
+    * `assets/images/my-profile.jpg`
+    * `assets/images/project-cover-1.png`
+
+### 4. Edit & Save
+Fill in your Profile, Resume, and Project details in the editor. When finished, click the **"💾 SAVE FILE"** button at the bottom right.
+* This will download a file named `projects.js` to your computer.
+
+### 5. Replace the Data File
+Take the downloaded `projects.js` file, move it to the **`assets/js/`** folder in your project directory, and **replace/overwrite** the existing file.
+
+Congratulations! Open `index.html` to see your updated portfolio live.
+
+---
+
+## 📂 Project File Structure
+
+For the system to work correctly, keep your files organized as shown below:
+
+```text
+📦 Portfolio-Root
+ ┣ 📂 assets
+ ┃ ┣ 📂 css        # Styles
+ ┃ ┣ 📂 images     # 📸 DROP YOUR PHOTOS HERE
+ ┃ ┗ 📂 js
+ ┃   ┗ 📜 projects.js  # ⚙️ THE FILE YOU DOWNLOAD FROM EDITOR GOES HERE
+ ┣ 📜 editor.html  # Admin Panel (Edit your content here)
+ ┣ 📜 index.html   # Your Main Website
+ ┗ 📜 README.md
