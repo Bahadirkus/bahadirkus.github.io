@@ -12,7 +12,7 @@ With the built-in **Visual Editor**, you don't need a database or backend. You c
 
 Watch the 1-minute workflow to see how easy it is to set up:
 
-[![Portfolio Editor Setup](https://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=G1R4V7UP-W0)
+[![Portfolio Editor Setup](https://img.youtube.com/vi/G1R4V7UP-W0/0.jpg)](https://www.youtube.com/watch?v=G1R4V7UP-W0)
 
 ---
 
