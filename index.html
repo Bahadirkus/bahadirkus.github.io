@@ -315,19 +315,15 @@
       if(soc.youtube) socDiv.innerHTML += `<a class="social-btn" href="${soc.youtube}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg"></a>`;
       if(soc.twitter || soc.x) socDiv.innerHTML += `<a class="social-btn" href="${soc.twitter || soc.x}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/x.svg"></a>`;
 
-      // --- GITHUB CARD LOGIC (ADDED) ---
-      // Veri yapısında github linki 'p.github' veya 'p.social.github' içinde olabilir.
+      // --- GITHUB CARD LOGIC ---
       const githubUrl = p.github || soc.github;
       if (githubUrl) {
           const ghCard = document.getElementById('link-github');
           ghCard.style.display = 'flex';
           ghCard.href = githubUrl;
-          
-          // Linkten kullanıcı adını çıkar
           let username = githubUrl.split('/').filter(Boolean).pop();
           document.getElementById('val-github').textContent = username;
       }
-      // ---------------------------------
 
       // Resume setup
       document.getElementById('resume-bio').textContent = p.bio || "";
@@ -379,9 +375,24 @@
       const skillDiv = document.getElementById('resume-skills');
       (r.skills||[]).forEach(s => skillDiv.innerHTML += `<span class="skill-tag">${s}</span>`);
 
+      // --- PROJECT RENDER AND LINKEDIN REDIRECTION LOGIC ---
       renderProjects('all');
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const pParam = urlParams.get('p'); 
       const hash = window.location.hash.substring(1);
-      if(hash) { const found = data.projects.find(pr => pr.id === hash); if(found) openModal(found); }
+
+      const targetId = pParam || hash;
+      if(targetId) { 
+          const found = data.projects.find(pr => pr.id === targetId); 
+          if(found) {
+              openModal(found); 
+              setTimeout(() => {
+                  const element = document.getElementById(targetId);
+                  if(element) element.scrollIntoView({ behavior: 'smooth' });
+              }, 500);
+          }
+      }
   }
 
   function filterProjects(type, btn) {
@@ -396,6 +407,7 @@
           let show = (filter === 'all') || (filter === 'software' && types.includes('software')) || (filter === 'technical-design' && (types.includes('design') || types.includes('technical-design')));
           if(!show) return;
           const card = document.createElement('article'); card.className = 'project-card';
+          card.id = p.id; // Added ID to card for scrollIntoView
           card.onclick = () => openModal(p);
           card.innerHTML = `<div class="project-image"><img src="${p.coverImage}" alt="${p.name}"></div><div class="project-text"><div class="project-meta">${p.role}</div><div class="project-title">${p.name}</div><div class="project-date">${p.date}</div><p class="project-desc">${p.shortDesc}</p><div class="project-tech">${p.tagline}</div></div>`;
           grid.appendChild(card);
