@@ -10,8 +10,6 @@
   <meta property="og:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
   <meta property="og:url" content="https://bahadirkus.github.io/">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -371,32 +369,31 @@
       const skillDiv = document.getElementById('resume-skills');
       (r.skills||[]).forEach(s => skillDiv.innerHTML += `<span class="skill-tag">${s}</span>`);
 
-      // Projeleri render et
+      // 1. Projeleri Render Et
       renderProjects('all');
 
-      // --- LINKEDIN PROOF REDIRECTION ---
+      // 2. LinkedIn ve URL Parametrelerini Kontrol Et
+      handleRedirection(data);
+  }
+
+  function handleRedirection(data) {
       const urlParams = new URLSearchParams(window.location.search);
-      const projectParam = urlParams.get('project') || urlParams.get('p');
-      const hashParam = window.location.hash.substring(1);
-      const targetId = projectParam || hashParam;
+      // LinkedIn'in eklediği kalabalığa rağmen 'project' parametresini oku
+      const targetId = urlParams.get('project') || urlParams.get('p') || window.location.hash.substring(1);
 
       if(targetId) { 
           const found = data.projects.find(pr => pr.id === targetId); 
           if(found) {
-              // LinkedIn Browser için gecikmeli açılış
+              // LinkedIn Browser'ı yavaş olduğu için 1 saniye bekle
               setTimeout(() => {
                   openModal(found); 
                   const element = document.getElementById(targetId);
                   if(element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }, 800);
+              }, 1000);
           }
       }
   }
 
-  function filterProjects(type, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderProjects(type);
-  }
-  
   function renderProjects(filter) {
       const data = window.data || { projects:[] };
       const grid = document.getElementById('projects-grid'); grid.innerHTML = '';
@@ -419,7 +416,7 @@
       document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById('sec-' + name).classList.add('active');
-      event.target.classList.add('active');
+      if(event && event.target) event.target.classList.add('active');
   }
 
   const modal = document.getElementById('project-modal');
@@ -427,7 +424,7 @@
       modal.classList.remove('open');
       document.body.classList.remove('no-scroll');
       document.getElementById('m-media').innerHTML = '';
-      history.pushState("", document.title, window.location.pathname + window.location.search);
+      history.pushState("", document.title, window.location.pathname);
   }
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });

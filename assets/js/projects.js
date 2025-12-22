@@ -13,7 +13,7 @@ window.data = {
     "social": {
       "github": "https://github.com/Bahadirkus",
       "linkedin": "https://www.linkedin.com/in/bahadir-kus/",
-      "instagram": "",
+      "instagram": "https://www.instagram.com/bahadirkush/",
       "youtube": "https://www.youtube.com/@bahadirkush",
       "x": "https://x.com/mrbahadirkus"
     }
