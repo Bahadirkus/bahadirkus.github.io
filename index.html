@@ -8,8 +8,9 @@
   <meta property="og:title" content="Bahadır Kuş | Simulation Architect & Developer">
   <meta property="og:description" content="Portfolio of Bahadır Kuş. Expert in Unity, Medical Simulation, Embedded Systems and Technical Design.">
   <meta property="og:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
-  <meta property="og:url" content="https://bahadirkus.github.io/">
   <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://bahadirkus.github.io/assets/images/profile/bahadir-profile.jpg">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -275,6 +276,8 @@
 
 <script src="assets/js/projects.js"></script>
 <script>
+  const data = window.data || { profile:{}, resume:{}, projects:[] };
+  
   function runLoader() {
       const msg = document.getElementById('loader-msg');
       const bar = document.getElementById('loader-bar');
@@ -292,9 +295,8 @@
   }
 
   function init() {
-      const data = window.data || { profile:{}, resume:{}, projects:[] };
       runLoader();
-      
+      // Profile setup
       const p = data.profile;
       document.getElementById('sidebar-name').textContent = p.name || "My Name";
       document.getElementById('sidebar-role').textContent = p.role || "Developer";
@@ -304,6 +306,7 @@
       document.getElementById('val-loc').textContent = p.location || "-";
       if(p.cvPath) { const cvBtn = document.getElementById('link-cv'); cvBtn.style.display = 'flex'; cvBtn.href = p.cvPath; }
       
+      // Social Icons
       const socDiv = document.getElementById('sidebar-social');
       const soc = p.social || {};
       if(soc.linkedin) socDiv.innerHTML += `<a class="social-btn" href="${soc.linkedin}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg"></a>`;
@@ -311,15 +314,21 @@
       if(soc.youtube) socDiv.innerHTML += `<a class="social-btn" href="${soc.youtube}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg"></a>`;
       if(soc.twitter || soc.x) socDiv.innerHTML += `<a class="social-btn" href="${soc.twitter || soc.x}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/x.svg"></a>`;
 
+      // --- GITHUB CARD LOGIC (ADDED) ---
+      // Veri yapısında github linki 'p.github' veya 'p.social.github' içinde olabilir.
       const githubUrl = p.github || soc.github;
       if (githubUrl) {
           const ghCard = document.getElementById('link-github');
           ghCard.style.display = 'flex';
           ghCard.href = githubUrl;
+          
+          // Linkten kullanıcı adını çıkar
           let username = githubUrl.split('/').filter(Boolean).pop();
           document.getElementById('val-github').textContent = username;
       }
+      // ---------------------------------
 
+      // Resume setup
       document.getElementById('resume-bio').textContent = p.bio || "";
       const r = data.resume || {};
       
@@ -362,40 +371,22 @@
           const div = document.createElement('div'); div.className = 'cert-card';
           let links = [];
           if(item.link) links.push({label:'View Original / Verify', url:item.link});
-          div.onclick = () => openModal({ id: item.id, name: item.title, role: item.issuer, date: '', longDesc: item.desc || "", coverImage: item.image, gallery: [{type: 'image', src: item.image}], links: links });
+          div.onclick = () => openModal({ name: item.title, role: item.issuer, date: '', longDesc: item.desc || "", coverImage: item.image, gallery: [{type: 'image', src: item.image}], links: links });
           div.innerHTML = `<div class="cert-img-wrapper"><img src="${item.image}" onerror="this.src='https://placehold.co/200?text=Cert'"></div><div class="cert-info"><h4>${item.title}</h4><span>${item.issuer}</span></div>`;
           certDiv.appendChild(div);
       });
       const skillDiv = document.getElementById('resume-skills');
       (r.skills||[]).forEach(s => skillDiv.innerHTML += `<span class="skill-tag">${s}</span>`);
 
-      // 1. Projeleri Render Et
       renderProjects('all');
-
-      // 2. LinkedIn ve URL Parametrelerini Kontrol Et
-      handleRedirection(data);
+      const hash = window.location.hash.substring(1);
+      if(hash) { const found = data.projects.find(pr => pr.id === hash); if(found) openModal(found); }
   }
 
-  function handleRedirection(data) {
-      const urlParams = new URLSearchParams(window.location.search);
-      // LinkedIn'in eklediği kalabalığa rağmen 'project' parametresini oku
-      const targetId = urlParams.get('project') || urlParams.get('p') || window.location.hash.substring(1);
-
-      if(targetId) { 
-          const found = data.projects.find(pr => pr.id === targetId); 
-          if(found) {
-              // LinkedIn Browser'ı yavaş olduğu için 1 saniye bekle
-              setTimeout(() => {
-                  openModal(found); 
-                  const element = document.getElementById(targetId);
-                  if(element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }, 1000);
-          }
-      }
+  function filterProjects(type, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderProjects(type);
   }
-
   function renderProjects(filter) {
-      const data = window.data || { projects:[] };
       const grid = document.getElementById('projects-grid'); grid.innerHTML = '';
       const projs = data.projects || [];
       projs.sort((a,b) => (a.date < b.date ? 1 : -1));
@@ -403,20 +394,17 @@
           const types = p.types || [];
           let show = (filter === 'all') || (filter === 'software' && types.includes('software')) || (filter === 'technical-design' && (types.includes('design') || types.includes('technical-design')));
           if(!show) return;
-          const card = document.createElement('article'); 
-          card.className = 'project-card';
-          card.id = p.id;
+          const card = document.createElement('article'); card.className = 'project-card';
           card.onclick = () => openModal(p);
           card.innerHTML = `<div class="project-image"><img src="${p.coverImage}" alt="${p.name}"></div><div class="project-text"><div class="project-meta">${p.role}</div><div class="project-title">${p.name}</div><div class="project-date">${p.date}</div><p class="project-desc">${p.shortDesc}</p><div class="project-tech">${p.tagline}</div></div>`;
           grid.appendChild(card);
       });
   }
-
   function openTab(name) {
       document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById('sec-' + name).classList.add('active');
-      if(event && event.target) event.target.classList.add('active');
+      event.target.classList.add('active');
   }
 
   const modal = document.getElementById('project-modal');
@@ -424,7 +412,7 @@
       modal.classList.remove('open');
       document.body.classList.remove('no-scroll');
       document.getElementById('m-media').innerHTML = '';
-      history.pushState("", document.title, window.location.pathname);
+      history.pushState("", document.title, window.location.pathname + window.location.search);
   }
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
@@ -432,7 +420,6 @@
   function getYouTubeId(url) { const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/|shorts\/))([a-zA-Z0-9_-]{11})/); return match ? match[1] : null; }
 
   function openModalById(id) {
-      const data = window.data || { projects:[] };
       const found = data.projects.find(p => p.id === id);
       if(found) openModal(found);
   }
