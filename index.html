@@ -277,8 +277,6 @@
 
 <script src="assets/js/projects.js"></script>
 <script>
-  const data = window.data || { profile:{}, resume:{}, projects:[] };
-  
   function runLoader() {
       const msg = document.getElementById('loader-msg');
       const bar = document.getElementById('loader-bar');
@@ -296,8 +294,9 @@
   }
 
   function init() {
+      const data = window.data || { profile:{}, resume:{}, projects:[] };
       runLoader();
-      // Profile setup
+      
       const p = data.profile;
       document.getElementById('sidebar-name').textContent = p.name || "My Name";
       document.getElementById('sidebar-role').textContent = p.role || "Developer";
@@ -307,7 +306,6 @@
       document.getElementById('val-loc').textContent = p.location || "-";
       if(p.cvPath) { const cvBtn = document.getElementById('link-cv'); cvBtn.style.display = 'flex'; cvBtn.href = p.cvPath; }
       
-      // Social Icons
       const socDiv = document.getElementById('sidebar-social');
       const soc = p.social || {};
       if(soc.linkedin) socDiv.innerHTML += `<a class="social-btn" href="${soc.linkedin}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/linkedin.svg"></a>`;
@@ -315,7 +313,6 @@
       if(soc.youtube) socDiv.innerHTML += `<a class="social-btn" href="${soc.youtube}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/youtube.svg"></a>`;
       if(soc.twitter || soc.x) socDiv.innerHTML += `<a class="social-btn" href="${soc.twitter || soc.x}" target="_blank"><img src="https://unpkg.com/simple-icons@v9/icons/x.svg"></a>`;
 
-      // --- GITHUB CARD LOGIC ---
       const githubUrl = p.github || soc.github;
       if (githubUrl) {
           const ghCard = document.getElementById('link-github');
@@ -325,7 +322,6 @@
           document.getElementById('val-github').textContent = username;
       }
 
-      // Resume setup
       document.getElementById('resume-bio').textContent = p.bio || "";
       const r = data.resume || {};
       
@@ -368,29 +364,31 @@
           const div = document.createElement('div'); div.className = 'cert-card';
           let links = [];
           if(item.link) links.push({label:'View Original / Verify', url:item.link});
-          div.onclick = () => openModal({ name: item.title, role: item.issuer, date: '', longDesc: item.desc || "", coverImage: item.image, gallery: [{type: 'image', src: item.image}], links: links });
+          div.onclick = () => openModal({ id: item.id, name: item.title, role: item.issuer, date: '', longDesc: item.desc || "", coverImage: item.image, gallery: [{type: 'image', src: item.image}], links: links });
           div.innerHTML = `<div class="cert-img-wrapper"><img src="${item.image}" onerror="this.src='https://placehold.co/200?text=Cert'"></div><div class="cert-info"><h4>${item.title}</h4><span>${item.issuer}</span></div>`;
           certDiv.appendChild(div);
       });
       const skillDiv = document.getElementById('resume-skills');
       (r.skills||[]).forEach(s => skillDiv.innerHTML += `<span class="skill-tag">${s}</span>`);
 
-      // --- PROJECT RENDER AND LINKEDIN REDIRECTION LOGIC ---
+      // Projeleri render et
       renderProjects('all');
 
+      // --- LINKEDIN PROOF REDIRECTION ---
       const urlParams = new URLSearchParams(window.location.search);
-      const pParam = urlParams.get('p'); 
-      const hash = window.location.hash.substring(1);
+      const projectParam = urlParams.get('project') || urlParams.get('p');
+      const hashParam = window.location.hash.substring(1);
+      const targetId = projectParam || hashParam;
 
-      const targetId = pParam || hash;
       if(targetId) { 
           const found = data.projects.find(pr => pr.id === targetId); 
           if(found) {
-              openModal(found); 
+              // LinkedIn Browser için gecikmeli açılış
               setTimeout(() => {
+                  openModal(found); 
                   const element = document.getElementById(targetId);
-                  if(element) element.scrollIntoView({ behavior: 'smooth' });
-              }, 500);
+                  if(element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }, 800);
           }
       }
   }
@@ -398,7 +396,9 @@
   function filterProjects(type, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderProjects(type);
   }
+  
   function renderProjects(filter) {
+      const data = window.data || { projects:[] };
       const grid = document.getElementById('projects-grid'); grid.innerHTML = '';
       const projs = data.projects || [];
       projs.sort((a,b) => (a.date < b.date ? 1 : -1));
@@ -406,13 +406,15 @@
           const types = p.types || [];
           let show = (filter === 'all') || (filter === 'software' && types.includes('software')) || (filter === 'technical-design' && (types.includes('design') || types.includes('technical-design')));
           if(!show) return;
-          const card = document.createElement('article'); card.className = 'project-card';
-          card.id = p.id; // Added ID to card for scrollIntoView
+          const card = document.createElement('article'); 
+          card.className = 'project-card';
+          card.id = p.id;
           card.onclick = () => openModal(p);
           card.innerHTML = `<div class="project-image"><img src="${p.coverImage}" alt="${p.name}"></div><div class="project-text"><div class="project-meta">${p.role}</div><div class="project-title">${p.name}</div><div class="project-date">${p.date}</div><p class="project-desc">${p.shortDesc}</p><div class="project-tech">${p.tagline}</div></div>`;
           grid.appendChild(card);
       });
   }
+
   function openTab(name) {
       document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -433,6 +435,7 @@
   function getYouTubeId(url) { const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/|shorts\/))([a-zA-Z0-9_-]{11})/); return match ? match[1] : null; }
 
   function openModalById(id) {
+      const data = window.data || { projects:[] };
       const found = data.projects.find(p => p.id === id);
       if(found) openModal(found);
   }
