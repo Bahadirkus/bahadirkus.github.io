@@ -6,14 +6,14 @@ window.data = {
     "name": "Bahadır Kuş",
     "role": "Simulation Developer & Technical Designer",
     "image": "assets/images/profile/bahadir-profile.jpg",
-    "cvPath": "assets/docs/Bahadir_Kus_Resume.pdf",
+    "cvPath": "",
     "bio": "Results-oriented Simulation Architect & Lead Developer with a proven track record of engineering high-fidelity training systems that bridge the gap between physical hardware and virtual environments. Founder of a med-tech startup, successfully delivering clinically validated surgical simulators using Unity 3D, embedded systems, and custom haptics. Expert in Digital Twins, sensor fusion, and full-cycle product development from prototyping (CNC/PCB) to deployment.",
     "email": "mrbahadirkus@gmail.com",
-    "location": "Winnipeg, Canada",
+    "location": "Ankara, Turkey",
     "social": {
       "github": "https://github.com/Bahadirkus",
       "linkedin": "https://www.linkedin.com/in/bahadir-kus/",
-      "instagram": "https://www.instagram.com/bahadirkush/",
+      "instagram": "",
       "youtube": "https://www.youtube.com/@bahadirkush",
       "x": "https://x.com/mrbahadirkus"
     }
